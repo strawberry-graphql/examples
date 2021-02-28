@@ -8,8 +8,15 @@ from django.template.loader import render_to_string
 from django.template.response import TemplateResponse
 from strawberry.django.views import AsyncGraphQLView as StrawberryAsyncGraphQLView
 
+from .context import Context, get_broadcast
+
 
 class AsyncGraphQLView(StrawberryAsyncGraphQLView):
+    async def get_context(self, request: HttpRequest) -> Context:
+        broadcast = await get_broadcast()
+
+        return Context(broadcast)
+
     def _render_graphiql(self, request: HttpRequest, context=None):
         if not self.graphiql:
             raise Http404()
