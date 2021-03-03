@@ -11,4 +11,4 @@ class Hero(models.Model):
     color = models.CharField(max_length=100)
     name = models.CharField(max_length=100, null=True)
     updatedAt = models.FloatField(max_length=100, null=True)
-    deleted = models.BooleanField(default=True)
+    deleted = models.BooleanField()

@@ -5,28 +5,17 @@ import time
 import traceback
 from typing import List, Optional
 
-import django.core.serializers
 import strawberry
 from asgiref.sync import sync_to_async
+from django.core.serializers import deserialize, serialize
 from django.db.models import Q
+from strawberry_django import ModelResolver, types
 
 from api import models
 
 
-# input HeroInput {
-#   id: String
-#   name: String
-#   color: String!
-#   updatedAt: Float
-#   deleted: Boolean!
-# }
-@strawberry.input
-class HeroInput:
-    id: str
-    color: str
-    name: Optional[str] = ""
-    updatedAt: Optional[float] = 0
-    deleted: Optional[bool] = False
+class HeroResolver(ModelResolver):
+    model = models.Hero
 
 
 # type Hero {
@@ -36,13 +25,23 @@ class HeroInput:
 #   updatedAt: Float
 #   deleted: Boolean!
 # }
-@strawberry.type
-class Hero:
-    id: str
-    color: str
-    name: Optional[str] = ""
-    updatedAt: Optional[float] = 0
-    deleted: Optional[bool] = False
+class Hero(HeroResolver.output_type):
+    pass
+
+
+# input HeroInput {
+#   id: String
+#   name: String
+#   color: String!
+#   updatedAt: Float
+#   deleted: Boolean!
+# }
+# The client code expects the input type to be called "HeroInput", not "CreateHero", which is the default
+# We therefore need to create a new type via the strawberry.input decorator
+# class HeroInput(HeroResolver.create_input_type):
+@strawberry.input
+class HeroInput(HeroResolver.create_input_type):
+    pass
 
 
 def filterHeroes(
@@ -68,9 +67,11 @@ def filterHeroes(
 
 @strawberry.type
 class Query:
-    @strawberry.field
-    def hello() -> str:
-        return "world"
+    ## to include the auto-generated methods from strawberry-graphql-django:
+    ## - hero(id: ID!): Hero!
+    ## - heros(filters: [String!] = null): [Hero!]!
+    ## declare the class as
+    ## class Query(HeroResolver.query()):
 
     # type Query {
     #   feedHero(id: String, updatedAt: Float, limit: Int!): [Hero!]!
@@ -89,15 +90,6 @@ class Mutation:
     # }
     @strawberry.mutation
     async def set_hero(self, info, hero: HeroInput = None) -> Hero:
-        print(f"Creating Hero from HeroInput {hero}")
-
-        shero = Hero(
-            id=hero.id,
-            color=hero.color,
-            name=hero.name,
-            updatedAt=hero.updatedAt,
-            deleted=hero.deleted,
-        )
         try:
             dhero = await sync_to_async(models.Hero.objects.get)(id=hero.id)
         except models.Hero.DoesNotExist:
@@ -106,15 +98,20 @@ class Mutation:
         dhero.color = hero.color
         dhero.name = hero.name
         dhero.updatedAt = int(time.time())
-
         dhero.deleted = hero.deleted
-        await sync_to_async(dhero.save)()
 
+        await sync_to_async(dhero.save)()
         await info.context.broadcast.publish(
-            channel="heros", message=django.core.serializers.serialize("json", [dhero])
+            channel="heros", message=serialize("json", [dhero])
         )
 
-        return shero
+        return Hero(
+            id=dhero.id,
+            color=dhero.color,
+            name=dhero.name,
+            updatedAt=dhero.updatedAt,
+            deleted=dhero.deleted,
+        )
 
 
 @strawberry.type
@@ -126,9 +123,7 @@ class Subscription:
     async def changed_hero(self, info, token: str) -> Hero:
         async with info.context.broadcast.subscribe(channel="heros") as subscriber:
             async for event in subscriber:
-                hero = list(django.core.serializers.deserialize("json", event.message))[
-                    0
-                ].object
+                hero = list(deserialize("json", event.message))[0].object
                 yield Hero(
                     id=hero.id,
                     color=hero.color,

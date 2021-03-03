@@ -13,6 +13,7 @@ uvicorn = {extras = ["standard"], version = "^0.13.4"}
 django-cors-headers = "^3.7.0"
 psycopg2-binary = {version = "^2.8.6", extras = ["postgres"], optional = true}
 broadcaster = {extras = ["postgres"], version = "^0.2.0"}
+strawberry-graphql-django = "^0.0.6"
 
 [tool.poetry.extras]
 postgres = ["psycopg2-binary"]
