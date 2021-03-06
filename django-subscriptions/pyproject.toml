@@ -10,6 +10,7 @@ python = "^3.9"
 strawberry-graphql = "^0.46.0"
 Django = "^3.1.7"
 uvicorn = {extras = ["standard"], version = "^0.13.4"}
+broadcaster = "^0.2.0"
 
 [tool.poetry.dev-dependencies]
 black = {version = "^20.8b1", allow-prereleases = true}

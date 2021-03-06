@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "django-subscriptions-rxdb"
+version = "0.1.0"
+description = ""
+authors = ["Patrick Arminio <patrick.arminio@gmail.com>", "Anton Melser <anton@melser.org>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+strawberry-graphql = "^0.46.0"
+Django = "^3.1.7"
+uvicorn = {extras = ["standard"], version = "^0.13.4"}
+django-cors-headers = "^3.7.0"
+psycopg2-binary = {version = "^2.8.6", extras = ["postgres"], optional = true}
+broadcaster = {extras = ["postgres"], version = "^0.2.0"}
+strawberry-graphql-django = "^0.0.6"
+
+[tool.poetry.extras]
+postgres = ["psycopg2-binary"]
+
+
+[tool.poetry.dev-dependencies]
+black = {version = "^20.8b1", allow-prereleases = true}
+flake8 = "^3.8.4"
+isort = "^5.7.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
