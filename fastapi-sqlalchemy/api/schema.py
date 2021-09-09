@@ -3,7 +3,7 @@ from typing import List
 import strawberry
 from strawberry.extensions import Extension
 
-from main.models import get_all_movies
+from main.models import get_movies
 from main.database import SessionLocal
 
 from .definitions.movie import Movie
@@ -24,10 +24,10 @@ class Query:
         return "pong"
 
     @strawberry.field
-    def top_250(self, info) -> List[Movie]:
+    def top_rated_movies(self, info, limit: int = 250) -> List[Movie]:
         db = info.context["db"]
-        movies = get_all_movies(db)
+        movies = get_movies(db, limit=limit)
         return [Movie.from_instance(movie) for movie in movies]
 
 
-schema = strawberry.Schema(Query)
+schema = strawberry.Schema(Query, extensions=[SQLAlchemySession])

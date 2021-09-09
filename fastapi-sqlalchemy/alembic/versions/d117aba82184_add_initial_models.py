@@ -1,8 +1,8 @@
 """Add initial models
 
-Revision ID: e690282050a1
+Revision ID: d117aba82184
 Revises:
-Create Date: 2021-09-09 17:27:04.631432
+Create Date: 2021-09-09 21:15:39.715853
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = "e690282050a1"
+revision = "d117aba82184"
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -35,10 +35,16 @@ def upgrade():
         sa.Column("image_url", sa.String(), nullable=True),
         sa.Column("imdb_rating", sa.Float(), nullable=True),
         sa.Column("imdb_rating_count", sa.String(), nullable=True),
+        sa.Column("director_id", sa.Integer(), nullable=True),
+        sa.ForeignKeyConstraint(
+            ["director_id"],
+            ["directors.id"],
+        ),
         sa.PrimaryKeyConstraint("id"),
+        sa.UniqueConstraint("title"),
     )
     op.create_index(op.f("ix_movies_id"), "movies", ["id"], unique=False)
-    op.create_index(op.f("ix_movies_imdb_id"), "movies", ["imdb_id"], unique=False)
+    op.create_index(op.f("ix_movies_imdb_id"), "movies", ["imdb_id"], unique=True)
     # ### end Alembic commands ###
 
 
