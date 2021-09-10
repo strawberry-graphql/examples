@@ -1,4 +1,7 @@
 from typing import Optional
+from sqlalchemy import select
+from sqlalchemy.exc import NoResultFound
+
 from main.models import User
 
 
@@ -20,6 +23,11 @@ def get_user(db, request) -> Optional[User]:
     if SESSION_KEY not in session:
         return None
 
-    user = db.query(User).filter_by(id=request.session[SESSION_KEY]).first()
+    try:
+        user = db.execute(
+            select(User).filter_by(id=request.session[SESSION_KEY])
+        ).scalar_one()
+    except NoResultFound:
+        return None
 
     return user

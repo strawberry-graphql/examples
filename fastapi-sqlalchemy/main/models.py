@@ -1,6 +1,8 @@
+from typing import Optional
 from sqlalchemy import Column, Integer, String, Float, ForeignKey, select
 from sqlalchemy.orm import relationship, joinedload
 from sqlalchemy.orm import Session
+from sqlalchemy.exc import NoResultFound
 from passlib.hash import pbkdf2_sha256
 
 from .database import Base
@@ -52,3 +54,11 @@ class User(Base):
 
     def check_password(self, password: str):
         return pbkdf2_sha256.verify(password, self.password_hash)
+
+
+def get_user_by_email(db, email: str) -> Optional[User]:
+    try:
+        user = db.execute(select(User).filter_by(email=email)).scalar_one()
+        return user
+    except NoResultFound:
+        return None

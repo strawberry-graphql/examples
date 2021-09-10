@@ -2,7 +2,7 @@ import re
 import strawberry
 
 from main.auth import login
-from main.models import User as UserModel
+from main.models import get_user_by_email
 
 from ..definitions.user import User
 
@@ -29,7 +29,7 @@ def login_user(info, email: str, password: str) -> LoginUserResponse:
 
     db = info.context["db"]
 
-    user = db.query(UserModel).filter_by(email=email).first()
+    user = get_user_by_email(db, email)
     if not user:
         return LoginUserError(error_message="User not found")
 

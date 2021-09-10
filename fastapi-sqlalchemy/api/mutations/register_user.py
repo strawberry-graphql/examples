@@ -2,7 +2,7 @@ import re
 import strawberry
 
 from main.auth import login
-from main.models import User as UserModel
+from main.models import User as UserModel, get_user_by_email
 
 from ..definitions.user import User
 
@@ -41,7 +41,7 @@ def register_user(info, data: RegisterUserInput) -> RegisterUserResponse:
 
     db = info.context["db"]
 
-    existing_user = db.query(UserModel).filter_by(email=email).first()
+    existing_user = get_user_by_email(db, email)
     if existing_user:
         return RegisterUserError(error_message="User already exists")
 
