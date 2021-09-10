@@ -1,15 +1,13 @@
 # -*- coding: utf-8 -*-
 
-import asyncio
 import time
-import traceback
 from typing import List, Optional
 
 import strawberry
 from asgiref.sync import sync_to_async
 from django.core.serializers import deserialize, serialize
 from django.db.models import Q
-from strawberry_django import ModelResolver, types
+from strawberry_django import ModelResolver
 
 from api import models
 

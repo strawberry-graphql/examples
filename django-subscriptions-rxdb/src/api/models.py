@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from asgiref.sync import sync_to_async
-from django.contrib.auth.models import User
 from django.db import models
-from django.db.models import Q
 
 
 class Hero(models.Model):
