@@ -13,11 +13,11 @@ This example reproduces the server-side component of the RxDB GraphQL example, w
 Tested on Ubuntu 20.04, should work everywhere these are available with no changes.
 
 ## Reason for this example
-While connectivity is getting better around the world every year, every user will always at least have moments when their connection is spotty, if not completely absent (at human prices) for certain periods (eg., on a plane). With an offline-first, local database and other offline-first tech (service workers, etc.), it is possible to develop web-technology-based applications  that will continue to offer much of their functionality offline, with realtime sync when they are online. This really is the best of both worlds, and can give much more fluid and friendly usage when connections are spotty.
+While connectivity is getting better around the world every year, every user will always have moments when their connection is spotty (eg. on a plane). With an offline-first, local database and other offline-first tech (service workers, etc.), it is possible to develop web-technology-based applications  that will continue to offer much of their functionality offline, with realtime sync when they are online. This really is the best of both worlds, and can give much more fluid and friendly usage when connections are spotty.
 
 So you already have a Django-based app, and want to add some rich, client-side, offline-first functionality without starting from scratch? This is an example of some of the server-side code for one way of starting out.
 
-The RxDB component of this is not included here to keep things as light as possible. Offline-first has complexities that need to be mastered, so this is not intended to be a template or even a particularly good way of doing things, just a rough example to get you started with `rxdb`, `strawberry`, `django` and `broadcaster`.
+The RxDB component of this is not included here to keep things as light as possible. Offline-first has complexities that need to be mastered, so this is not intended to be a template or even a particularly good way of doing things. It's one rough example to get you started with `rxdb`, `strawberry`, `django` and `broadcaster`.
 
 ### The full example stack
 
@@ -29,6 +29,6 @@ If you use PostgreSQL then you will have to set up a database like you would for
 make install-postgres
 ```
 
-Now simply run `make run` as usual to run it.
+Now run `make run` as usual to run it.
 
-This extended setup shows how you can have multiple instances of your Django (in a Kubernetes cluster, for example), and realtime notifications will work for any client connected to any of the servers. This example uses [broadcaster](https://github.com/encode/broadcaster) for subscription notifications which, in addition to `postgres`, supports `memory` (for a single node), `redis` and `kafka`. If your `django` is not using `postgres` and/or you are using one of the other options for caching or messaging, you might want to use one of those. It should Just Work if you follow the `broadcaster` docs for the connection string.
+This extended setup shows how you can have multiple instances of your Django (in a Kubernetes cluster, for example), and realtime notifications will work for any client connected to any of the servers. This example uses [broadcaster](https://github.com/encode/broadcaster) for subscription notifications which, in addition to `postgres`, supports `memory` (for a single node), `redis` and `kafka`. If your `django` is not using `postgres` and/or you are using one of the other options for caching or messaging, you might want to use one of those. It should work if you follow the `broadcaster` docs for the connection string.
