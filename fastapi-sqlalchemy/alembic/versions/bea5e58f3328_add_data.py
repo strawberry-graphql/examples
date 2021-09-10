@@ -9,7 +9,8 @@ import json
 from pathlib import Path
 
 from alembic import op
-from sqlalchemy import orm
+from sqlalchemy import orm, select
+from sqlalchemy.exc import NoResultFound
 
 from main.models import Director, Movie
 
@@ -33,12 +34,11 @@ def upgrade():
         json_data = json.load(f)
 
     for movie_data in json_data:
-        director = (
-            session.query(Director)
-            .filter_by(name=movie_data["director"]["name"])
-            .first()
-        )
-        if not director:
+        try:
+            director = session.execute(
+                select(Director).filter_by(name=movie_data["director"]["name"])
+            ).scalar_one()
+        except NoResultFound:
             director = Director(name=movie_data["director"]["name"])
             session.add(director)
             session.commit()
@@ -57,4 +57,10 @@ def upgrade():
 
 
 def downgrade():
-    pass
+    bind = op.get_bind()
+    session = orm.Session(bind=bind)
+
+    session.execute("DELETE FROM movies")
+    session.execute("DELETE FROM directors")
+    session.commit()
+    session.close()

@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Float, ForeignKey
+from sqlalchemy import Column, Integer, String, Float, ForeignKey, select
 from sqlalchemy.orm import relationship, joinedload
 from sqlalchemy.orm import Session
 
@@ -28,10 +28,12 @@ class Movie(Base):
 
 
 def get_movies(db: Session, limit: int = 250):
-    return (
-        db.query(Movie)
+    query = (
+        select(Movie)
         .options(joinedload(Movie.director))
         .order_by(Movie.imdb_rating.desc())
         .limit(limit)
-        .all()
     )
+
+    result = db.execute(query).unique()
+    return result.scalars()
