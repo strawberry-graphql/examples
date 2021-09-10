@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String, Float, ForeignKey, select
 from sqlalchemy.orm import relationship, joinedload
 from sqlalchemy.orm import Session
+from passlib.hash import pbkdf2_sha256
 
 from .database import Base
 
@@ -37,3 +38,17 @@ def get_movies(db: Session, limit: int = 250):
 
     result = db.execute(query).unique()
     return result.scalars()
+
+
+class User(Base):
+    __tablename__ = "users"
+
+    id: int = Column(Integer, primary_key=True, index=True)
+    email: str = Column(String, unique=True, index=True)
+    password_hash: str = Column(String)
+
+    def set_password(self, password: str):
+        self.password_hash = pbkdf2_sha256.hash(password)
+
+    def check_password(self, password: str):
+        return pbkdf2_sha256.verify(password, self.password_hash)

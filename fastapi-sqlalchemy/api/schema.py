@@ -6,6 +6,7 @@ from strawberry.extensions import Extension
 from main.models import get_movies
 from main.database import SessionLocal
 
+from .mutation import Mutation
 from .definitions.movie import Movie
 
 
@@ -26,4 +27,4 @@ class Query:
         return [Movie.from_instance(movie) for movie in movies]
 
 
-schema = strawberry.Schema(Query, extensions=[SQLAlchemySession])
+schema = strawberry.Schema(Query, mutation=Mutation, extensions=[SQLAlchemySession])
