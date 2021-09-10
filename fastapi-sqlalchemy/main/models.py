@@ -43,9 +43,9 @@ def get_movies(db: Session, limit: int = 250):
 class User(Base):
     __tablename__ = "users"
 
-    id: int = Column(Integer, primary_key=True, index=True)
-    email: str = Column(String, unique=True, index=True)
-    password_hash: str = Column(String)
+    id: int = Column(Integer, primary_key=True, index=True, nullable=False)
+    email: str = Column(String, unique=True, index=True, nullable=False)
+    password_hash: str = Column(String, nullable=False)
 
     def set_password(self, password: str):
         self.password_hash = pbkdf2_sha256.hash(password)
