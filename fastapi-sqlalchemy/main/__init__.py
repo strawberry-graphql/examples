@@ -6,4 +6,4 @@ from api.schema import schema
 graphql_app = GraphQL(schema)
 
 app = FastAPI()
-app.add_route("/graphql", graphql_app)
+app.mount("/graphql", graphql_app)
