@@ -1,6 +1,7 @@
 import re
 import strawberry
 
+from main.auth import login
 from main.models import User as UserModel
 
 from ..definitions.user import User
@@ -51,7 +52,8 @@ def register_user(info, data: RegisterUserInput) -> RegisterUserResponse:
     db.add(user)
     db.commit()
 
-    # TODO login user
+    # Login user
+    login(info.context["request"], user)
 
     return RegisterUserSuccess(
         user=User.from_instance(user),

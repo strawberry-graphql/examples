@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 import strawberry
 from strawberry.extensions import Extension
@@ -8,6 +8,7 @@ from main.database import SessionLocal
 
 from .mutation import Mutation
 from .definitions.movie import Movie
+from .definitions.user import User
 
 
 class SQLAlchemySession(Extension):
@@ -25,6 +26,15 @@ class Query:
         db = info.context["db"]
         movies = get_movies(db, limit=limit)
         return [Movie.from_instance(movie) for movie in movies]
+
+    @strawberry.field
+    def current_user(self, info) -> Optional[User]:
+        request = info.context["request"]
+
+        if request.user.is_authenticated:
+            return User.from_instance(request.user)
+
+        return None
 
 
 schema = strawberry.Schema(Query, mutation=Mutation, extensions=[SQLAlchemySession])

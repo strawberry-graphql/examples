@@ -1,6 +1,7 @@
 import re
 import strawberry
 
+from main.auth import login
 from main.models import User as UserModel
 
 from ..definitions.user import User
@@ -35,7 +36,8 @@ def login_user(info, email: str, password: str) -> LoginUserResponse:
     if not user.check_password(password):
         return LoginUserError(error_message="Invalid password")
 
-    # TODO login user
+    # Login user
+    login(info.context["request"], user)
 
     return LoginUserSuccess(
         user=User.from_instance(user),
