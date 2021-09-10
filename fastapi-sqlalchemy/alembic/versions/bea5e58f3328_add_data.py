@@ -1,8 +1,8 @@
 """Add data
 
-Revision ID: 3320c3c008d2
-Revises: d117aba82184
-Create Date: 2021-09-09 21:16:08.831902
+Revision ID: bea5e58f3328
+Revises: 9bc8667ab6a6
+Create Date: 2021-09-10 16:00:20.280277
 
 """
 import json
@@ -15,10 +15,11 @@ from main.models import Director, Movie
 
 
 # revision identifiers, used by Alembic.
-revision = "3320c3c008d2"
-down_revision = "d117aba82184"
+revision = "bea5e58f3328"
+down_revision = "9bc8667ab6a6"
 branch_labels = None
 depends_on = None
+
 
 current_dir = Path(__file__).parent.resolve()
 data_file = current_dir.parent.parent.parent / Path("common-data") / Path("movies.json")
