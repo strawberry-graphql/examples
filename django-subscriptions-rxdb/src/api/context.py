@@ -19,7 +19,10 @@ async def get_broadcast():
                 if dbinfo.get("PORT")
                 else dbinfo.get("HOST")
             )
-            dsnstr = f"postgresql://{dbinfo.get('USER')}:{dbinfo.get('PASSWORD')}@{host}/{dbinfo.get('NAME')}"
+            dsnstr = (
+                f"postgresql://{dbinfo.get('USER')}:"
+                f"{dbinfo.get('PASSWORD')}@{host}/{dbinfo.get('NAME')}"
+            )
             broadcast = Broadcast(dsnstr)
         else:
             broadcast = Broadcast("memory://")

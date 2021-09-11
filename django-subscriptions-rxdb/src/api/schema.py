@@ -1,15 +1,13 @@
 # -*- coding: utf-8 -*-
 
-import asyncio
 import time
-import traceback
 from typing import List, Optional
 
 import strawberry
 from asgiref.sync import sync_to_async
 from django.core.serializers import deserialize, serialize
 from django.db.models import Q
-from strawberry_django import ModelResolver, types
+from strawberry_django import ModelResolver
 
 from api import models
 
@@ -36,9 +34,9 @@ class Hero(HeroResolver.output_type):
 #   updatedAt: Float
 #   deleted: Boolean!
 # }
-# The client code expects the input type to be called "HeroInput", not "CreateHero", which is the default
-# We therefore need to create a new type via the strawberry.input decorator
-# class HeroInput(HeroResolver.create_input_type):
+# The client code expects the input type to be called "HeroInput",
+# not "CreateHero", which is the default We therefore need to create a new type
+# via the strawberry.input decorator
 @strawberry.input
 class HeroInput(HeroResolver.create_input_type):
     pass
@@ -67,11 +65,11 @@ def filterHeroes(
 
 @strawberry.type
 class Query:
-    ## to include the auto-generated methods from strawberry-graphql-django:
-    ## - hero(id: ID!): Hero!
-    ## - heros(filters: [String!] = null): [Hero!]!
-    ## declare the class as
-    ## class Query(HeroResolver.query()):
+    # to include the auto-generated methods from strawberry-graphql-django:
+    # - hero(id: ID!): Hero!
+    # - heros(filters: [String!] = null): [Hero!]!
+    # declare the class as
+    # class Query(HeroResolver.query()):
 
     # type Query {
     #   feedHero(id: String, updatedAt: Float, limit: Int!): [Hero!]!
