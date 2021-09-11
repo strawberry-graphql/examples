@@ -4,7 +4,6 @@ This examples shows you how to setup Strawberry with FastAPI and SQLAlchemy. It
 setups a GraphQL API to fetch the top rated movies from IMDB (stored in a sqlite
 DB).
 
-
 ## How to use
 
 1. Install dependencies
