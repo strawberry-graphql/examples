@@ -100,6 +100,35 @@ argon2 = ["argon2-cffi (>=19.1.0)"]
 bcrypt = ["bcrypt"]
 
 [[package]]
+name = "django-stubs"
+version = "1.9.0"
+description = "Mypy stubs for Django"
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[package.dependencies]
+django = "*"
+django-stubs-ext = ">=0.3.0"
+mypy = ">=0.910"
+toml = "*"
+types-pytz = "*"
+types-PyYAML = "*"
+typing-extensions = "*"
+
+[[package]]
+name = "django-stubs-ext"
+version = "0.3.1"
+description = "Monkey-patching and extensions for django-stubs"
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[package.dependencies]
+django = "*"
+typing-extensions = "*"
+
+[[package]]
 name = "flake8"
 version = "3.9.2"
 description = "the modular source code checker: pep8 pyflakes and co"
@@ -178,7 +207,7 @@ python-versions = "*"
 name = "mypy"
 version = "0.910"
 description = "Optional static typing for Python"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.5"
 
@@ -196,7 +225,7 @@ python2 = ["typed-ast (>=1.4.0,<1.5.0)"]
 name = "mypy-extensions"
 version = "0.4.3"
 description = "Experimental type system extensions for programs checked with the mypy typechecker."
-category = "dev"
+category = "main"
 optional = false
 python-versions = "*"
 
@@ -329,7 +358,7 @@ aiohttp = ["aiohttp (>=3.7.4.post0,<4.0.0)"]
 name = "toml"
 version = "0.10.2"
 description = "Python Library for Tom's Obvious, Minimal Language"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*"
 
@@ -345,7 +374,23 @@ python-versions = ">=3.6"
 name = "typed-ast"
 version = "1.4.3"
 description = "a fork of Python 2 and 3 ast modules with type comment support"
-category = "dev"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
+name = "types-pytz"
+version = "2021.1.2"
+description = "Typing stubs for pytz"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
+name = "types-pyyaml"
+version = "5.4.10"
+description = "Typing stubs for PyYAML"
+category = "main"
 optional = false
 python-versions = "*"
 
@@ -372,7 +417,7 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytes
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "dcbba5c0d9bd9968cf344b9df8fbadf180e108db8f417279a9a2bcedbaa6ea3b"
+content-hash = "62c56c7dc68fedaeb21cd9bb792e51ef47bbcb8b0d485de1d0cb69ad2fadd51d"
 
 [metadata.files]
 asgiref = [
@@ -402,6 +447,14 @@ colorama = [
 django = [
     {file = "Django-3.2.7-py3-none-any.whl", hash = "sha256:e93c93565005b37ddebf2396b4dc4b6913c1838baa82efdfb79acedd5816c240"},
     {file = "Django-3.2.7.tar.gz", hash = "sha256:95b318319d6997bac3595517101ad9cc83fe5672ac498ba48d1a410f47afecd2"},
+]
+django-stubs = [
+    {file = "django-stubs-1.9.0.tar.gz", hash = "sha256:664843091636a917faf5256d028476559dc360fdef9050b6df87ab61b21607bf"},
+    {file = "django_stubs-1.9.0-py3-none-any.whl", hash = "sha256:59c9f81af64d214b1954eaf90f037778c8d2b9c2de946a3cda177fefcf588fbd"},
+]
+django-stubs-ext = [
+    {file = "django-stubs-ext-0.3.1.tar.gz", hash = "sha256:783c198d7e39a41be0b90fd843fa2770243a642922af679be4b19e03b82c8c28"},
+    {file = "django_stubs_ext-0.3.1-py3-none-any.whl", hash = "sha256:a51a3e9e844d4e1cacaaedbb33bf3def78a3956eed5d9575a640bd97ccd99cec"},
 ]
 flake8 = [
     {file = "flake8-3.9.2-py2.py3-none-any.whl", hash = "sha256:bf8fd333346d844f616e8d47905ef3a3384edae6b4e9beb0c5101e25e3110907"},
@@ -581,6 +634,14 @@ typed-ast = [
     {file = "typed_ast-1.4.3-cp39-cp39-win32.whl", hash = "sha256:209596a4ec71d990d71d5e0d312ac935d86930e6eecff6ccc7007fe54d703808"},
     {file = "typed_ast-1.4.3-cp39-cp39-win_amd64.whl", hash = "sha256:9c6d1a54552b5330bc657b7ef0eae25d00ba7ffe85d9ea8ae6540d2197a3788c"},
     {file = "typed_ast-1.4.3.tar.gz", hash = "sha256:fb1bbeac803adea29cedd70781399c99138358c26d05fcbd23c13016b7f5ec65"},
+]
+types-pytz = [
+    {file = "types-pytz-2021.1.2.tar.gz", hash = "sha256:448828a06f2aaa840e57364d866c661645a045e532f817e4f10c8c3ab2b66651"},
+    {file = "types_pytz-2021.1.2-py3-none-any.whl", hash = "sha256:28fb1c0f77f59aebe9b792d073ebfbbbf7b329f9d4af6a6079713a618a1c0f31"},
+]
+types-pyyaml = [
+    {file = "types-PyYAML-5.4.10.tar.gz", hash = "sha256:1d9e431e9f1f78a65ea957c558535a3b15ad67ea4912bce48a6c1b613dcf81ad"},
+    {file = "types_PyYAML-5.4.10-py3-none-any.whl", hash = "sha256:f1d1357168988e45fa20c65aecb3911462246a84809015dd889ebf8b1db74124"},
 ]
 typing-extensions = [
     {file = "typing_extensions-3.10.0.2-py2-none-any.whl", hash = "sha256:d8226d10bc02a29bcc81df19a26e56a9647f8b0a6d4a83924139f4a8b01f17b7"},

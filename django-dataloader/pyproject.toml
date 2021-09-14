@@ -8,6 +8,7 @@ authors = ["Jonathan Kim <jkimbo@gmail.com>"]
 python = "^3.7"
 Django = "^3.2.7"
 strawberry-graphql = "^0.77.8"
+django-stubs = "^1.9.0"
 
 [tool.poetry.dev-dependencies]
 black = "^21.9b0"
