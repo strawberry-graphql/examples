@@ -24,8 +24,9 @@ class Movie:
     instance: strawberry.Private[MovieModel]
 
     @strawberry.field
-    async def director(self) -> Director:
-        director = await get_director(self.instance)
+    async def director(self, info) -> Director:
+        loader = info.context["dataloaders"]["director_loader"]
+        director = await loader.load(self.instance.director_id)
         return Director.from_instance(director)
 
     @classmethod

@@ -2,6 +2,8 @@ from typing import Optional
 from asgiref.sync import sync_to_async
 from inspect import iscoroutinefunction
 from strawberry.extensions import Extension
+from strawberry.dataloader import DataLoader
+
 from pyinstrument import Profiler
 from viztracer import VizTracer
 
@@ -15,6 +17,20 @@ class SyncToAsync(Extension):
             return sync_to_async(_next)(root, info, *args, **kwargs)
 
         return _next(root, info, *args, **kwargs)
+
+
+class AddDataLoader(Extension):
+    def __init__(self, name, load_fn):
+        self.name = name
+        self.load_fn = load_fn
+
+    def __call__(self, execution_context):
+        self.execution_context = execution_context
+        return self
+
+    def on_request_start(self):
+        context = self.execution_context.context
+        context["dataloaders"][self.name] = DataLoader(load_fn=self.load_fn)
 
 
 class PyInstrumentExtension(Extension):

@@ -3,7 +3,8 @@ import strawberry
 
 from movies.models import Movie as MovieModel
 from .definitions.movie import Movie
-from .extensions import SyncToAsync, PyInstrumentExtension, VizTracerExtension
+from .definitions.director import load_directors
+from .extensions import SyncToAsync, AddDataLoader
 
 
 @strawberry.type
@@ -14,4 +15,10 @@ class Query:
         return [Movie.from_instance(movie) for movie in movies]
 
 
-schema = strawberry.Schema(Query, extensions=[SyncToAsync])
+schema = strawberry.Schema(
+    Query,
+    extensions=[
+        SyncToAsync,
+        AddDataLoader("director_loader", load_fn=load_directors),  # type: ignore
+    ],
+)
