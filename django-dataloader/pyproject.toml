@@ -9,6 +9,8 @@ python = "^3.7"
 Django = "^3.2.7"
 strawberry-graphql = "^0.77.8"
 django-stubs = "^1.9.0"
+pyinstrument = "^4.0.3"
+viztracer = "^0.14.0"
 
 [tool.poetry.dev-dependencies]
 black = "^21.9b0"
@@ -16,6 +18,7 @@ flake8 = "^3.9.2"
 flake8-black = "^0.2.3"
 flake8-bugbear = "^21.9.1"
 mypy = "^0.910"
+pdbpp = "^0.10.3"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

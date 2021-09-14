@@ -3,6 +3,7 @@ import strawberry
 
 from movies.models import Movie as MovieModel
 from .definitions.movie import Movie
+from .extensions import SyncToAsync, PyInstrumentExtension, VizTracerExtension
 
 
 @strawberry.type
@@ -13,4 +14,4 @@ class Query:
         return [Movie.from_instance(movie) for movie in movies]
 
 
-schema = strawberry.Schema(Query)
+schema = strawberry.Schema(Query, extensions=[SyncToAsync])

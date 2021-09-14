@@ -5,7 +5,7 @@ from .schema import schema
 
 urlpatterns = [
     path(
-        "graphql",
+        "graphql/",
         AsyncGraphQLView.as_view(schema=schema),
     ),
 ]

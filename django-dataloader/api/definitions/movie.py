@@ -1,8 +1,14 @@
+from asgiref.sync import sync_to_async
 import strawberry
 
 from movies.models import Movie as MovieModel
 
 from .director import Director
+
+
+@sync_to_async
+def get_director(movie):
+    return movie.director
 
 
 @strawberry.type
@@ -18,8 +24,9 @@ class Movie:
     instance: strawberry.Private[MovieModel]
 
     @strawberry.field
-    def director(self) -> Director:
-        return Director.from_instance(self.instance.director)
+    async def director(self) -> Director:
+        director = await get_director(self.instance)
+        return Director.from_instance(director)
 
     @classmethod
     def from_instance(cls, instance: MovieModel):
