@@ -460,7 +460,7 @@ full = ["aiofiles", "graphene", "itsdangerous", "jinja2", "python-multipart", "p
 
 [[package]]
 name = "strawberry-graphql"
-version = "0.76.0"
+version = "0.77.10"
 description = "A library for creating GraphQL APIs"
 category = "main"
 optional = false
@@ -481,7 +481,7 @@ asgi = ["starlette (>=0.13.6,<0.17.0)"]
 debug-server = ["starlette (>=0.13.6,<0.17.0)", "uvicorn (>=0.11.6,<0.16.0)"]
 django = ["django (>=2,<4)", "asgiref (>=3.2,<4.0)"]
 flask = ["flask (>=1.1,<2.0)"]
-opentelemetry = ["opentelemetry-api (<1.5)", "opentelemetry-sdk (<1.5)"]
+opentelemetry = ["opentelemetry-api (<2)", "opentelemetry-sdk (<2)"]
 pydantic = ["pydantic (<2)"]
 sanic = ["sanic (>=20.12.2,<21.0.0)"]
 aiohttp = ["aiohttp (>=3.7.4.post0,<4.0.0)"]
@@ -586,7 +586,7 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytes
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "07eeafea421a4bb24f74442a2e60d6d7c6cca3a43b1c1c3ef7334c032df492a0"
+content-hash = "98fa69364a20e1543505c385c05fd9be26fdc5abbb60fc0e52136a65a1036d88"
 
 [metadata.files]
 alembic = [
@@ -985,8 +985,8 @@ starlette = [
     {file = "starlette-0.14.2.tar.gz", hash = "sha256:7d49f4a27f8742262ef1470608c59ddbc66baf37c148e938c7038e6bc7a998aa"},
 ]
 strawberry-graphql = [
-    {file = "strawberry-graphql-0.76.0.tar.gz", hash = "sha256:90da5eaf49655552d66eeb24052773c041004930288d62b9a855aa56c627e3d2"},
-    {file = "strawberry_graphql-0.76.0-py3-none-any.whl", hash = "sha256:5c6ee605b5b0d60c091e65ed4be24cb2fdc6792c8d4f097c9ff9bcb42424faac"},
+    {file = "strawberry-graphql-0.77.10.tar.gz", hash = "sha256:e55d3f20485faab8e9e50d28376b52bbbaefe1ce6b628cc1c7bff40afdad37b6"},
+    {file = "strawberry_graphql-0.77.10-py3-none-any.whl", hash = "sha256:e0bbd0832d310c52d6f10425eb790db3a667baaf251959bbdfb4860209c37ce7"},
 ]
 toml = [
     {file = "toml-0.10.2-py2.py3-none-any.whl", hash = "sha256:806143ae5bfb6a3c6e736a764057db0e6a0e05e338b5630894a5f779cabb4f9b"},

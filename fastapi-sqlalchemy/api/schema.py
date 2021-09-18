@@ -20,10 +20,6 @@ class SQLAlchemySession(Extension):
 @strawberry.type
 class Query:
     @strawberry.field
-    def ping(self) -> str:
-        return "pong"
-
-    @strawberry.field
     def top_rated_movies(self, info, limit: int = 250) -> List[Movie]:
         db = info.context["db"]
         movies = get_movies(db, limit=limit)

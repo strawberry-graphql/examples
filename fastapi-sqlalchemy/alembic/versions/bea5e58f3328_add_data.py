@@ -23,7 +23,7 @@ depends_on = None
 
 
 current_dir = Path(__file__).parent.resolve()
-data_file = current_dir.parent.parent.parent / Path("common-data") / Path("movies.json")
+data_file = current_dir.parent.parent.parent / "common-data" / "movies.json"
 
 
 def upgrade():
