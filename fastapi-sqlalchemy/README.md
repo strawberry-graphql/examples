@@ -32,3 +32,23 @@ poetry run uvicorn main:app --reload
 ```
 
 The GraphQL API should now be available at http://localhost:8000/graphql
+
+## Example query
+
+```graphql
+query AllTopRatedMovies {
+  topRatedMovies {
+    id
+    imageUrl
+    imdbId
+    imdbRating
+    imdbRatingCount
+    title
+    year
+    director {
+      id
+      name
+    }
+  }
+}
+```
