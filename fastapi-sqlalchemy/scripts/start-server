@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
+
+script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd -P)
+root_dir=$(dirname $script_dir)
+
+cd $root_dir
+
+docker build -t benchmark .
+docker rm benchmark
+docker run -it -p 8000:8000 --memory="1g" --cpus="1" --name benchmark benchmark

@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
+
+script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd -P)
+root_dir=$(dirname $script_dir)
+
+cd $root_dir
+
+echo "Running `from-instance`"
+k6 run from-instance.js
+
+echo ""
+echo "Running `queryset`"
+k6 run queryset.js
