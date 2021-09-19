@@ -3,10 +3,11 @@ from typing import List
 import strawberry
 from strawberry.extensions import Extension
 
-from main.models import get_movies
+from main.models import get_movies, get_people
 from main.database import SessionLocal
 
 from .definitions.movie import Movie
+from .definitions.people import Person
 
 
 class SQLAlchemySession(Extension):
@@ -24,6 +25,17 @@ class Query:
         db = info.context["db"]
         movies = get_movies(db, limit=limit)
         return [Movie.from_instance(movie) for movie in movies]
+
+    @strawberry.field
+    def all_people(self, info, limit: int = 250) -> List[Person]:
+        db = info.context["db"]
+        people = get_people(db, limit=limit)
+        return [Person.from_instance(person) for person in people]
+
+    @strawberry.field
+    def all_people_queryset(self, info, limit: int = 250) -> List[Person]:
+        db = info.context["db"]
+        return get_people(db, limit=limit)
 
 
 schema = strawberry.Schema(Query, extensions=[SQLAlchemySession])

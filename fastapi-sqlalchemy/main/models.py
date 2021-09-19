@@ -37,3 +37,17 @@ def get_movies(db: Session, limit: int = 250):
 
     result = db.execute(query).unique()
     return result.scalars()
+
+
+class Person(Base):
+    __tablename__ = "people"
+
+    id: int = Column(Integer, primary_key=True, index=True, nullable=False)
+    name: str = Column(String)
+
+
+def get_people(db: Session, limit: int = 250):
+    query = select(Person).limit(limit)
+
+    result = db.execute(query)
+    return result.scalars()
