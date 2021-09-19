@@ -27,15 +27,15 @@ class Query:
         return [Movie.from_instance(movie) for movie in movies]
 
     @strawberry.field
-    def all_people(self, info, limit: int = 250) -> List[Person]:
+    def all_people(self, info) -> List[Person]:
         db = info.context["db"]
-        people = get_people(db, limit=limit)
+        people = get_people(db)
         return [Person.from_instance(person) for person in people]
 
     @strawberry.field
-    def all_people_queryset(self, info, limit: int = 250) -> List[Person]:
+    def all_people_queryset(self, info) -> List[Person]:
         db = info.context["db"]
-        return get_people(db, limit=limit)
+        return get_people(db)
 
 
 schema = strawberry.Schema(Query, extensions=[SQLAlchemySession])

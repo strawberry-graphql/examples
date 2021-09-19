@@ -46,8 +46,8 @@ class Person(Base):
     name: str = Column(String)
 
 
-def get_people(db: Session, limit: int = 250):
-    query = select(Person).limit(limit)
+def get_people(db: Session):
+    query = select(Person)
 
     result = db.execute(query)
     return result.scalars()
