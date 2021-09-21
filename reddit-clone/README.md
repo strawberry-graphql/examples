@@ -1,6 +1,9 @@
 # Reddit GraphQL API
 
 This example shows you how to create a Reddit API clone using GraphQL.
+The goal of this example is not to re-create the entire reddit API, but
+to produce a simpler version that is easier to understand, and implements
+most of the features that Strawberry gives us.
 
 ## Tech Stack used:
 
