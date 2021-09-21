@@ -3,10 +3,10 @@ from typing import Optional
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
 
-from reddit.core.models import Base
+from reddit.core.models import BaseModel
 
 
-class User(Base):
+class User(BaseModel):
     """
     Represents an individual user account.
     """

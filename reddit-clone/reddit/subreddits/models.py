@@ -3,10 +3,10 @@ from typing import Optional
 from sqlalchemy import Column, String, Integer, SmallInteger, ForeignKey
 from sqlalchemy.orm import relationship
 
-from reddit.core.models import Base
+from reddit.core.models import BaseModel
 
 
-class SubReddit(Base):
+class SubReddit(BaseModel):
     """
     Represents a SubReddit.
     """
@@ -49,7 +49,7 @@ class SubReddit(Base):
         String(255),
         default=None,
         comment="""
-        The icon for the subreddit.
+        The icon URL for the subreddit.
         """,
     )
 

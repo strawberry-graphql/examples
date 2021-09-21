@@ -5,6 +5,8 @@ from sqlalchemy import Column
 from sqlalchemy.ext.declarative import declarative_base
 
 
+__all__ = ("BaseModel",)
+
 Base = declarative_base()
 
 
