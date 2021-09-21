@@ -34,7 +34,7 @@ class SubReddit(BaseModel):
         Integer,
         ForeignKey("users.id"),
         comment="""
-        The ID of the subreddit's admin.
+        The admin ID of the subreddit.
         """,
     )
 

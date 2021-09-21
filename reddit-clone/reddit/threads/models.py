@@ -48,7 +48,7 @@ class Thread(BaseModel):
         Integer,
         ForeignKey("users.id"),
         comment="""
-        The owner ID the thread.
+        The owner ID of the thread.
         """,
     )
 
