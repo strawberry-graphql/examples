@@ -7,6 +7,7 @@ This example shows you how to create a Reddit API clone using GraphQL.
 - Strawberry GraphQL
 - FastAPI w/ Starlette
 - SQLAlchemy (asyncio)
+- Alembic for migrations
 
 ## Features at a glance
 
