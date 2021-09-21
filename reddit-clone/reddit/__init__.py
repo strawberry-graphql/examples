@@ -15,9 +15,9 @@ def create_application() -> FastAPI:
     """
     application = FastAPI(title="Reddit GraphQL", debug=DEBUG)
 
-    application.add_route(
-        path="/graphql", route=GraphQL(schema=schema, graphiql=True, debug=DEBUG)
-    )
+    graphql_app = GraphQL(schema=schema, graphiql=True, debug=DEBUG)
+
+    application.add_route(path="/graphql", route=graphql_app)
 
     return application
 
