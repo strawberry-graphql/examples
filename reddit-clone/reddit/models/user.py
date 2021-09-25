@@ -49,7 +49,9 @@ class User(BaseModel):
 
     posts = relationship("Post", backref="user", lazy="dynamic")
 
-    subreddits = relationship("Subreddit", backref="user", secondary="subreddit_users", lazy="dynamic")
+    subreddits = relationship(
+        "Subreddit", backref="user", secondary="subreddit_users", lazy="dynamic"
+    )
 
     comments = relationship("Comment", backref="user", lazy="dynamic")
 
@@ -61,4 +63,5 @@ class SubredditUser(BaseModel):
     """
     Represents a Subreddit-user relationship.
     """
+
     __tablename__ = "subreddit_users"
