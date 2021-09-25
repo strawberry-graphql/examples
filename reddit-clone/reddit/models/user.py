@@ -69,7 +69,7 @@ class SubredditUser(BaseModel):
     user_id: int = Column(
         Integer,
         ForeignKey("users.id"),
-        nullable=False,
+        primary_key=True,
         comment="""
         The relationship's user ID.
         """,
@@ -78,7 +78,7 @@ class SubredditUser(BaseModel):
     subreddit_id: int = Column(
         Integer,
         ForeignKey("subreddits.id"),
-        nullable=False,
+        primary_key=True,
         comment="""
         The relationship's subreddit ID.
         """,
