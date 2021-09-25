@@ -31,6 +31,7 @@ class Post(BaseModel):
     link: Optional[str] = Column(
         String(255),
         default=None,
+        unique=True,
         comment="""
         The link for the post.
         """,
