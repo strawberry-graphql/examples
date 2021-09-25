@@ -47,7 +47,7 @@ class User(BaseModel):
         """,
     )
 
-    posrs = relationship("Post", backref="user", lazy="dynamic")
+    posts = relationship("Post", backref="user", lazy="dynamic")
 
     subreddits = relationship("Subreddit", backref="user", lazy="dynamic")
 
