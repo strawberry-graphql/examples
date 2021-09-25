@@ -53,8 +53,6 @@ class User(BaseModel):
         "Subreddit", backref="user", secondary="subreddit_users", lazy="dynamic"
     )
 
-
-
     comments = relationship("Comment", backref="user", lazy="dynamic")
 
     def __repr__(self) -> str:
