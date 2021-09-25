@@ -43,7 +43,7 @@ class User(BaseModel):
         String(255),
         default=None,
         comment="""
-        The avatar for the user.
+        The avatar URL for the user.
         """,
     )
 
