@@ -49,9 +49,16 @@ class User(BaseModel):
 
     posts = relationship("Post", backref="user", lazy="dynamic")
 
-    subreddits = relationship("Subreddit", backref="user", lazy="dynamic")
+    subreddits = relationship("Subreddit", backref="user", secondary="subreddit_users", lazy="dynamic")
 
     comments = relationship("Comment", backref="user", lazy="dynamic")
 
     def __repr__(self) -> str:
         return "<User %s>" % self.username
+
+
+class SubredditUser(BaseModel):
+    """
+    Represents a Subreddit-user relationship.
+    """
+    __tablename__ = "subreddit_users"
