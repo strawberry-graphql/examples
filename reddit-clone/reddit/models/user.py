@@ -53,6 +53,8 @@ class User(BaseModel):
         "Subreddit", backref="user", secondary="subreddit_users", lazy="dynamic"
     )
 
+
+
     comments = relationship("Comment", backref="user", lazy="dynamic")
 
     def __repr__(self) -> str:
@@ -65,3 +67,21 @@ class SubredditUser(BaseModel):
     """
 
     __tablename__ = "subreddit_users"
+
+    user_id: int = Column(
+        Integer,
+        ForeignKey("users.id"),
+        nullable=False,
+        comment="""
+        The relationship's user ID.
+        """,
+    )
+
+    subreddit_id: int = Column(
+        Integer,
+        ForeignKey("subreddits.id"),
+        nullable=False,
+        comment="""
+        The relationship's subreddit ID.
+        """,
+    )
