@@ -13,7 +13,7 @@ config = context.config
 # This line sets up loggers basically.
 fileConfig(config.config_file_name)
 
-from reddit.db.base import Base # noqa
+from reddit.db.base import Base  # noqa
 
 target_metadata = Base.metadata
 
