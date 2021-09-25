@@ -3,12 +3,12 @@ from typing import Optional
 from sqlalchemy import Column, String, Integer, SmallInteger, ForeignKey
 from sqlalchemy.orm import relationship
 
-from reddit.core.models import BaseModel
+from .base import BaseModel
 
 
-class SubReddit(BaseModel):
+class Subreddit(BaseModel):
     """
-    Represents a SubReddit.
+    Represents a Subreddit.
     """
 
     __tablename__ = "subreddits"
@@ -53,7 +53,7 @@ class SubReddit(BaseModel):
         """,
     )
 
-    threads = relationship("Thread", backref="subreddit", lazy="dynamic")
+    posts = relationship("Post", backref="subreddit", lazy="dynamic")
 
     def __repr__(self) -> str:
         return "<SubReddit %s>" % self.name

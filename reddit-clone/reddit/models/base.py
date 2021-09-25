@@ -2,12 +2,8 @@ from typing import Optional
 from datetime import datetime
 
 from sqlalchemy import Column
-from sqlalchemy.ext.declarative import declarative_base
 
-
-__all__ = ("BaseModel",)
-
-Base = declarative_base()
+from reddit.db.base import Base
 
 
 class BaseModel(Base):
@@ -21,7 +17,7 @@ class BaseModel(Base):
     id: Optional[int] = Column(
         default=None,
         primary_key=True,
-        description="""
+        comment="""
         Identifier for the object.
         """,
     )
@@ -29,7 +25,7 @@ class BaseModel(Base):
     created_at: datetime = Column(
         nullable=False,
         default=datetime.now(),
-        description="""
+        comment="""
         When the object was created.
         """,
     )
@@ -38,7 +34,7 @@ class BaseModel(Base):
         nullable=False,
         default=datetime.now(),
         onupdate=datetime.now(),
-        description="""
+        comment="""
         When the object was updated.
         """,
     )

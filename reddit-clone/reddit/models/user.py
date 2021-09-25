@@ -3,7 +3,7 @@ from typing import Optional
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
 
-from reddit.core.models import BaseModel
+from .base import BaseModel
 
 
 class User(BaseModel):
@@ -47,7 +47,7 @@ class User(BaseModel):
         """,
     )
 
-    threads = relationship("Thread", backref="user", lazy="dynamic")
+    posrs = relationship("Post", backref="user", lazy="dynamic")
 
     subreddits = relationship("Subreddit", backref="user", lazy="dynamic")
 

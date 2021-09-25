@@ -3,20 +3,20 @@ from typing import Optional
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 
-from reddit.core.models import BaseModel
+from .base import BaseModel
 
 
-class Thread(BaseModel):
+class Post(BaseModel):
     """
-    Represents a Thread in a SubReddit.
+    Represents a post in a Subreddit.
     """
 
-    __tablename__ = "threads"
+    __tablename__ = "posts"
 
     title: str = Column(
         String(150),
         comment="""
-        The title for the thread.
+        The title for the post.
         """,
     )
 
@@ -24,7 +24,7 @@ class Thread(BaseModel):
         String(1024),
         default=None,
         comment="""
-        The text for the thread.
+        The text for the post.
         """,
     )
 
@@ -32,7 +32,7 @@ class Thread(BaseModel):
         String(255),
         default=None,
         comment="""
-        The link for the thread.
+        The link for the post.
         """,
     )
 
@@ -40,7 +40,7 @@ class Thread(BaseModel):
         String(255),
         default=None,
         comment="""
-        The thumbnail URL for the thread.
+        The thumbnail URL for the post.
         """,
     )
 
@@ -48,7 +48,7 @@ class Thread(BaseModel):
         Integer,
         ForeignKey("users.id"),
         comment="""
-        The owner ID of the thread.
+        The owner ID of the post.
         """,
     )
 
@@ -56,7 +56,7 @@ class Thread(BaseModel):
         Integer,
         ForeignKey("subreddits.id"),
         comment="""
-        The SubReddit ID of the thread.
+        The SubReddit ID of the post.
         """,
     )
 
@@ -64,11 +64,11 @@ class Thread(BaseModel):
         Integer,
         default=1,
         comment="""
-        The votes for the thread.
+        The votes for the post.
         """,
     )
 
-    comments = relationship("Comment", backref="thread", lazy="dynamic")
+    comments = relationship("Comment", backref="post", lazy="dynamic")
 
     def __repr__(self) -> str:
-        return "<Thread %s>" % self.title
+        return "<Post %s>" % self.title

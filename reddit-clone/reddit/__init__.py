@@ -4,8 +4,6 @@ from strawberry.asgi import GraphQL
 from reddit.core.config import DEBUG
 from reddit.schema import schema
 
-__all__ = ("app",)
-
 
 def create_application() -> FastAPI:
     """

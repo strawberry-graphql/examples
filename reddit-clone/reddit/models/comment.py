@@ -3,7 +3,7 @@ from typing import Optional
 from sqlalchemy import Column, Integer, Text, ForeignKey
 from sqlalchemy.orm import relationship
 
-from reddit.core.models import BaseModel
+from .base import BaseModel
 
 
 class Comment(BaseModel):

@@ -9,3 +9,6 @@ DEBUG: bool = config("DEBUG", cast=bool, default=False)
 
 # secret key to use for sessions.
 SECRET_KEY: Secret = config("SECRET_KEY", cast=Secret)
+
+# sqlalchemy database url.
+DATABASE_URI: str = config("DATABASE_URI", cast=str)
