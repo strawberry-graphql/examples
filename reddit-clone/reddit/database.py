@@ -30,4 +30,5 @@ async def get_session() -> Generator[AsyncSession]:
     finally:
         await session.close()
 
+
 Base = declarative_base()
