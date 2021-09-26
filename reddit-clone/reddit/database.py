@@ -6,7 +6,7 @@ from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.ext.declarative import declarative_base
 
 
-from reddit.core.config import DATABASE_URI
+from .settings import DATABASE_URI
 
 async_engine = create_async_engine(DATABASE_URI, future=True)
 
