@@ -29,7 +29,11 @@ Use [poetry](https://python-poetry.org/) to install dependencies:
 poetry install
 ```
 
-2. Run migrations
+2. setup database
+   This example uses a PostgreSQL database. Make sure you have it installed
+   on your machine, and configure the `DATABASE_URI` environment variable.
+
+3. Run migrations
 
 Run [alembic](https://alembic.sqlalchemy.org/en/latest/) to create the database
 and populate it with movie data:
@@ -38,7 +42,7 @@ and populate it with movie data:
 poetry run alembic upgrade head
 ```
 
-3. Run the server
+4. Run the server
 
 Run [uvicorn](https://www.uvicorn.org/) to run the server:
 

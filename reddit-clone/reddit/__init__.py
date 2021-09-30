@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from strawberry.asgi import GraphQL
 
-from reddit.core.config import DEBUG
-from reddit.schema import schema
+from .settings import DEBUG
+from .schema import schema
 
 
 def create_application() -> FastAPI:
