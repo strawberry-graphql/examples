@@ -21,6 +21,12 @@ config.set_main_option("sqlalchemy.url", DATABASE_URI)
 # This line sets up loggers basically.
 fileConfig(config.config_file_name)
 
+# populate Base.metadata
+from reddit.users.models import User  # noqa
+from reddit.subreddits.models import Subreddit  # noqa
+from reddit.posts.models import Post  # noqa
+from reddit.comments.models import Comment  # noqa
+
 # add your model's MetaData object here
 # for 'autogenerate' support
 # from myapp import mymodel
