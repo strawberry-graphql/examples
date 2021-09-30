@@ -13,6 +13,10 @@ class Comment(Base):
     Represents a Comment in a thread.
     """
 
+    __tablename__ = "comments"
+
+    id: int = Column(Integer, primary_key=True, nullable=False)
+
     content: str = Column(Text, nullable=False)
 
     votes: int = Column(Integer, default=1)

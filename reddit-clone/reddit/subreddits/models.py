@@ -14,7 +14,7 @@ class Subreddit(Base):
 
     __tablename__ = "subreddits"
 
-    id: Optional[int] = Column(default=None, primary_key=True)
+    id: int = Column(Integer, primary_key=True, nullable=False)
 
     name: str = Column(String(75), unique=True, nullable=False)
 

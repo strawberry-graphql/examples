@@ -16,7 +16,7 @@ class User(Base):
 
     __tablename__ = "users"
 
-    id: Optional[int] = Column(default=None, primary_key=True)
+    id: int = Column(Integer, primary_key=True, nullable=False)
 
     username: str = Column(String(32), nullable=False, unique=True)
 

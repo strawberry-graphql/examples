@@ -14,7 +14,7 @@ class Post(Base):
 
     __tablename__ = "posts"
 
-    id: Optional[int] = Column(default=None, primary_key=True)
+    id: int = Column(Integer, primary_key=True, nullable=False)
 
     title: str = Column(String(150))
 

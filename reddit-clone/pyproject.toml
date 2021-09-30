@@ -9,6 +9,7 @@ python = "^3.7"
 uvicorn = {extras = ["standard"], version = "^0.15.0"}
 SQLAlchemy = {extras = ["mypy"], version = "^1.4.23"}
 alembic = "^1.7.1"
+asyncpg = "^0.24"
 strawberry-graphql = {extras = ["asgi"], version = "^0.77.0"}
 fastapi = "^0.68.1"
 

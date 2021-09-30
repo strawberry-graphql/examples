@@ -33,6 +33,12 @@ poetry install
    This example uses a PostgreSQL database. Make sure you have it installed
    on your machine, and configure the `DATABASE_URI` environment variable.
 
+   An example database URL:
+
+   ```text
+   postgresql+asyncpg://localhost/db_name?user=user&password=password
+   ```
+
 3. Run migrations
 
 Run [alembic](https://alembic.sqlalchemy.org/en/latest/) to create the database
