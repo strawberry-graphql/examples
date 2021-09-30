@@ -5,12 +5,11 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.ext.declarative import declarative_base
 
-
 from .settings import DATABASE_URI
 
-async_engine = create_async_engine(DATABASE_URI, future=True)
+engine = create_async_engine(DATABASE_URI, future=True)
 
-session_factory = sessionmaker(bind=async_engine, class_=AsyncSession)
+session_factory = sessionmaker(bind=engine, class_=AsyncSession)
 
 
 @asynccontextmanager
