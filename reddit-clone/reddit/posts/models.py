@@ -1,9 +1,10 @@
-from typing import Optional
+from typing import Optional, List
 
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 
 from ..database import Base
+from ..comments.models import Comment
 
 
 class Post(Base):
@@ -29,7 +30,9 @@ class Post(Base):
 
     votes: int = Column(Integer, default=1)
 
-    comments = relationship("Comment", back_populates="post", lazy="dynamic")
+    comments: List[Comment] = relationship(
+        "Comment", back_populates="post", lazy="dynamic"
+    )
 
     def __repr__(self) -> str:
         return f"<Post {self.title}>"

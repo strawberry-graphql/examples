@@ -1,9 +1,12 @@
-from typing import Optional
+from typing import Optional, List
 
 from sqlalchemy import Column, String, Integer, ForeignKey
 from sqlalchemy.orm import relationship
 
 from ..database import Base
+from ..comments.models import Comment
+from ..subreddits.models import Subreddit
+from ..posts.models import Post
 
 
 class User(Base):
@@ -23,13 +26,15 @@ class User(Base):
 
     avatar: Optional[str] = Column(String(255), default=None)
 
-    posts = relationship("Post", back_populates="user", lazy="dynamic")
+    posts: List[Post] = relationship("Post", back_populates="user", lazy="dynamic")
 
-    subreddits = relationship(
+    subreddits: List[Subreddit] = relationship(
         "Subreddit", back_populates="user", secondary="subreddit_users", lazy="dynamic"
     )
 
-    comments = relationship("Comment", back_populates="user", lazy="dynamic")
+    comments: List[Comment] = relationship(
+        "Comment", back_populates="user", lazy="dynamic"
+    )
 
     def __repr__(self) -> str:
         return f"<User {self.username}>"

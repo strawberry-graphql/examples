@@ -1,4 +1,6 @@
-from typing import Optional
+from __future__ import annotations
+
+from typing import Optional, List
 
 from sqlalchemy import Column, Integer, Text, ForeignKey
 from sqlalchemy.orm import relationship
@@ -17,7 +19,9 @@ class Comment(Base):
 
     user_id: Optional[int] = Column(Integer, ForeignKey("users.id"))
 
-    replies = relationship("Comment", back_populates="parent", lazy="dynamic")
+    replies: List[Comment] = relationship(
+        "Comment", back_populates="parent", lazy="dynamic"
+    )
 
     def __repr__(self) -> str:
         return f"<Comment {self.id}>"

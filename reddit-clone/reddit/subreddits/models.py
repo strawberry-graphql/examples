@@ -1,9 +1,10 @@
-from typing import Optional
+from typing import Optional, List
 
 from sqlalchemy import Column, String, Integer, SmallInteger, ForeignKey
 from sqlalchemy.orm import relationship
 
 from ..database import Base
+from ..posts.models import Post
 
 
 class Subreddit(Base):
@@ -25,7 +26,7 @@ class Subreddit(Base):
 
     icon: Optional[str] = Column(String(255), default=None)
 
-    posts = relationship("Post", back_populates="subreddit", lazy="dynamic")
+    posts: List[Post] = relationship("Post", back_populates="subreddit", lazy="dynamic")
 
     def __repr__(self) -> str:
         return f"<SubReddit {self.name}>"
