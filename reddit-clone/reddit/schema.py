@@ -1,11 +1,11 @@
-from strawberry import type, field, Schema
+from strawberry import type, Schema
+
+from reddit.base.queries import BaseQueries
 
 
 @type
-class Query:
-    @field
-    def hello_world(self) -> str:
-        return "Hello world!"
+class Query(BaseQueries):
+    pass
 
 
-schema = Schema(query=Query, mutation=None)
+schema = Schema(query=Query)
