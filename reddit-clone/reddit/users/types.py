@@ -47,7 +47,7 @@ class UserType(NodeType):
     )
 
     @classmethod
-    async def get_node(cls, info: Info, user_id: str) -> Optional[UserType]:
+    async def resolve_node(cls, info: Info, user_id: str) -> Optional[UserType]:
         """
         Gets an user with the given ID.
         """

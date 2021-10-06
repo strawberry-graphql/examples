@@ -38,7 +38,7 @@ class CommentType(NodeType):
     )
 
     @classmethod
-    async def get_node(cls, info: Info, comment_id: str) -> Optional[CommentType]:
+    async def resolve_node(cls, info: Info, comment_id: str) -> Optional[CommentType]:
         """
         Gets a comment with the given ID.
         """

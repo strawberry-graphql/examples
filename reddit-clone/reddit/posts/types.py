@@ -63,7 +63,7 @@ class PostType(NodeType):
     )
 
     @classmethod
-    async def get_node(cls, info: Info, post_id: str) -> Optional[PostType]:
+    async def resolve_node(cls, info: Info, post_id: str) -> Optional[PostType]:
         """
         Gets a post with the given ID.
         """

@@ -52,7 +52,9 @@ class SubredditType(NodeType):
     )
 
     @classmethod
-    async def get_node(cls, info: Info, subreddit_id: str) -> Optional[SubredditType]:
+    async def resolve_node(
+        cls, info: Info, subreddit_id: str
+    ) -> Optional[SubredditType]:
         """
         Gets a subreddit with the given ID.
         """

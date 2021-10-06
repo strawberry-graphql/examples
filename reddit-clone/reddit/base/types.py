@@ -35,9 +35,9 @@ class NodeType:
                 f'ObjectType "{_type}" does not implement the "{cls}" interface.'
             )
 
-        get_node = getattr(schema_type, "get_node", None)
-        if get_node:
-            return get_node(info, _id)
+        resolver = getattr(schema_type, "resolve_node", None)
+        if resolver is not None:
+            return resolver(info, _id)
 
     @classmethod
     def from_global_id(cls, global_id: str):
