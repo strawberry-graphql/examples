@@ -184,6 +184,18 @@ optional = false
 python-versions = ">=3.6,<4"
 
 [[package]]
+name = "graphql-relay"
+version = "3.1.0"
+description = "Relay library for graphql-core"
+category = "main"
+optional = false
+python-versions = ">=3.6,<4"
+
+[package.dependencies]
+graphql-core = ">=3.1"
+typing-extensions = {version = ">=3.7,<4", markers = "python_version < \"3.8\""}
+
+[[package]]
 name = "greenlet"
 version = "1.1.2"
 description = "Lightweight in-process concurrent programming"
@@ -603,7 +615,7 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytes
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "f3370347eb4ab8f408c13bdc052245300e88eca06607c5302a492c703bf2d4f8"
+content-hash = "c7f68ad613b93e290f94e02da38f6c0c46e7b049d42fcf911543dc7762ac2c97"
 
 [metadata.files]
 alembic = [
@@ -668,6 +680,10 @@ flake8-bugbear = [
 graphql-core = [
     {file = "graphql-core-3.1.6.tar.gz", hash = "sha256:e65975b6a13878f9113a1fa5320760585b522d139944e005936b1b8358d0651a"},
     {file = "graphql_core-3.1.6-py3-none-any.whl", hash = "sha256:c78d09596d347e1cffd266c5384abfedf43ed1eae08729773bebb3d527fe5a14"},
+]
+graphql-relay = [
+    {file = "graphql-relay-3.1.0.tar.gz", hash = "sha256:70d5a7ee5995ea7c2a9a37e51227663b1a464f1f40e98fdde950be5415dfe0b4"},
+    {file = "graphql_relay-3.1.0-py3-none-any.whl", hash = "sha256:2cda0ac0199dd56c28ca4f6e0381cdcf5787809c06d1507df3c2a738f9ad846f"},
 ]
 greenlet = [
     {file = "greenlet-1.1.2-cp27-cp27m-macosx_10_14_x86_64.whl", hash = "sha256:58df5c2a0e293bf665a51f8a100d3e9956febfbf1d9aaf8c0677cf70218910c6"},

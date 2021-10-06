@@ -1,11 +1,11 @@
-import strawberry
+from strawberry import type, field, Schema
 
 
-@strawberry.type
+@type
 class Query:
-    @strawberry.field()
+    @field
     def hello_world(self) -> str:
         return "Hello world!"
 
 
-schema = strawberry.Schema(query=Query, mutation=None)
+schema = Schema(query=Query, mutation=None)

@@ -1,4 +1,4 @@
-from typing import Optional, List
+from typing import List
 
 from sqlalchemy import Column, String, Integer, ForeignKey
 from sqlalchemy.orm import relationship
@@ -24,7 +24,7 @@ class User(Base):
 
     password: str = Column(String(255), nullable=False)
 
-    avatar: Optional[str] = Column(String(255), default=None)
+    avatar: str = Column(String(255), nullable=False, default="default.jpg")
 
     posts: List[Post] = relationship("Post", back_populates="user", lazy="dynamic")
 
