@@ -22,7 +22,22 @@ class NodeType:
                 f"Exception message: {str(e)}"
             )
 
-        info.schema.get_type(_type)
+        schema_type = info.schema.get_type(_type)
+        if schema_type is None:
+            raise Exception(f'Relay Node "{_type}" not found in schema')
+
+        if only_type:
+            assert schema_type == only_type
+
+        # We make sure the ObjectType implements the "Node" interface
+        if cls not in schema_type.interfaces:
+            raise Exception(
+                f'ObjectType "{_type}" does not implement the "{cls}" interface.'
+            )
+
+        get_node = getattr(schema_type, "get_node", None)
+        if get_node:
+            return get_node(info, _id)
 
     @classmethod
     def from_global_id(cls, global_id: str):
