@@ -35,7 +35,7 @@ class NodeType:
             assert schema_type == only_type
 
         # We make sure the ObjectType implements the "Node" interface
-        if cls not in schema_type.interfaces:
+        if cls not in schema_type._type_definition.interfaces:
             raise Exception(
                 f'ObjectType "{_type}" does not implement the "{cls}" interface.'
             )
