@@ -3,12 +3,15 @@ from __future__ import annotations
 from typing import List, Optional
 
 from strawberry import type, field
+from strawberry.types import Info
+from sqlalchemy import select
 
 from reddit.users.models import User
 from reddit.base.types import NodeType
 from reddit.posts.types import PostType
 from reddit.subreddits.types import SubredditType
 from reddit.comments.types import CommentType
+from reddit.database import get_session
 
 
 @type(name="User")
@@ -19,7 +22,7 @@ class UserType(NodeType):
         """
     )
 
-    avatar: Optional[str] = field(
+    avatar: str = field(
         description="""
         The avatar URL of the user.
         """
@@ -42,6 +45,16 @@ class UserType(NodeType):
         The comments for the user.
         """
     )
+
+    @classmethod
+    async def get_node(cls, info: Info, user_id: str) -> Optional[User]:
+        """
+        Gets an user with the given ID.
+        """
+        query = select(User).filter_by(id=user_id).first()
+        async with get_session() as session:
+            user = await session.execute(query)
+        return user
 
     @classmethod
     def from_instance(cls, instance: User) -> UserType:

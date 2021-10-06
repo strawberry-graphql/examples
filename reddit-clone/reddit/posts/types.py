@@ -3,10 +3,13 @@ from __future__ import annotations
 from typing import List, Optional
 
 from strawberry import type, field
+from strawberry.types import Info
+from sqlalchemy import select
 
 from reddit.base.types import NodeType
 from reddit.posts.models import Post
 from reddit.comments.types import CommentType
+from reddit.database import get_session
 
 
 @type(name="Post")
@@ -58,6 +61,16 @@ class PostType(NodeType):
         The comments for the post.
         """
     )
+
+    @classmethod
+    async def get_node(cls, info: Info, post_id: str) -> Optional[Post]:
+        """
+        Gets a post with the given ID.
+        """
+        query = select(Post).filter_by(id=post_id).first()
+        async with get_session() as session:
+            user = await session.execute(query)
+        return user
 
     @classmethod
     def from_instance(cls, instance: Post) -> PostType:

@@ -1,12 +1,15 @@
 from __future__ import annotations
 
-from typing import List
+from typing import List, Optional
 
 from strawberry import type, field
+from strawberry.types import Info
+from sqlalchemy import select
 
 from reddit.base.types import NodeType
 from reddit.subreddits.models import Subreddit
 from reddit.posts.types import PostType
+from reddit.database import get_session
 
 
 @type(name="Subreddit")
@@ -47,6 +50,16 @@ class SubredditType(NodeType):
         The posts for the subreddit.
         """
     )
+
+    @classmethod
+    async def get_node(cls, info: Info, subreddit_id: str) -> Optional[Subreddit]:
+        """
+        Gets a subreddit with the given ID.
+        """
+        query = select(Subreddit).filter_by(id=subreddit_id).first()
+        async with get_session() as session:
+            user = await session.execute(query)
+        return user
 
     @classmethod
     def from_instance(cls, instance: Subreddit) -> SubredditType:
