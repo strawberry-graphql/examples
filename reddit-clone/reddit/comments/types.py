@@ -38,14 +38,15 @@ class CommentType(NodeType):
     )
 
     @classmethod
-    async def get_node(cls, info: Info, comment_id: str) -> Optional[Comment]:
+    async def get_node(cls, info: Info, comment_id: str) -> Optional[CommentType]:
         """
         Gets a comment with the given ID.
         """
         query = select(Comment).filter_by(id=comment_id).first()
         async with get_session() as session:
-            user = await session.execute(query)
-        return user
+            comment = await session.execute(query)
+        if comment is not None:
+            return cls.from_instance(comment)
 
     @classmethod
     def from_instance(cls, instance: Comment) -> CommentType:

@@ -47,14 +47,15 @@ class UserType(NodeType):
     )
 
     @classmethod
-    async def get_node(cls, info: Info, user_id: str) -> Optional[User]:
+    async def get_node(cls, info: Info, user_id: str) -> Optional[UserType]:
         """
         Gets an user with the given ID.
         """
         query = select(User).filter_by(id=user_id).first()
         async with get_session() as session:
             user = await session.execute(query)
-        return user
+        if user is not None:
+            return cls.from_instance(user)
 
     @classmethod
     def from_instance(cls, instance: User) -> UserType:

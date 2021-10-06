@@ -52,14 +52,15 @@ class SubredditType(NodeType):
     )
 
     @classmethod
-    async def get_node(cls, info: Info, subreddit_id: str) -> Optional[Subreddit]:
+    async def get_node(cls, info: Info, subreddit_id: str) -> Optional[SubredditType]:
         """
         Gets a subreddit with the given ID.
         """
         query = select(Subreddit).filter_by(id=subreddit_id).first()
         async with get_session() as session:
-            user = await session.execute(query)
-        return user
+            subreddit = await session.execute(query)
+        if subreddit is not None:
+            return cls.from_instance(subreddit)
 
     @classmethod
     def from_instance(cls, instance: Subreddit) -> SubredditType:

@@ -63,14 +63,15 @@ class PostType(NodeType):
     )
 
     @classmethod
-    async def get_node(cls, info: Info, post_id: str) -> Optional[Post]:
+    async def get_node(cls, info: Info, post_id: str) -> Optional[PostType]:
         """
         Gets a post with the given ID.
         """
         query = select(Post).filter_by(id=post_id).first()
         async with get_session() as session:
-            user = await session.execute(query)
-        return user
+            post = await session.execute(query)
+        if post is not None:
+            return cls.from_instance(post)
 
     @classmethod
     def from_instance(cls, instance: Post) -> PostType:
