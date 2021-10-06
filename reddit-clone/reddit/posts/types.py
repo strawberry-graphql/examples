@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import List, Optional
 
-from strawberry import type, field
+import strawberry
 from strawberry.types import Info
 from sqlalchemy import select
 
@@ -12,51 +12,51 @@ from reddit.comments.types import CommentType
 from reddit.database import get_session
 
 
-@type(name="Post")
+@strawberry.type(name="Post")
 class PostType(NodeType):
-    title: str = field(
+    title: str = strawberry.field(
         description="""
         The title of the post.
         """
     )
 
-    text: Optional[str] = field(
+    text: Optional[str] = strawberry.field(
         description="""
         The text for the post.
         """
     )
 
-    link: Optional[str] = field(
+    link: Optional[str] = strawberry.field(
         description="""
         The link of the post.
         """
     )
 
-    thumbnail: Optional[str] = field(
+    thumbnail: Optional[str] = strawberry.field(
         description="""
         The thumbnail URL of the post.
         """
     )
 
-    user_id: int = field(
+    user_id: int = strawberry.field(
         description="""
         The owner ID of the post.
         """
     )
 
-    subreddit_id: int = field(
+    subreddit_id: int = strawberry.field(
         description="""
         The subreddit ID of the post.
         """
     )
 
-    votes: int = field(
+    votes: int = strawberry.field(
         description="""
         The votes the post has.
         """
     )
 
-    comments: List[CommentType] = field(
+    comments: List[CommentType] = strawberry.field(
         description="""
         The comments for the post.
         """

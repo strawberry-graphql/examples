@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import List, Optional
 
-from strawberry import type, field
+import strawberry
 from strawberry.types import Info
 from sqlalchemy import select
 
@@ -12,40 +12,40 @@ from reddit.posts.types import PostType
 from reddit.database import get_session
 
 
-@type(name="Subreddit")
+@strawberry.type(name="Subreddit")
 class SubredditType(NodeType):
-    name: str = field(
+    name: str = strawberry.field(
         description="""
         The name of the subreddit.
         """
     )
 
-    description: str = field(
+    description: str = strawberry.field(
         description="""
         The description of the subreddit.
         """
     )
 
-    admin_id: int = field(
+    admin_id: int = strawberry.field(
         description="""
         The owner ID of the subreddit.
         """
     )
 
     # TODO: make status an enum
-    status: int = field(
+    status: int = strawberry.field(
         description="""
         The status of the subreddit.
         """
     )
 
-    icon: str = field(
+    icon: str = strawberry.field(
         description="""
         The icon URL of the subreddit.
         """
     )
 
-    posts: List[PostType] = field(
+    posts: List[PostType] = strawberry.field(
         description="""
         The posts for the subreddit.
         """

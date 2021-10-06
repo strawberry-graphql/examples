@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import List, Optional
 
-from strawberry import type, field
+import strawberry
 from strawberry.types import Info
 from sqlalchemy import select
 
@@ -14,33 +14,33 @@ from reddit.comments.types import CommentType
 from reddit.database import get_session
 
 
-@type(name="User")
+@strawberry.type(name="User")
 class UserType(NodeType):
-    username: str = field(
+    username: str = strawberry.field(
         description="""
         The username of the user.
         """
     )
 
-    avatar: str = field(
+    avatar: str = strawberry.field(
         description="""
         The avatar URL of the user.
         """
     )
 
-    posts: List[PostType] = field(
+    posts: List[PostType] = strawberry.field(
         description="""
         The posts for the user.
         """
     )
 
-    subreddits: List[SubredditType] = field(
+    subreddits: List[SubredditType] = strawberry.field(
         description="""
         The subreddits the user is in.
         """
     )
 
-    comments: List[CommentType] = field(
+    comments: List[CommentType] = strawberry.field(
         description="""
         The comments for the user.
         """

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import List, Optional
 
-from strawberry import type, field
+import strawberry
 from strawberry.types import Info
 from sqlalchemy import select
 
@@ -11,27 +11,27 @@ from reddit.comments.models import Comment
 from reddit.database import get_session
 
 
-@type(name="Comment")
+@strawberry.type(name="Comment")
 class CommentType(NodeType):
-    content: str = field(
+    content: str = strawberry.field(
         description="""
         The content of the comment.
         """
     )
 
-    votes: int = field(
+    votes: int = strawberry.field(
         description="""
         The votes the comment has.
         """
     )
 
-    user_id: Optional[int] = field(
+    user_id: Optional[int] = strawberry.field(
         description="""
         The owner ID of the comment.
         """
     )
 
-    replies: List[CommentType] = field(
+    replies: List[CommentType] = strawberry.field(
         description="""
         The replies for the comment.
         """

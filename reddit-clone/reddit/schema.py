@@ -1,11 +1,11 @@
-from strawberry import type, Schema
+import strawberry
 
 from reddit.base.queries import BaseQueries
 
 
-@type
+@strawberry.type
 class Query(BaseQueries):
     pass
 
 
-schema = Schema(query=Query)
+schema = strawberry.Schema(query=Query)

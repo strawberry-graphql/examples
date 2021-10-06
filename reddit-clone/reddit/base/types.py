@@ -2,14 +2,14 @@ from __future__ import annotations
 
 from typing import Optional, Type
 
-from strawberry import interface, field, ID
+import strawberry
 from strawberry.types import Info
 from graphql_relay import from_global_id, to_global_id
 
 
-@interface(name="Node", description="An object with an ID.")
+@strawberry.interface(name="Node", description="An object with an ID.")
 class NodeType:
-    id: ID = field(
+    id: strawberry.ID = strawberry.field(
         description="""
         ID of the object.
         """
