@@ -1,0 +1,35 @@
+import strawberry
+from strawberry.types import Info
+
+from reddit.users.types import UserType
+
+
+@strawberry.type
+class EmailChangeRequestInput:
+    email: str
+    password: str
+
+
+@strawberry.type
+class EmailChangeRequestSuccess:
+    user: UserType
+
+
+@strawberry.type
+class EmailChangeRequestError:
+    error: str
+
+
+EmailChangeRequestResult = strawberry.union(
+    name="EmailChangeRequestResult",
+    types=(EmailChangeRequestSuccess, EmailChangeRequestError),
+)
+
+
+@strawberry.mutation(
+    description="Sends an email change code to the given email address."
+)
+async def email_change_request(
+    info: Info, input: EmailChangeRequestInput
+) -> EmailChangeRequestResult:
+    pass

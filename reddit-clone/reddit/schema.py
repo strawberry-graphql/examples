@@ -1,11 +1,18 @@
 import strawberry
 
-from reddit.base.queries import BaseQueries
+from reddit.base.queries import BaseQuery
+from reddit.users.queries import UserQuery
+from reddit.users.mutations import UserMutation
 
 
 @strawberry.type
-class Query(BaseQueries):
+class Query(BaseQuery, UserQuery):
     pass
 
 
-schema = strawberry.Schema(query=Query)
+@strawberry.type
+class Mutation(UserMutation):
+    pass
+
+
+schema = strawberry.Schema(query=Query, mutation=Mutation)

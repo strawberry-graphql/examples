@@ -1,0 +1,31 @@
+import strawberry
+from strawberry.types import Info
+
+from reddit.users.types import UserType
+
+
+@strawberry.type
+class UserDeactivateInput:
+    password: str
+
+
+@strawberry.type
+class UserDeactivateSuccess:
+    user: UserType
+
+
+@strawberry.type
+class UserDeactivateError:
+    error: str
+
+
+UserDeactivateResult = strawberry.union(
+    name="UserDeactivateResult", types=(UserDeactivateSuccess, UserDeactivateError)
+)
+
+
+@strawberry.mutation(description="Deactivates the current user.")
+async def user_deactivate(
+    info: Info, input: UserDeactivateInput
+) -> UserDeactivateResult:
+    pass
