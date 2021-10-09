@@ -11,6 +11,7 @@ from .user_deactivate import user_deactivate
 from .user_update import user_update
 
 UserMutation = create_type(
+    name="UserMutation",
     fields=(
         authenticate,
         avatar_remove,
@@ -21,5 +22,5 @@ UserMutation = create_type(
         user_create,
         user_deactivate,
         user_update,
-    )
+    ),
 )

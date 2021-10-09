@@ -1,24 +1,33 @@
 from typing import Optional
 
 import strawberry
+from strawberry.tools import create_type
 from strawberry.types import Info
-from sqlalchemy import select
 
-from reddit.database import get_session
 from reddit.users.types import UserType
-from reddit.users.models import User
 
 
-@strawberry.type
-class UserQuery:
-    @strawberry.field(description="Gets an user by username.")
-    async def user(self, info: Info, username: str) -> Optional[UserType]:
-        query = select(User).filter_by(username=username).first()
-        async with get_session() as session:
-            user = await session.execute(query)
-        if user is not None:
-            return UserType.from_instance(user)
+async def resolve_user(info: Info, username: str) -> Optional[UserType]:
+    pass
 
-    @strawberry.field(description="Gets the current user.")
-    async def current_user(self, info: Info) -> UserType:
-        pass
+
+user = strawberry.field(
+    resolver=resolve_user,
+    description="""
+    Get an user by username.
+    """,
+)
+
+
+async def resolve_current_user(info: Info) -> UserType:
+    pass
+
+
+current_user = strawberry.field(
+    resolver=resolve_current_user,
+    description="""
+    Gets the current user.
+    """,
+)
+
+UserQuery = create_type(name="UserQuery", fields=(user, current_user))

@@ -5,6 +5,8 @@ from strawberry.types import Info
 
 from reddit.users.types import UserType
 
+__all__ = ("password_reset",)
+
 
 @strawberry.input
 class PasswordResetInput:
@@ -26,6 +28,15 @@ class PasswordResetError:
 PasswordResetResult = Union[PasswordResetSuccess, PasswordResetError]
 
 
-@strawberry.mutation(description="Resets the password for the user account.")
-async def password_reset(info: Info, input: PasswordResetInput) -> PasswordResetResult:
+async def resolve_password_reset(
+    info: Info, input: PasswordResetInput
+) -> PasswordResetResult:
     pass
+
+
+password_reset = strawberry.mutation(
+    resolver=resolve_password_reset,
+    description="""
+    Resets the password for the user account.
+    """,
+)

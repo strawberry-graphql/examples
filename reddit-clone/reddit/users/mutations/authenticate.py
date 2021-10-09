@@ -6,6 +6,9 @@ from strawberry.types import Info
 from reddit.users.types import UserType
 
 
+__all__ = ("authenticate",)
+
+
 @strawberry.input
 class AuthenticateInput:
     username: str
@@ -25,6 +28,15 @@ class AuthenticateError:
 AuthenticateResult = Union[AuthenticateSuccess, AuthenticateError]
 
 
-@strawberry.mutation(description="Logs the current user in.")
-async def authenticate(info: Info, input: AuthenticateInput) -> AuthenticateResult:
+async def resolve_authenticate(
+    info: Info, input: AuthenticateInput
+) -> AuthenticateResult:
     pass
+
+
+authenticate = strawberry.mutation(
+    resolver=resolve_authenticate,
+    description="""
+    Logs the current user in.
+    """,
+)

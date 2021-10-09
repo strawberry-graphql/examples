@@ -5,6 +5,8 @@ from strawberry.types import Info
 
 from reddit.users.types import UserType
 
+__all__ = ("user_create",)
+
 
 @strawberry.input
 class UserCreateInput:
@@ -26,6 +28,13 @@ class UserCreateError:
 UserCreateResult = Union[UserCreateSuccess, UserCreateError]
 
 
-@strawberry.mutation(description="Creates a new user.")
-async def user_create(info: Info, input: UserCreateInput) -> UserCreateResult:
+async def resolve_user_create(info: Info, input: UserCreateInput) -> UserCreateResult:
     pass
+
+
+user_create = strawberry.mutation(
+    resolver=resolve_user_create,
+    description="""
+    Creates a new user.
+    """,
+)

@@ -6,6 +6,8 @@ from strawberry.types import Info
 
 from reddit.users.types import UserType
 
+__all__ = ("user_update",)
+
 
 @strawberry.input
 class UserUpdateInput:
@@ -26,6 +28,13 @@ class UserUpdateError:
 UserUpdateResult = Union[UserUpdateSuccess, UserUpdateError]
 
 
-@strawberry.mutation(description="Updates the current user.")
-async def user_update(info: Info, input: UserUpdateInput) -> UserUpdateResult:
+async def resolve_user_update(info: Info, input: UserUpdateInput) -> UserUpdateResult:
     pass
+
+
+user_update = strawberry.mutation(
+    resolver=resolve_user_update,
+    description="""
+    Updates the current user.
+    """,
+)

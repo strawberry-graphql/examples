@@ -6,6 +6,9 @@ from strawberry.types import Info
 from reddit.users.types import UserType
 
 
+__all__ = ("email_change_request",)
+
+
 @strawberry.input
 class EmailChangeRequestInput:
     email: str
@@ -25,10 +28,16 @@ class EmailChangeRequestError:
 EmailChangeRequestResult = Union[EmailChangeRequestSuccess, EmailChangeRequestError]
 
 
-@strawberry.mutation(
-    description="Sends an email change code to the given email address."
-)
-async def email_change_request(
+async def resolve_email_change_request(
     info: Info, input: EmailChangeRequestInput
 ) -> EmailChangeRequestResult:
     pass
+
+
+email_change_request = strawberry.mutation(
+    resolver=resolve_email_change_request,
+    description="""
+    Sends an email change code to
+    the given email address.
+    """,
+)

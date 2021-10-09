@@ -5,6 +5,8 @@ from strawberry.types import Info
 
 from reddit.users.types import UserType
 
+__all__ = ("email_change",)
+
 
 @strawberry.input
 class EmailChangeInput:
@@ -25,6 +27,15 @@ class EmailChangeError:
 EmailChangeResult = Union[EmailChangeSuccess, EmailChangeError]
 
 
-@strawberry.mutation(description="Changes the email for associated user.")
-async def email_change(info: Info, input: EmailChangeInput) -> EmailChangeResult:
+async def resolve_email_change(
+    info: Info, input: EmailChangeInput
+) -> EmailChangeResult:
     pass
+
+
+email_change = strawberry.mutation(
+    resolver=resolve_email_change,
+    description="""
+    Changes the email for associated user.
+    """,
+)
