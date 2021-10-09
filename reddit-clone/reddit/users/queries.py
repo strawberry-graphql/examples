@@ -14,7 +14,7 @@ async def resolve_user(info: Info, username: str) -> Optional[UserType]:
 user = strawberry.field(
     resolver=resolve_user,
     description="""
-    Get an user by username.
+    Gets an user by username.
     """,
 )
 
