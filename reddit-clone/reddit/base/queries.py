@@ -1,13 +1,22 @@
 from typing import Optional
 
 import strawberry
+from strawberry.tools import create_type
 from strawberry.types import Info
 
 from reddit.base.types import NodeType
 
 
-@strawberry.type
-class BaseQuery:
-    @strawberry.field(name="node", description="Fetches an object given its ID.")
-    def resolve_node(self, info: Info, id: strawberry.ID) -> Optional[NodeType]:
-        return NodeType.get_node_from_global_id(info=info, global_id=id)
+def resolve_node(info: Info, id: strawberry.ID) -> Optional[NodeType]:
+    return NodeType.get_node_from_global_id(info=info, global_id=id)
+
+
+node = strawberry.field(
+    resolver=resolve_node,
+    description="""
+    Fetches an object given its ID.
+    """,
+)
+
+
+BaseQuery = create_type(name="BaseQuery", fields=(node,))
