@@ -6,7 +6,7 @@ from strawberry.types import Info
 from reddit.users.types import UserType
 
 
-@strawberry.type
+@strawberry.input
 class UserCreateInput:
     email: str
     username: str

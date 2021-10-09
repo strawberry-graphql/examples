@@ -1,16 +1,16 @@
 from typing import Union
 
 import strawberry
+from strawberry.file_uploads import Upload
 from strawberry.types import Info
 
 from reddit.users.types import UserType
 
 
-@strawberry.type
+@strawberry.input
 class UserUpdateInput:
-    email: str
     username: str
-    password: str
+    avatar: Upload
 
 
 @strawberry.type
