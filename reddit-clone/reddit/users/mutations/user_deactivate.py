@@ -1,3 +1,5 @@
+from typing import Union
+
 import strawberry
 from strawberry.types import Info
 
@@ -19,9 +21,7 @@ class UserDeactivateError:
     error: str
 
 
-UserDeactivateResult = strawberry.union(
-    name="UserDeactivateResult", types=(UserDeactivateSuccess, UserDeactivateError)
-)
+UserDeactivateResult = Union[UserDeactivateSuccess, UserDeactivateError]
 
 
 @strawberry.mutation(description="Deactivates the current user.")

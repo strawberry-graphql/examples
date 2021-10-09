@@ -1,3 +1,5 @@
+from typing import Union
+
 import strawberry
 from strawberry.types import Info
 
@@ -21,9 +23,7 @@ class UserUpdateError:
     error: str
 
 
-UserUpdateResult = strawberry.union(
-    name="UserUpdateResult", types=(UserUpdateSuccess, UserUpdateError)
-)
+UserUpdateResult = Union[UserUpdateSuccess, UserUpdateError]
 
 
 @strawberry.mutation(description="Updates the current user.")

@@ -1,3 +1,5 @@
+from typing import Union
+
 import strawberry
 from strawberry.types import Info
 
@@ -21,9 +23,7 @@ class UserCreateError:
     error: str
 
 
-UserCreateResult = strawberry.union(
-    name="UserCreateResult", types=(UserCreateSuccess, UserCreateError)
-)
+UserCreateResult = Union[UserCreateSuccess, UserCreateError]
 
 
 @strawberry.mutation(description="Creates a new user.")

@@ -1,3 +1,5 @@
+from typing import Union
+
 import strawberry
 from strawberry.types import Info
 
@@ -20,9 +22,7 @@ class AuthenticateError:
     error: str
 
 
-AuthenticateResult = strawberry.union(
-    name="AuthenticateResult", types=(AuthenticateSuccess, AuthenticateError)
-)
+AuthenticateResult = Union[AuthenticateSuccess, AuthenticateError]
 
 
 @strawberry.mutation(description="Logs the current user in.")

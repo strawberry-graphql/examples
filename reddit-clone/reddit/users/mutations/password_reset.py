@@ -1,3 +1,5 @@
+from typing import Union
+
 import strawberry
 from strawberry.types import Info
 
@@ -21,9 +23,7 @@ class PasswordResetError:
     error: str
 
 
-PasswordResetResult = strawberry.union(
-    name="PasswordResetResult", types=(PasswordResetSuccess, PasswordResetError)
-)
+PasswordResetResult = Union[PasswordResetSuccess, PasswordResetError]
 
 
 @strawberry.mutation(description="Resets the password for the user account.")

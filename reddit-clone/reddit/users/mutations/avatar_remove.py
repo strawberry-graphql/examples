@@ -1,3 +1,5 @@
+from typing import Union
+
 import strawberry
 from strawberry.types import Info
 
@@ -14,9 +16,7 @@ class AvatarRemoveError:
     error: str
 
 
-AvatarRemoveResult = strawberry.union(
-    name="AvatarRemoveResult", types=(AvatarRemoveSuccess, AvatarRemoveError)
-)
+AvatarRemoveResult = Union[AvatarRemoveSuccess, AvatarRemoveError]
 
 
 @strawberry.mutation(description="Removes the current user's avatar.")

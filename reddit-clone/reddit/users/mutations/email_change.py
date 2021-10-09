@@ -1,3 +1,5 @@
+from typing import Union
+
 import strawberry
 from strawberry.types import Info
 
@@ -20,9 +22,7 @@ class EmailChangeError:
     error: str
 
 
-EmailChangeResult = strawberry.union(
-    name="EmailChangeResult", types=(EmailChangeSuccess, EmailChangeError)
-)
+EmailChangeResult = Union[EmailChangeSuccess, EmailChangeError]
 
 
 @strawberry.mutation(description="Changes the email for associated user.")
