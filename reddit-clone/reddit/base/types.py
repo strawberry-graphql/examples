@@ -16,7 +16,7 @@ class NodeType:
     )
 
     @classmethod
-    def get_node_from_global_id(
+    def resolve(
         cls, info: Info, global_id: str, only_type=None
     ) -> Optional[Type[NodeType]]:
         try:

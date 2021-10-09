@@ -8,7 +8,7 @@ from reddit.base.types import NodeType
 
 
 def resolve_node(info: Info, id: strawberry.ID) -> Optional[NodeType]:
-    return NodeType.get_node_from_global_id(info=info, global_id=id)
+    return NodeType.resolve(info=info, global_id=id)
 
 
 node = strawberry.field(

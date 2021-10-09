@@ -32,6 +32,13 @@ class SubredditType(NodeType):
         """
     )
 
+    submit_text: str = strawberry.field(
+        description="""
+        The text set by the subreddit moderators, intended
+        to be displayed on the submission form.
+        """
+    )
+
     # TODO: make status an enum
     status: int = strawberry.field(
         description="""
