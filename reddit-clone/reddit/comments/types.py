@@ -50,10 +50,4 @@ class CommentType(NodeType):
 
     @classmethod
     def from_instance(cls, instance: Comment) -> CommentType:
-        return CommentType(
-            id=instance.id,
-            content=instance.content,
-            votes=instance.votes,
-            user_id=instance.user_id,
-            replies=instance.replies,
-        )
+        pass

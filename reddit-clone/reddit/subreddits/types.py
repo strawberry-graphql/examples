@@ -16,45 +16,38 @@ from reddit.database import get_session
 class SubredditType(NodeType):
     name: str = strawberry.field(
         description="""
-        The name of the subreddit.
+        The name of the Subreddit.
         """
     )
 
     description: str = strawberry.field(
         description="""
-        The description of the subreddit.
+        The description of the Subreddit.
         """
     )
 
     admin_id: int = strawberry.field(
         description="""
-        The owner ID of the subreddit.
+        The owner ID of the Subreddit.
         """
     )
 
     submit_text: str = strawberry.field(
         description="""
-        The text set by the subreddit moderators, intended
+        The text set by the Subreddit moderators, intended
         to be displayed on the submission form.
-        """
-    )
-
-    # TODO: make status an enum
-    status: int = strawberry.field(
-        description="""
-        The status of the subreddit.
         """
     )
 
     icon: str = strawberry.field(
         description="""
-        The icon URL of the subreddit.
+        The icon URL of the Subreddit.
         """
     )
 
     posts: List[PostType] = strawberry.field(
         description="""
-        The posts for the subreddit.
+        The posts for the Subreddit.
         """
     )
 
@@ -63,7 +56,7 @@ class SubredditType(NodeType):
         cls, info: Info, subreddit_id: str
     ) -> Optional[SubredditType]:
         """
-        Gets a subreddit with the given ID.
+        Gets a Subreddit with the given ID.
         """
         query = select(Subreddit).filter_by(id=subreddit_id).first()
         async with get_session() as session:
@@ -73,11 +66,4 @@ class SubredditType(NodeType):
 
     @classmethod
     def from_instance(cls, instance: Subreddit) -> SubredditType:
-        return SubredditType(
-            id=instance.id,
-            description=instance.description,
-            admin_id=instance.admin_id,
-            status=instance.status,
-            icon=instance.icon,
-            posts=instance.posts,
-        )
+        pass

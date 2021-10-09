@@ -65,11 +65,4 @@ class UserType(NodeType):
 
     @classmethod
     def from_instance(cls, instance: User) -> UserType:
-        return UserType(
-            id=instance.id,
-            username=instance.username,
-            avatar=instance.avatar,
-            posts=instance.posts,
-            subreddits=instance.subreddits,
-            comments=instance.comments,
-        )
+        pass

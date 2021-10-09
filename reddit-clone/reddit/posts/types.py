@@ -75,14 +75,4 @@ class PostType(NodeType):
 
     @classmethod
     def from_instance(cls, instance: Post) -> PostType:
-        return PostType(
-            id=instance.id,
-            title=instance.title,
-            text=instance.text,
-            link=instance.link,
-            thumbnail=instance.thumbnail,
-            user_id=instance.user_id,
-            subreddit_id=instance.subreddit_id,
-            votes=instance.votes,
-            comments=instance.comments,
-        )
+        pass
