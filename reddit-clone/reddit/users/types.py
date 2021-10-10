@@ -28,12 +28,6 @@ class UserType(NodeType):
         """
     )
 
-    blocked: List[UserType] = strawberry.field(
-        description="""
-        The accounts blocked by the user.
-        """
-    )
-
     posts: List[PostType] = strawberry.field(
         description="""
         The posts for the user.

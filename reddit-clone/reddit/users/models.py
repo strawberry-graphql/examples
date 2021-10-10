@@ -54,6 +54,14 @@ class User(Base):
         query = select(User).filter_by(username=username).first()
         return await session.execute(query)
 
+    @classmethod
+    async def by_email(cls, session: AsyncSession, email: str) -> Optional[User]:
+        """
+        Gets an user by their email.
+        """
+        query = select(User).filter_by(email=email).first()
+        return await session.execute(query)
+
     def set_password(self, password: str) -> None:
         """
         Sets a hashed version of the provided

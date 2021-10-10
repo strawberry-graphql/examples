@@ -50,10 +50,21 @@ async def remove_avatar(session: AsyncSession, user: User) -> User:
     return user
 
 
-async def request_change_email(session: AsyncSession, email: str, password: str):
+async def request_change_email(
+    session: AsyncSession, email: str, password: str, user: User
+):
     """
     Sends an email change code to the user's new email.
     """
+    if not user.check_password(password=password):
+        # TODO: handle exception here.
+        pass
+    user = await User.by_email(session=session, email=email)
+    if user is not None:
+        # TODO: handle exception here.
+        pass
+    # TODO: store email change code and send
+    # change request email.
 
 
 async def change_email(
@@ -69,6 +80,10 @@ async def request_reset_password(session: AsyncSession, email: str):
     Sends a password reset code to the given email, if it
     actually exists.
     """
+    user = await User.by_email(session=session, email=email)
+    if user is not None:
+        # TODO: send password reset email here.
+        pass
 
 
 async def reset_password(
@@ -76,12 +91,6 @@ async def reset_password(
 ):
     """
     Resets the password for the given user instance.
-    """
-
-
-async def block_user(session: AsyncSession, user_id: int, user: User):
-    """
-    Blocks the user account for the given user instance.
     """
 
 
