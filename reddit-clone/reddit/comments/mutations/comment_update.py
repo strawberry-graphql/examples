@@ -37,7 +37,6 @@ async def resolve_comment_update(
 
 
 comment_update = strawberry.mutation(
-    name="comment_update",
     resolver=resolve_comment_update,
     description="""
     Updates a comment on a post.

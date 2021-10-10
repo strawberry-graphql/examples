@@ -36,7 +36,6 @@ async def resolve_comment_vote(
 
 
 comment_vote = strawberry.mutation(
-    name="comment_vote",
     resolver=resolve_comment_vote,
     description="""
     Creates a vote on a comment.

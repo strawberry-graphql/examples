@@ -34,7 +34,6 @@ async def resolve_post_create(info: Info, input: PostCreateInput) -> PostCreateR
 
 
 post_create = strawberry.mutation(
-    name="post_create",
     resolver=resolve_post_create,
     description="""
     Creates a new post in a Subreddit.

@@ -36,7 +36,6 @@ async def resolve_subreddit_update(
 
 
 subreddit_update = strawberry.mutation(
-    name="subreddit_update",
     resolver=resolve_subreddit_update,
     description="""
     Updates a Subreddit.

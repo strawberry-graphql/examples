@@ -33,7 +33,6 @@ async def resolve_post_delete(info: Info, input: PostDeleteInput) -> PostDeleteR
 
 
 post_delete = strawberry.mutation(
-    name="post_delete",
     resolver=resolve_post_delete,
     description="""
     Deletes a post in a Subreddit.

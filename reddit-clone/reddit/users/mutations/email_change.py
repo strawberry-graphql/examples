@@ -34,7 +34,6 @@ async def resolve_email_change(
 
 
 email_change = strawberry.mutation(
-    name="email_change",
     resolver=resolve_email_change,
     description="""
     Changes the email for the user account

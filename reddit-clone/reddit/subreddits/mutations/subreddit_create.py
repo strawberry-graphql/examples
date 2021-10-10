@@ -35,7 +35,6 @@ async def resolve_subreddit_create(
 
 
 subreddit_create = strawberry.mutation(
-    name="subreddit_create",
     resolver=resolve_subreddit_create,
     description="""
     Creates a new Subreddit.

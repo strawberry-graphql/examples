@@ -35,7 +35,6 @@ async def resolve_password_reset_request(
 
 
 password_reset_request = strawberry.mutation(
-    name="password_reset_request",
     resolver=resolve_password_reset_request,
     description="""
     Sends a password reset code to the

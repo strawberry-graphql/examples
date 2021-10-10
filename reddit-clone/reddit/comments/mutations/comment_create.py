@@ -36,7 +36,6 @@ async def resolve_comment_create(
 
 
 comment_create = strawberry.mutation(
-    name="comment_create",
     resolver=resolve_comment_create,
     description="""
     Creates a new comment on a post.

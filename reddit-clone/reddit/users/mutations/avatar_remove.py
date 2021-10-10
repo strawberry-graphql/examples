@@ -26,7 +26,6 @@ async def resolve_avatar_remove(info: Info) -> AvatarRemoveResult:
 
 
 avatar_remove = strawberry.mutation(
-    name="avatar_remove",
     resolver=resolve_avatar_remove,
     description="""
     Removes the current user's avatar.

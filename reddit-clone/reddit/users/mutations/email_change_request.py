@@ -35,7 +35,6 @@ async def resolve_email_change_request(
 
 
 email_change_request = strawberry.mutation(
-    name="email_change_request",
     resolver=resolve_email_change_request,
     description="""
     Sends an email change code to

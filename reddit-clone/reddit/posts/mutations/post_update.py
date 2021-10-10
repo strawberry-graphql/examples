@@ -35,7 +35,6 @@ async def resolve_post_update(info: Info, input: PostUpdateInput) -> PostUpdateR
 
 
 post_update = strawberry.mutation(
-    name="post_update",
     resolver=resolve_post_update,
     description="""
     Updates a post in a Subreddit.

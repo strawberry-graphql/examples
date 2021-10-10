@@ -34,7 +34,6 @@ async def resolve_subreddit_delete(
 
 
 subreddit_delete = strawberry.mutation(
-    name="subreddit_delete",
     resolver=resolve_subreddit_delete,
     description="""
     Deletes a Subreddit.

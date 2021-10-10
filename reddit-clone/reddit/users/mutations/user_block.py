@@ -32,7 +32,6 @@ async def resolve_user_block(info: Info, input: UserBlockInput) -> UserBlockResu
 
 
 user_block = strawberry.mutation(
-    name="user_block",
     resolver=resolve_user_block,
     description="""
     Blocks an user account.

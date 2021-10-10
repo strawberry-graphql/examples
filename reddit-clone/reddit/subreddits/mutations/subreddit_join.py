@@ -34,7 +34,6 @@ async def resolve_subreddit_join(
 
 
 subreddit_join = strawberry.mutation(
-    name="subreddit_join",
     resolver=resolve_subreddit_join,
     description="""
     Creates a new Subreddit-User relationship.

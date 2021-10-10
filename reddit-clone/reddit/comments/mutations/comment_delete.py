@@ -36,7 +36,6 @@ async def resolve_comment_delete(
 
 
 comment_delete = strawberry.mutation(
-    name="comment_delete",
     resolver=resolve_comment_delete,
     description="""
     Deletes a comment on a post.

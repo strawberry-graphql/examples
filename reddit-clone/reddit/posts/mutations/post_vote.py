@@ -33,7 +33,6 @@ async def resolve_post_vote(info: Info, input: PostVoteInput) -> PostVoteResult:
 
 
 post_vote = strawberry.mutation(
-    name="post_vote",
     resolver=resolve_post_vote,
     description="""
     Creates a vote on a post.

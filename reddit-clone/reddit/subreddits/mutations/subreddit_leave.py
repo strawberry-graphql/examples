@@ -34,7 +34,6 @@ async def resolve_subreddit_leave(
 
 
 subreddit_leave = strawberry.mutation(
-    name="subreddit_leave",
     resolver=resolve_subreddit_leave,
     description="""
     Deletes a Subreddit-User relationship.
