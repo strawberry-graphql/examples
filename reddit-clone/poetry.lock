@@ -1,4 +1,16 @@
 [[package]]
+name = "aiosmtplib"
+version = "1.1.6"
+description = "asyncio SMTP client"
+category = "main"
+optional = false
+python-versions = ">=3.5.2,<4.0.0"
+
+[package.extras]
+uvloop = ["uvloop (>=0.13,<0.15)"]
+docs = ["sphinx (>=2,<4)", "sphinx_autodoc_typehints (>=1.7.0,<2.0.0)"]
+
+[[package]]
 name = "alembic"
 version = "1.7.3"
 description = "A database migration tool for SQLAlchemy."
@@ -615,9 +627,13 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytes
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "c7f68ad613b93e290f94e02da38f6c0c46e7b049d42fcf911543dc7762ac2c97"
+content-hash = "4bd91cde71e77298fc4bece81a46d4fbe0dc6e526c22ac3daa5f3b392eda8780"
 
 [metadata.files]
+aiosmtplib = [
+    {file = "aiosmtplib-1.1.6-py3-none-any.whl", hash = "sha256:84174765778b2c5e0e207fbce0a769202fcf0c3de81faa87cc03551a6333bfa9"},
+    {file = "aiosmtplib-1.1.6.tar.gz", hash = "sha256:d138fe6ffecbc9e6320269690b9ac0b75e540ef96e8f5c77d4a306760014dce2"},
+]
 alembic = [
     {file = "alembic-1.7.3-py3-none-any.whl", hash = "sha256:d0c580041f9f6487d5444df672a83da9be57398f39d6c1802bbedec6fefbeef6"},
     {file = "alembic-1.7.3.tar.gz", hash = "sha256:bc5bdf03d1b9814ee4d72adc0b19df2123f6c50a60c1ea761733f3640feedb8d"},
