@@ -435,6 +435,14 @@ optional = false
 python-versions = "*"
 
 [[package]]
+name = "schematics"
+version = "2.1.1"
+description = "Python Data Structures for Humans"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "six"
 version = "1.16.0"
 description = "Python 2 and 3 compatibility utilities"
@@ -627,7 +635,7 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytes
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "4bd91cde71e77298fc4bece81a46d4fbe0dc6e526c22ac3daa5f3b392eda8780"
+content-hash = "87e854daf2789f690051ca6542bccb2e94c7c4f3cb2ba41db8f2ea1aa2413913"
 
 [metadata.files]
 aiosmtplib = [
@@ -983,6 +991,10 @@ regex = [
     {file = "regex-2021.9.30-cp39-cp39-win32.whl", hash = "sha256:9910869c472e5a6728680ca357b5846546cbbd2ab3ad5bef986ef0bc438d0aa6"},
     {file = "regex-2021.9.30-cp39-cp39-win_amd64.whl", hash = "sha256:3b71213ec3bad9a5a02e049f2ec86b3d7c3e350129ae0f4e2f99c12b5da919ed"},
     {file = "regex-2021.9.30.tar.gz", hash = "sha256:81e125d9ba54c34579e4539a967e976a3c56150796674aec318b1b2f49251be7"},
+]
+schematics = [
+    {file = "schematics-2.1.1-py2.py3-none-any.whl", hash = "sha256:be2d451bfb86789975e5ec0864aec569b63cea9010f0d24cbbd992a4e564c647"},
+    {file = "schematics-2.1.1.tar.gz", hash = "sha256:34c87f51a25063bb498ae1cc201891b134cfcb329baf9e9f4f3ae869b767560f"},
 ]
 six = [
     {file = "six-1.16.0-py2.py3-none-any.whl", hash = "sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254"},
