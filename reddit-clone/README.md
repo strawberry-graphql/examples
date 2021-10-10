@@ -14,7 +14,7 @@ most of the features that Strawberry gives us.
 
 ## Features at a glance
 
-- [ ] Error handling with unions
+- [ ] Error modelling within the schema
 - [ ] Authorization with the permissions API
 - [ ] Batch loading with dataloaders
 - [ ] Pagination with SQLAlchemy
