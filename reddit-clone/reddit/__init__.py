@@ -11,6 +11,8 @@ from reddit.settings import DEBUG
 from reddit.schema import schema
 from reddit.users.loaders import load_users
 
+__all__ = ("app",)
+
 
 class MyGraphQL(GraphQL):
     async def get_context(

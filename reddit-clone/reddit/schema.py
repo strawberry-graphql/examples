@@ -8,6 +8,8 @@ from reddit.posts.mutations import PostMutation
 from reddit.subreddits.mutations import SubredditMutation
 from reddit.users.mutations import UserMutation
 
+__all__ = ("schema",)
+
 
 @strawberry.type
 class Query(BaseQuery, UserQuery, SubredditQuery):

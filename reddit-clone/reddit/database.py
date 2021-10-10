@@ -11,6 +11,8 @@ engine = create_async_engine(DATABASE_URI, future=True)
 
 session_factory = sessionmaker(bind=engine, class_=AsyncSession)
 
+__all__ = ("get_session", "Base")
+
 
 @asynccontextmanager
 async def get_session() -> AsyncGenerator[AsyncSession, None]:

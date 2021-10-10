@@ -12,8 +12,10 @@ from reddit.settings import (
     MAIL_PORT,
 )
 
+__all__ = ("send_mail",)
 
-async def send_message(
+
+async def send_mail(
     recipient: str, subject: str, content: str, html_content: Optional[str] = None
 ) -> None:
     """
