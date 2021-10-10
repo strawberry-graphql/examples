@@ -1,9 +1,11 @@
-from typing import Union
+from typing import Union, cast
 
 import strawberry
 from strawberry.types import Info
 
+from reddit.database import get_session
 from reddit.users.types import UserType
+from reddit.users.services import UserService
 
 __all__ = ("user_create",)
 
@@ -29,7 +31,10 @@ UserCreateResult = Union[UserCreateSuccess, UserCreateError]
 
 
 async def resolve_user_create(info: Info, input: UserCreateInput) -> UserCreateResult:
-    pass
+    async with get_session() as session:
+        service = UserService(session=session)
+        user = await service.create_user(**input)
+    return UserCreateSuccess(user=cast(UserType, user))
 
 
 user_create = strawberry.mutation(
