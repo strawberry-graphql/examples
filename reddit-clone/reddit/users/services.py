@@ -19,7 +19,7 @@ async def create_user(
     """
     Creates a new user instance.
     """
-    user = User(email=email, username=username, password=str)
+    user = User(email=email, username=username, password=password)
     session.add(instance=user)
     await session.commit()
     await session.refresh(instance=user)
