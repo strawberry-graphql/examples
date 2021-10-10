@@ -35,6 +35,7 @@ async def resolve_password_reset(
 
 
 password_reset = strawberry.mutation(
+    name="password_reset",
     resolver=resolve_password_reset,
     description="""
     Resets the password for the user account

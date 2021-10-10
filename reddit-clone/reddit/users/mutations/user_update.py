@@ -33,6 +33,7 @@ async def resolve_user_update(info: Info, input: UserUpdateInput) -> UserUpdateR
 
 
 user_update = strawberry.mutation(
+    name="user_update",
     resolver=resolve_user_update,
     description="""
     Updates the current user.

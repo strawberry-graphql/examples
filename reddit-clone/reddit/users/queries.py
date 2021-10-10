@@ -12,6 +12,7 @@ async def resolve_user(info: Info, username: str) -> Optional[UserType]:
 
 
 user = strawberry.field(
+    name="user",
     resolver=resolve_user,
     description="""
     Gets an user by username.
@@ -24,6 +25,7 @@ async def resolve_current_user(info: Info) -> UserType:
 
 
 current_user = strawberry.field(
+    name="current_user",
     resolver=resolve_current_user,
     description="""
     Gets the current user.

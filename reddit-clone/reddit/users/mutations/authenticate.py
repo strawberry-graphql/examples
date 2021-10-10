@@ -35,6 +35,7 @@ async def resolve_authenticate(
 
 
 authenticate = strawberry.mutation(
+    name="authenticate",
     resolver=resolve_authenticate,
     description="""
     Logs the current user in.

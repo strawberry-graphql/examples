@@ -12,6 +12,7 @@ async def resolve_subreddits(info: Info) -> List[SubredditType]:
 
 
 subreddits = strawberry.field(
+    name="subreddits",
     resolver=resolve_subreddits,
     description="""
     Gets the available subreddits.

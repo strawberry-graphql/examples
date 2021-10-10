@@ -33,6 +33,7 @@ async def resolve_user_deactivate(
 
 
 user_deactivate = strawberry.mutation(
+    name="user_deactivate",
     resolver=resolve_user_deactivate,
     description="""
     Deactivates the current user.

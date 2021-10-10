@@ -33,6 +33,7 @@ async def resolve_user_create(info: Info, input: UserCreateInput) -> UserCreateR
 
 
 user_create = strawberry.mutation(
+    name="user_create",
     resolver=resolve_user_create,
     description="""
     Creates a new user.
