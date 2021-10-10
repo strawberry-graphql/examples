@@ -30,17 +30,14 @@ Use [poetry](https://python-poetry.org/) to install dependencies:
 poetry install
 ```
 
-2. setup database
-   This example uses a PostgreSQL database. Make sure you have it installed
-   on your machine, and configure the `DATABASE_URI` environment variable.
+2. Setup database
+   This example needs a PostgreSQL database. Make sure you have one on your machine.
 
-   An example database URL:
+3. Configure envionment variables
+   Next up, you'd need to setup your environment variables. There is an example [`.env`](.env.example) file
+   which you can reference! (Blank variables are optional)
 
-   ```text
-   postgresql+asyncpg://localhost/db_name?user=user&password=password
-   ```
-
-3. Run migrations
+4. Run migrations
 
 Run [alembic](https://alembic.sqlalchemy.org/en/latest/) to create the database
 and populate it with movie data:
@@ -49,7 +46,7 @@ and populate it with movie data:
 poetry run alembic upgrade head
 ```
 
-4. Run the server
+5. Run the server
 
 Run [uvicorn](https://www.uvicorn.org/) to run the server:
 
@@ -57,4 +54,4 @@ Run [uvicorn](https://www.uvicorn.org/) to run the server:
 poetry run uvicorn reddit:app --reload
 ```
 
-The GraphQL API should now be available at http://localhost:8000/graphql
+You can now explore the GraphQL API here: http://localhost:8000/graphql

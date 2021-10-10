@@ -7,7 +7,7 @@ from starlette.websockets import WebSocket
 from strawberry.dataloader import DataLoader
 from strawberry.asgi import GraphQL
 
-from reddit.settings import DEBUG
+from reddit import settings
 from reddit.schema import schema
 from reddit.users.loaders import load_users
 
@@ -29,9 +29,9 @@ def create_application() -> FastAPI:
 
     :return: The created application.
     """
-    application = FastAPI(title="Reddit GraphQL", debug=DEBUG)
+    application = FastAPI(title="Reddit GraphQL", debug=settings.DEBUG)
 
-    graphql_app = MyGraphQL(schema=schema, graphiql=True, debug=DEBUG)
+    graphql_app = MyGraphQL(schema=schema, graphiql=True, debug=settings.DEBUG)
 
     application.add_route(path="/graphql", route=graphql_app)
 

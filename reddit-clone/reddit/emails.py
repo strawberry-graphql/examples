@@ -4,13 +4,7 @@ from typing import Optional
 
 from aiosmtplib import send
 
-from reddit.settings import (
-    MAIL_SENDER,
-    MAIL_USERNAME,
-    MAIL_PASSWORD,
-    MAIL_HOST,
-    MAIL_PORT,
-)
+from reddit import settings
 
 __all__ = ("send_mail",)
 
@@ -36,9 +30,9 @@ async def send_mail(
 
     await send(
         message=message,
-        sender=MAIL_SENDER,
-        username=MAIL_USERNAME,
-        password=MAIL_PASSWORD,
-        hostname=MAIL_HOST,
-        port=MAIL_PORT,
+        sender=settings.MAIL_SENDER,
+        username=settings.MAIL_USERNAME,
+        password=settings.MAIL_PASSWORD,
+        hostname=settings.MAIL_HOST,
+        port=settings.MAIL_PORT,
     )
