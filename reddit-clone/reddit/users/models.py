@@ -1,8 +1,10 @@
 from __future__ import annotations
 
-from typing import List
+from typing import List, Optional
 
-from sqlalchemy import Column, String, Integer, ForeignKey
+from passlib.hash import argon2
+from sqlalchemy import select, Column, String, Integer, ForeignKey
+from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import relationship
 
 from ..database import Base
@@ -40,6 +42,28 @@ class User(Base):
 
     def __repr__(self) -> str:
         return f"<User {self.username}>"
+
+    @classmethod
+    async def by_username(cls, session: AsyncSession, username: str) -> Optional[User]:
+        """
+        Gets an user by their username.
+        """
+        query = select(User).filter_by(username=username).first()
+        return await session.execute(query)
+
+    def set_password(self, password: str) -> None:
+        """
+        Sets a hashed version of the provided
+        password on the user instance.
+        """
+        self.password = argon2.hash(password)
+
+    def check_password(self, password: str) -> bool:
+        """
+        Checks whether the provided password
+        matches the user's password hash.
+        """
+        return argon2.verify(password, self.password)
 
 
 class SubredditUser(Base):

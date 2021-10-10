@@ -9,8 +9,14 @@ async def authenticate(
     session: AsyncSession, username: str, password: str
 ) -> Optional[User]:
     """
-    Checks if the provided credentials are valid.
+    Checks if the provided user credentials are valid.
     """
+    user = await User.by_username(session=session, username=username)
+    if user is None:
+        return user
+    if user.check_password(password=password):
+        return user
+    return None
 
 
 async def create_user(
@@ -19,7 +25,8 @@ async def create_user(
     """
     Creates a new user instance.
     """
-    user = User(email=email, username=username, password=password)
+    user = User(email=email, username=username)
+    user.set_password(password=password)
     session.add(instance=user)
     await session.commit()
     await session.refresh(instance=user)
@@ -32,10 +39,15 @@ async def update_user(session: AsyncSession, user: User):
     """
 
 
-async def remove_avatar(session: AsyncSession, user: User):
+async def remove_avatar(session: AsyncSession, user: User) -> User:
     """
     Removes the avatar for the given user instance.
     """
+    user.avatar = None
+    session.add(instance=user)
+    await session.commit()
+    await session.refresh(instance=user)
+    return user
 
 
 async def request_change_email(session: AsyncSession, email: str, password: str):
