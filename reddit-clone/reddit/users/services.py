@@ -1,55 +1,79 @@
 from typing import Optional
 
-from argon2 import PasswordHasher
-from argon2.exceptions import VerifyMismatchError
-from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
 
-from reddit.base.services import BaseService
 from reddit.users.models import User
 
 
-class UserService(BaseService):
-    _hasher = PasswordHasher()
+async def authenticate(
+    session: AsyncSession, username: str, password: str
+) -> Optional[User]:
+    """
+    Checks if the provided credentials are valid.
+    """
 
-    async def create_user(self, username: str, password: str, email: str) -> User:
-        """
-        Creates an user instance.
-        """
-        # TODO: validate input before creating
-        user = User(
-            email=email,
-            username=username,
-            password=self._hasher.hash(password=password),
-        )
-        self._session.add(instance=user)
-        await self._session.commit()
-        await self._session.refresh(instance=user)
-        return user
 
-    async def get_by_username(self, username: str) -> Optional[User]:
-        """
-        Gets an user by their username.
-        """
-        stmt = select(User).filter_by(username=username).first()
-        return await self._session.execute(stmt)
+async def create_user(
+    session: AsyncSession, email: str, username: str, password: str
+) -> User:
+    """
+    Creates a new user instance.
+    """
+    user = User(email=email, username=username, password=str)
+    session.add(instance=user)
+    await session.commit()
+    await session.refresh(instance=user)
+    return user
 
-    async def authenticate(self, username: str, password: str) -> Optional[User]:
-        """
-        Checks whether the given credentials match
-        and returns the associated user instance.
-        """
-        user = self.get_by_username(username=username)
-        if user is None:
-            return user
-        try:
-            self._hasher.verify(hash=user.password, password=password)
-        except VerifyMismatchError:
-            return None
 
-        if self._hasher.check_needs_rehash(hash=user.password):
-            # recalculate the user's password hash.
-            user.password = self._hasher.hash(password=password)
-            self._session.add(instance=user)
-            await self._session.commit()
-            await self._session.refresh(instance=user)
-        return user
+async def update_user(session: AsyncSession, user: User):
+    """
+    Updates the given user instance.
+    """
+
+
+async def remove_avatar(session: AsyncSession, user: User):
+    """
+    Removes the avatar for the given user instance.
+    """
+
+
+async def request_change_email(session: AsyncSession, email: str, password: str):
+    """
+    Sends an email change code to the user's new email.
+    """
+
+
+async def change_email(
+    session: AsyncSession, email: str, change_code: str, password: str
+):
+    """
+    Changes the email for the given user instance.
+    """
+
+
+async def request_reset_password(session: AsyncSession, email: str):
+    """
+    Sends a password reset code to the given email, if it
+    actually exists.
+    """
+
+
+async def reset_password(
+    session: AsyncSession, password: str, reset_code: str, email: str
+):
+    """
+    Resets the password for the given user instance.
+    """
+
+
+async def block_user(session: AsyncSession, user_id: int, user: User):
+    """
+    Blocks the user account for the given user instance.
+    """
+
+
+async def deactivate_user(session: AsyncSession, password: str, user: User):
+    """
+    Deactivates the given user instance.
+    """

@@ -12,6 +12,7 @@ __all__ = ("email_change",)
 class EmailChangeInput:
     email: str
     change_code: str
+    password: str
 
 
 @strawberry.type

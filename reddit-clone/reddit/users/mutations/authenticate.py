@@ -1,11 +1,9 @@
-from typing import Union, cast
+from typing import Union
 
 import strawberry
 from strawberry.types import Info
 
-from reddit.database import get_session
 from reddit.users.types import UserType
-from reddit.users.services import UserService
 
 
 __all__ = ("authenticate",)
@@ -33,12 +31,7 @@ AuthenticateResult = Union[AuthenticateSuccess, AuthenticateError]
 async def resolve_authenticate(
     info: Info, input: AuthenticateInput
 ) -> AuthenticateResult:
-    async with get_session() as session:
-        service = UserService(session=session)
-        user = await service.authenticate(**input)
-    if user is None:
-        return AuthenticateError(error="Invalid credentials provided.")
-    return AuthenticateSuccess(user=cast(UserType, user))
+    pass
 
 
 authenticate = strawberry.mutation(
