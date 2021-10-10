@@ -7,17 +7,18 @@ most of the features that Strawberry gives us.
 
 ## Tech Stack used:
 
-- Strawberry GraphQL
-- FastAPI w/ Starlette
-- SQLAlchemy (asyncio)
-- Alembic for migrations
+- [Strawberry GraphQL](https://github.com/strawberry-graphql/strawberry)
+- [FastAPI](https://github.com/tiangolo/fastapi) w/ [Starlette](https://github.com/encode/starlette)
+- [SQLAlchemy](https://github.com/sqlalchemy/sqlalchemy) (asyncio)
+- [Alembic](https://github.com/sqlalchemy/alembic) for migrations
 
 ## Features at a glance
 
-- Error handling with unions
-- Authorization with the permissions API
-- Batch loading with dataloaders
-- Pagination with SQLAlchemy
+- [ ] Error handling with unions
+- [ ] Authorization with the permissions API
+- [ ] Batch loading with dataloaders
+- [ ] Pagination with SQLAlchemy
+- [x] modular codebase
 
 ## How to use
 
