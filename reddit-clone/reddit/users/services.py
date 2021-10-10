@@ -12,11 +12,10 @@ async def authenticate(
     Checks if the provided user credentials are valid.
     """
     user = await User.by_username(session=session, username=username)
-    if user is None:
-        return user
-    if user.check_password(password=password):
-        return user
-    return None
+    if user is None or not user.check_password(password=password):
+        # TODO: handle exception here.
+        pass
+    return user
 
 
 async def create_user(
@@ -27,6 +26,7 @@ async def create_user(
     """
     user = User(email=email, username=username)
     user.set_password(password=password)
+    # TODO: validate input data here.
     session.add(instance=user)
     await session.commit()
     await session.refresh(instance=user)
@@ -85,7 +85,15 @@ async def block_user(session: AsyncSession, user_id: int, user: User):
     """
 
 
-async def deactivate_user(session: AsyncSession, password: str, user: User):
+async def deactivate_user(session: AsyncSession, password: str, user: User) -> User:
     """
     Deactivates the given user instance.
     """
+    if not user.check_password(password=password):
+        # TODO: handle exception here.
+        pass
+    user.is_active = False
+    session.add(instance=user)
+    await session.commit()
+    await session.refresh(instance=user)
+    return user

@@ -6,6 +6,7 @@ from passlib.hash import argon2
 from sqlalchemy import select, Column, String, Integer, ForeignKey
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import relationship
+from sqlalchemy.sql.sqltypes import Boolean
 
 from ..database import Base
 from ..comments.models import Comment
@@ -29,6 +30,8 @@ class User(Base):
     password: str = Column(String(255), nullable=False)
 
     avatar: str = Column(String(255), nullable=False, default="default.jpg")
+
+    is_active: bool = Column(Boolean, nullable=False, default=False)
 
     posts: List[Post] = relationship("Post", back_populates="user", lazy="dynamic")
 
