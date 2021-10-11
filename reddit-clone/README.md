@@ -12,6 +12,7 @@ most of the features that Strawberry gives us.
 - [SQLAlchemy](https://github.com/sqlalchemy/sqlalchemy) core/ mapper (asyncio)
 - [Alembic](https://github.com/sqlalchemy/alembic) migrations
 - PostgreSQL database
+- [Schematics](https://github.com/schematics/schematics) data validation
 
 ## Features at a glance
 
