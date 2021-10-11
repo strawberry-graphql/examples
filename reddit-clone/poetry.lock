@@ -1,4 +1,12 @@
 [[package]]
+name = "aiofiles"
+version = "0.7.0"
+description = "File support for asyncio."
+category = "main"
+optional = false
+python-versions = ">=3.6,<4.0"
+
+[[package]]
 name = "aiosmtplib"
 version = "1.1.6"
 description = "asyncio SMTP client"
@@ -701,9 +709,13 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytes
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "2c06d6d834957f2c4efe2573570f18ee4bde2f8c41f227317761789709c4a736"
+content-hash = "de1904503b60be0c64385f92a9c8ab428553b7a6274eff9246e5ce1d22a5c1e3"
 
 [metadata.files]
+aiofiles = [
+    {file = "aiofiles-0.7.0-py3-none-any.whl", hash = "sha256:c67a6823b5f23fcab0a2595a289cec7d8c863ffcb4322fb8cd6b90400aedfdbc"},
+    {file = "aiofiles-0.7.0.tar.gz", hash = "sha256:a1c4fc9b2ff81568c83e21392a82f344ea9d23da906e4f6a52662764545e19d4"},
+]
 aiosmtplib = [
     {file = "aiosmtplib-1.1.6-py3-none-any.whl", hash = "sha256:84174765778b2c5e0e207fbce0a769202fcf0c3de81faa87cc03551a6333bfa9"},
     {file = "aiosmtplib-1.1.6.tar.gz", hash = "sha256:d138fe6ffecbc9e6320269690b9ac0b75e540ef96e8f5c77d4a306760014dce2"},
