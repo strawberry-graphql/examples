@@ -8,16 +8,16 @@ most of the features that Strawberry gives us.
 ## Tech Stack used:
 
 - [Strawberry GraphQL](https://github.com/strawberry-graphql/strawberry)
-- [FastAPI](https://github.com/tiangolo/fastapi) w/ [Starlette](https://github.com/encode/starlette)
-- [SQLAlchemy](https://github.com/sqlalchemy/sqlalchemy) (asyncio)
-- [Alembic](https://github.com/sqlalchemy/alembic) for migrations
+- [Starlette](https://github.com/encode/starlette) web framework
+- [SQLAlchemy](https://github.com/sqlalchemy/sqlalchemy) core/ mapper (asyncio)
+- [Alembic](https://github.com/sqlalchemy/alembic) migrations
 
 ## Features at a glance
 
+- [ ] Implements the Relay spec
 - [ ] Error modelling within the schema
 - [ ] Authorization with the permissions API
 - [ ] Batch loading with dataloaders
-- [ ] Pagination with SQLAlchemy
 - [x] modular codebase
 
 ## How to use

@@ -12,13 +12,12 @@ strawberry-graphql = {extras = ["asgi"], version = "^0.77.0"}
 passlib = {extras = ["argon2"], version = "^1.7.4"}
 alembic = "^1.7.1"
 asyncpg = "^0.24"
-fastapi = "^0.68.1"
-starlette = "^0.14"
 graphql-relay = "^3.1.0"
 aiosmtplib = "^1.1.6"
 schematics = "^2.1.1"
 jinja2 = "^3.0.2"
 aiofiles = "^0.7.0"
+starlette = "^0.16.0"
 
 
 [tool.poetry.dev-dependencies]
