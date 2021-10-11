@@ -7,6 +7,7 @@ from starlette.websockets import WebSocket
 from strawberry.dataloader import DataLoader
 from strawberry.asgi import GraphQL
 
+from reddit import settings
 from reddit.schema import schema
 from reddit.users.loaders import load_users
 
@@ -28,8 +29,11 @@ def create_application() -> Starlette:
 
     :return: The created application.
     """
-    app = Starlette()
-    app.add_route(path="/graphql", route=GraphQL(schema=schema, graphiql=True))
+    app = Starlette(debug=settings.DEBUG)
+    app.add_route(
+        path="/graphql",
+        route=GraphQL(schema=schema, graphiql=True, debug=settings.DEBUG),
+    )
 
     return app
 
