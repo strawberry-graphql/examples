@@ -11,11 +11,13 @@ most of the features that Strawberry gives us.
 - [Starlette](https://github.com/encode/starlette) web framework
 - [SQLAlchemy](https://github.com/sqlalchemy/sqlalchemy) core/ mapper (asyncio)
 - [Alembic](https://github.com/sqlalchemy/alembic) migrations
+- PostgreSQL database
 
 ## Features at a glance
 
 - [ ] Implements the Relay spec
-- [ ] Error modelling within the schema
+- [x] data modelling with relations
+- [x] Error modelling within the schema
 - [ ] Authorization with the permissions API
 - [ ] Batch loading with dataloaders
 - [x] modular codebase
