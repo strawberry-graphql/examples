@@ -10,7 +10,7 @@ environment = Environment(
 
 def render_template(template_name: str, *args, **kwargs):
     """
-    Renders the html template with the given variables.
+    Renders the HTML template with the given variables.
     """
     template = environment.get_template(name=template_name)
     return template.render(*args, **kwargs)
