@@ -16,9 +16,7 @@ class NodeType:
     )
 
     @classmethod
-    def resolve(
-        cls, info: Info, global_id: str, only_type=None
-    ) -> Optional[Type[NodeType]]:
+    def resolve(cls, info: Info, global_id: str) -> Optional[Type[NodeType]]:
         try:
             type_name, _id = cls.from_global_id(global_id)
         except Exception as e:
@@ -30,9 +28,6 @@ class NodeType:
         schema_type = info.schema.get_type_by_name(type_name)
         if schema_type is None:
             raise Exception(f'Relay Node "{type_name}" not found in schema')
-
-        if only_type:
-            assert schema_type == only_type
 
         # We make sure the ObjectType implements the "Node" interface
         if cls not in schema_type._type_definition.interfaces:
