@@ -72,7 +72,3 @@ class PostType(NodeType):
             post = await session.execute(query)
         if post is not None:
             return cls.from_instance(post)
-
-    @classmethod
-    def from_instance(cls, instance: Post) -> PostType:
-        pass

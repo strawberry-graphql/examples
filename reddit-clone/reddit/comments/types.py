@@ -47,7 +47,3 @@ class CommentType(NodeType):
             comment = await session.execute(query)
         if comment is not None:
             return cls.from_instance(comment)
-
-    @classmethod
-    def from_instance(cls, instance: Comment) -> CommentType:
-        pass

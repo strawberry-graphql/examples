@@ -63,7 +63,3 @@ class SubredditType(NodeType):
             subreddit = await session.execute(query)
         if subreddit is not None:
             return cls.from_instance(subreddit)
-
-    @classmethod
-    def from_instance(cls, instance: Subreddit) -> SubredditType:
-        pass

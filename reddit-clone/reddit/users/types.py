@@ -56,7 +56,3 @@ class UserType(NodeType):
             user = await session.execute(query)
         if user is not None:
             return cls.from_instance(user)
-
-    @classmethod
-    def from_instance(cls, instance: User) -> UserType:
-        pass
