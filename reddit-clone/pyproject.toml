@@ -8,7 +8,7 @@ authors = ["Aryan Iyappan <aryaniyappan2006@gmail.com>"]
 python = "^3.7"
 uvicorn = {extras = ["standard"], version = "^0.15.0"}
 SQLAlchemy = {extras = ["mypy"], version = "^1.4.23"}
-strawberry-graphql = {extras = ["asgi"], version = "^0.77.0"}
+strawberry-graphql = {extras = ["asgi"], version = "^0.82.2"}
 passlib = {extras = ["argon2"], version = "^1.7.4"}
 alembic = "^1.7.1"
 asyncpg = "^0.24"
