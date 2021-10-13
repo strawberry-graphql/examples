@@ -99,13 +99,13 @@ class PageInfoType:
 class ConnectionType:
     edges: List[EdgeType] = strawberry.field(
         description="""
-        Contains the edges in this connection.
+        Contains the edges in the connection.
         """
     )
 
     nodes: List[NodeType] = strawberry.field(
         description="""
-        Contains the nodes in this connection.
+        Contains the nodes in the connection.
         """
     )
 
