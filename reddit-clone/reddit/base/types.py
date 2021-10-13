@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Optional, Type
+from typing import List, Optional, Type
 
 import strawberry
 from strawberry.types import Info
@@ -51,3 +51,25 @@ class NodeType:
     @classmethod
     def to_global_id(cls, schema_type: str, id: str) -> str:
         return to_global_id(schema_type, id)
+
+
+@strawberry.type(name="Edge")
+class EdgeType:
+    cursor: str
+    node: NodeType
+
+
+@strawberry.type(name="PageInfo")
+class PageInfoType:
+    end_cursor: Optional[str]
+    has_next_page: bool
+    has_previous_page: bool
+    start_cursor: Optional[str]
+
+
+@strawberry.type(name="Connection")
+class ConnectionType:
+    edges: List[EdgeType]
+    nodes: List[NodeType]
+    page_info: PageInfoType
+    total_count: int
