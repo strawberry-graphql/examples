@@ -25,7 +25,7 @@ user = strawberry.field(
 )
 
 
-async def resolve_current_user(info: Info) -> UserType:
+async def resolve_current_user(info: Info) -> Optional[UserType]:
     pass
 
 
