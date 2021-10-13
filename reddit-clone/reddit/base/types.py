@@ -55,21 +55,68 @@ class NodeType:
 
 @strawberry.type(name="Edge")
 class EdgeType:
-    cursor: str
-    node: NodeType
+    cursor: str = strawberry.field(
+        description="""
+        A cursor for use in pagination.
+        """
+    )
+
+    node: NodeType = strawberry.field(
+        description="""
+        The item at the end of the edge.
+        """
+    )
 
 
 @strawberry.type(name="PageInfo")
 class PageInfoType:
-    end_cursor: Optional[str]
-    has_next_page: bool
-    has_previous_page: bool
-    start_cursor: Optional[str]
+    end_cursor: Optional[str] = strawberry.field(
+        description="""
+        When paginating forwards, the cursor to continue.
+        """
+    )
+
+    has_next_page: bool = strawberry.field(
+        description="""
+        When paginating forwards, are there more items?
+        """
+    )
+
+    has_previous_page: bool = strawberry.field(
+        description="""
+        When paginating backwards, are there more items?
+        """
+    )
+
+    start_cursor: Optional[str] = strawberry.field(
+        description="""
+        When paginating backwards, the cursor to continue.
+        """
+    )
 
 
 @strawberry.type(name="Connection")
 class ConnectionType:
-    edges: List[EdgeType]
-    nodes: List[NodeType]
-    page_info: PageInfoType
-    total_count: int
+    edges: List[EdgeType] = strawberry.field(
+        description="""
+        Contains the edges in this connection.
+        """
+    )
+
+    nodes: List[NodeType] = strawberry.field(
+        description="""
+        Contains the nodes in this connection.
+        """
+    )
+
+    page_info: PageInfoType = strawberry.field(
+        description="""
+        Information to aid in pagination.
+        """
+    )
+
+    total_count: int = strawberry.field(
+        description="""
+        Identifies the total count of items in the connection.
+        """
+    )
