@@ -13,6 +13,7 @@ most of the features that Strawberry gives us.
 - [Alembic](https://github.com/sqlalchemy/alembic) migrations
 - PostgreSQL database
 - [Schematics](https://github.com/schematics/schematics) data validation
+- [Celery](https://github.com/celery/celery) task management
 
 ## Features at a glance
 
