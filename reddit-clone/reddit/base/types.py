@@ -38,8 +38,8 @@ class EdgeType(Generic[Node, Cursor]):
 
 
 @strawberry.type(name="PageInfo")
-class PageInfoType:
-    end_cursor: Optional[str] = strawberry.field(
+class PageInfoType(Generic[Cursor]):
+    end_cursor: Optional[Cursor] = strawberry.field(
         description="""
         When paginating forwards, the cursor to continue.
         """
@@ -57,7 +57,7 @@ class PageInfoType:
         """
     )
 
-    start_cursor: Optional[str] = strawberry.field(
+    start_cursor: Optional[Cursor] = strawberry.field(
         description="""
         When paginating backwards, the cursor to continue.
         """
