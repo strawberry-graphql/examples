@@ -10,6 +10,9 @@ from strawberry.asgi import GraphQL
 from reddit import settings
 from reddit.schema import schema
 from reddit.users.loaders import load_users
+from reddit.subreddits.loaders import load_subreddits
+from reddit.posts.loaders import load_posts
+from reddit.comments.loaders import load_comments
 
 __all__ = ("app",)
 
@@ -19,7 +22,12 @@ class MyGraphQL(GraphQL):
         self, request: Union[Request, WebSocket], response: Optional[Response] = None
     ) -> Optional[Any]:
         context: dict = await super().get_context(request, response=response)
-        context.update(user_loader=DataLoader(load_fn=load_users))
+        context.update(
+            user_loader=DataLoader(load_fn=load_users),
+            subreddit_loader=DataLoader(load_fn=load_subreddits),
+            post_loader=DataLoader(load_fn=load_posts),
+            comment_loader=DataLoader(load_fn=load_comments),
+        )
         return context
 
 

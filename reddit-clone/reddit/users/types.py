@@ -5,12 +5,10 @@ from typing import List, Optional, cast
 import strawberry
 from strawberry.types import Info
 
-from reddit.users.services import user_by_id
 from reddit.base.types import NodeType
 from reddit.posts.types import PostType
 from reddit.subreddits.types import SubredditType
 from reddit.comments.types import CommentType
-from reddit.database import get_session
 
 
 @strawberry.type(name="User")
@@ -50,7 +48,6 @@ class UserType(NodeType):
         """
         Gets an user with the given ID.
         """
-        async with get_session() as session:
-            user = await user_by_id(session=session, id=user_id)
-        if user is not None:
-            return cast(UserType, user)
+        loader = info.context.get("user_loader")
+        user = await loader.load(user_id)
+        return cast(UserType, user)

@@ -1,14 +1,11 @@
 from __future__ import annotations
 
-from typing import List, Optional
+from typing import List, Optional, cast
 
 import strawberry
 from strawberry.types import Info
-from sqlalchemy import select
 
 from reddit.base.types import NodeType
-from reddit.comments.models import Comment
-from reddit.database import get_session
 
 
 @strawberry.type(name="Comment")
@@ -42,8 +39,6 @@ class CommentType(NodeType):
         """
         Gets a comment with the given ID.
         """
-        query = select(Comment).filter_by(id=comment_id).first()
-        async with get_session() as session:
-            comment = await session.execute(query)
-        if comment is not None:
-            return cls.from_instance(comment)
+        loader = info.context.get("comment_loader")
+        comment = await loader.load(comment_id)
+        return cast(CommentType, comment)
