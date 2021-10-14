@@ -25,3 +25,9 @@ MAIL_PASSWORD: Optional[str] = config("MAIL_PASSWORD", cast=str, default=None)
 
 # mail client sender address.
 MAIL_SENDER: Optional[str] = config("MAIL_SENDER", cast=str, default=None)
+
+# celery broker URL.
+CELERY_BROKER: str = config("CELERY_BROKER_URL", cast=str)
+
+# celery result backend URL.
+CELERY_BACKEND: str = config("CELERY_BACKEND", cast=str)

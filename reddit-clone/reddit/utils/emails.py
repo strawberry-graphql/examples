@@ -1,23 +1,23 @@
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from smtplib import SMTP
 from typing import Optional
 
-from aiosmtplib import send
-
 from reddit import settings
+from reddit.celery import celery
 
 __all__ = ("send_mail",)
 
 
-async def send_mail(
+@celery.task(name="send_email")
+def send_mail(
     recipient: str, subject: str, content: str, html_content: Optional[str] = None
 ) -> None:
     """
-    Sends a multipart email to the provided
-    recipient asynchronously.
+    Sends a multipart email to the provided recipient.
     """
     message = MIMEMultipart()
-    message["From"] = None
+    message["From"] = settings.MAIL_SENDER
     message["To"] = recipient
     message["Subject"] = subject
 
@@ -28,11 +28,8 @@ async def send_mail(
         html_text = MIMEText(html_content, "html")
         message.attach(html_text)
 
-    await send(
-        message=message,
-        sender=settings.MAIL_SENDER,
-        username=settings.MAIL_USERNAME,
-        password=settings.MAIL_PASSWORD,
-        hostname=settings.MAIL_HOST,
-        port=settings.MAIL_PORT,
-    )
+    server = SMTP(host=settings.MAIL_HOST, port=settings.MAIL_PORT)
+    server.login(user=settings.MAIL_USERNAME, password=settings.MAIL_PASSWORD)
+    server.starttls()
+    server.send_message(message)
+    server.quit()

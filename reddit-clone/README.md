@@ -9,9 +9,10 @@ most of the features that Strawberry gives us.
 
 - [Strawberry GraphQL](https://github.com/strawberry-graphql/strawberry)
 - [Starlette](https://github.com/encode/starlette) web framework
+- [Uvicorn](https://github.com/encode/uvicorn) ASGI server
 - [SQLAlchemy](https://github.com/sqlalchemy/sqlalchemy) core/ mapper (asyncio)
 - [Alembic](https://github.com/sqlalchemy/alembic) migrations
-- PostgreSQL database
+- [PostgreSQL](https://github.com/postgres/postgres) database instance
 - [Schematics](https://github.com/schematics/schematics) data validation
 - [Celery](https://github.com/celery/celery) task management
 
