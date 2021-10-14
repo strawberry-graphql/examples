@@ -21,7 +21,7 @@ class MyGraphQL(GraphQL):
     async def get_context(
         self, request: Union[Request, WebSocket], response: Optional[Response] = None
     ) -> Optional[Any]:
-        context: dict = await super().get_context(request, response=response)
+        context = await super().get_context(request, response=response)
         context.update(
             user_loader=DataLoader(load_fn=load_users),
             subreddit_loader=DataLoader(load_fn=load_subreddits),
