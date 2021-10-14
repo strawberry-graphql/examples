@@ -14,11 +14,11 @@ class NodeType:
     )
 
 
-Node = TypeVar("Node")
+Node = TypeVar(name="Node")
 
-Cursor = TypeVar("Cursor")
+Cursor = TypeVar(name="Cursor")
 
-Edge = TypeVar("Edge")
+Edge = TypeVar(name="Edge")
 
 
 # TODO: make an abstract type
