@@ -21,7 +21,7 @@ class Comment(Base):
 
     votes: int = Column(Integer, default=1)
 
-    user_id: Optional[int] = Column(Integer, ForeignKey("users.id"))
+    owner_id: Optional[int] = Column(Integer, ForeignKey("users.id"))
 
     post_id: int = Column(Integer, ForeignKey("posts.id"))
 

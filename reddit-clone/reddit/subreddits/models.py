@@ -1,6 +1,6 @@
 from typing import Optional, List
 
-from sqlalchemy import Column, String, Integer, SmallInteger, ForeignKey
+from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 
 from ..database import Base
@@ -20,9 +20,7 @@ class Subreddit(Base):
 
     description: Optional[str] = Column(String(255), default=None)
 
-    admin_id: int = Column(Integer, ForeignKey("users.id"))
-
-    status: int = Column(SmallInteger)
+    owner_id: int = Column(Integer, ForeignKey("users.id"))
 
     icon: Optional[str] = Column(String(255), default=None)
 

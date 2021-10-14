@@ -22,7 +22,7 @@ class CommentType(NodeType):
         """
     )
 
-    user_id: Optional[int] = strawberry.field(
+    owner_id: Optional[int] = strawberry.field(
         description="""
         The owner ID of the comment.
         """

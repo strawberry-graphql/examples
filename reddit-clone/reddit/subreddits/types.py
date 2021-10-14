@@ -23,7 +23,7 @@ class SubredditType(NodeType):
         """
     )
 
-    admin_id: int = strawberry.field(
+    owner_id: int = strawberry.field(
         description="""
         The owner ID of the Subreddit.
         """

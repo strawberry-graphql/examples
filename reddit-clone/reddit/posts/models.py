@@ -24,7 +24,7 @@ class Post(Base):
 
     thumbnail: Optional[str] = Column(String(255), default=None)
 
-    user_id: int = Column(Integer, ForeignKey("users.id"))
+    owner_id: int = Column(Integer, ForeignKey("users.id"))
 
     subreddit_id: int = Column(Integer, ForeignKey("subreddits.id"))
 

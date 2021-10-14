@@ -50,13 +50,13 @@ async def create_user(
     return user
 
 
-async def update_user(session: AsyncSession, user: User):
+async def update_user(session: AsyncSession, user: User) -> User:
     """
     Updates the given user instance.
     """
 
 
-async def remove_avatar(session: AsyncSession, user: User) -> User:
+async def remove_user_avatar(session: AsyncSession, user: User) -> User:
     """
     Removes the avatar for the given user instance.
     """

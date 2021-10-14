@@ -35,7 +35,7 @@ class PostType(NodeType):
         """
     )
 
-    user_id: int = strawberry.field(
+    owner_id: int = strawberry.field(
         description="""
         The owner ID of the post.
         """
