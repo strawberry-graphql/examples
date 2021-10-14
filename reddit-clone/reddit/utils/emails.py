@@ -4,7 +4,7 @@ from smtplib import SMTP
 from typing import Optional
 
 from reddit import settings
-from reddit.celery import celery
+from reddit.tasks import celery
 
 __all__ = ("send_mail",)
 
