@@ -12,7 +12,7 @@ most of the features that Strawberry gives us.
 - [Uvicorn](https://github.com/encode/uvicorn) ASGI server
 - [SQLAlchemy](https://github.com/sqlalchemy/sqlalchemy) core/ mapper (asyncio)
 - [Alembic](https://github.com/sqlalchemy/alembic) migrations
-- [PostgreSQL](https://github.com/postgres/postgres) database instance
+- [PostgreSQL](https://github.com/postgres/postgres) database server
 - [Schematics](https://github.com/schematics/schematics) data validation
 - [Celery](https://github.com/celery/celery) task management
 
