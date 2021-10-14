@@ -38,7 +38,7 @@ def create_application() -> Starlette:
     :return: The created application.
     """
     app = Starlette(debug=settings.DEBUG)
-    graphql_app = GraphQL(schema=schema, graphiql=True, debug=settings.DEBUG)
+    graphql_app = MyGraphQL(schema=schema, graphiql=True, debug=settings.DEBUG)
     app.add_route(
         path="/graphql",
         route=graphql_app,
