@@ -99,7 +99,8 @@ async def request_reset_password(session: AsyncSession, email: str):
     """
     user = await user_by_email(session=session, email=email)
     if user is not None:
-        # TODO: send password reset email here.
+        # TODO: store password reset code and
+        # send password reset email here.
         pass
 
 
