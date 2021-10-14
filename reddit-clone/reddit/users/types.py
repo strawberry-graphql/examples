@@ -1,12 +1,11 @@
 from __future__ import annotations
 
-from typing import List, Optional
+from typing import List, Optional, cast
 
 import strawberry
 from strawberry.types import Info
-from sqlalchemy import select
 
-from reddit.users.models import User
+from reddit.users.services import user_by_id
 from reddit.base.types import NodeType
 from reddit.posts.types import PostType
 from reddit.subreddits.types import SubredditType
@@ -51,8 +50,7 @@ class UserType(NodeType):
         """
         Gets an user with the given ID.
         """
-        query = select(User).filter_by(id=user_id).first()
         async with get_session() as session:
-            user = await session.execute(query)
+            user = await user_by_id(session=session, id=user_id)
         if user is not None:
-            return cls.from_instance(user)
+            return cast(UserType, user)

@@ -6,6 +6,14 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from reddit.users.models import User
 
 
+async def user_by_id(session: AsyncSession, id: int) -> Optional[User]:
+    """
+    Gets an user by their ID.
+    """
+    query = select(User).filter_by(id=id).first()
+    return await session.execute(query)
+
+
 async def user_by_email(session: AsyncSession, email: str) -> Optional[User]:
     """
     Gets an user by their email.
