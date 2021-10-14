@@ -1,8 +1,25 @@
 from typing import Optional
 
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from reddit.users.models import User
+
+
+async def user_by_email(session: AsyncSession, email: str) -> Optional[User]:
+    """
+    Gets an user by their email.
+    """
+    query = select(User).filter_by(email=email).first()
+    return await session.execute(query)
+
+
+async def user_by_username(session: AsyncSession, username: str) -> Optional[User]:
+    """
+    Gets an user by their username.
+    """
+    query = select(User).filter_by(username=username).first()
+    return await session.execute(query)
 
 
 async def authenticate(
@@ -11,7 +28,7 @@ async def authenticate(
     """
     Checks if the provided user credentials are valid.
     """
-    user = await User.by_username(session=session, username=username)
+    user = await user_by_username(session=session, username=username)
     if user is None or not user.check_password(password=password):
         # TODO: handle exception here.
         pass
@@ -59,7 +76,7 @@ async def request_change_email(
     if not user.check_password(password=password):
         # TODO: handle exception here.
         pass
-    user = await User.by_email(session=session, email=email)
+    user = await user_by_email(session=session, email=email)
     if user is not None:
         # TODO: handle exception here.
         pass
@@ -80,7 +97,7 @@ async def request_reset_password(session: AsyncSession, email: str):
     Sends a password reset code to the given email, if it
     actually exists.
     """
-    user = await User.by_email(session=session, email=email)
+    user = await user_by_email(session=session, email=email)
     if user is not None:
         # TODO: send password reset email here.
         pass

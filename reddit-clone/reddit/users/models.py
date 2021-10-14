@@ -1,10 +1,9 @@
 from __future__ import annotations
 
-from typing import List, Optional
+from typing import List
 
 from passlib.hash import argon2
-from sqlalchemy import select, Column, String, Integer, ForeignKey
-from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import Column, String, Integer, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql.sqltypes import Boolean
 
@@ -45,22 +44,6 @@ class User(Base):
 
     def __repr__(self) -> str:
         return f"<User {self.username}>"
-
-    @classmethod
-    async def by_username(cls, session: AsyncSession, username: str) -> Optional[User]:
-        """
-        Gets an user by their username.
-        """
-        query = select(User).filter_by(username=username).first()
-        return await session.execute(query)
-
-    @classmethod
-    async def by_email(cls, session: AsyncSession, email: str) -> Optional[User]:
-        """
-        Gets an user by their email.
-        """
-        query = select(User).filter_by(email=email).first()
-        return await session.execute(query)
 
     def set_password(self, password: str) -> None:
         """
