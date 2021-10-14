@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Optional
+from typing import Generic, List, Optional, TypeVar
 
 import strawberry
 
@@ -14,9 +14,17 @@ class NodeType:
     )
 
 
+Node = TypeVar("Node")
+
+Cursor = TypeVar("Cursor")
+
+Edge = TypeVar("Edge")
+
+
+# TODO: make an abstract type
 @strawberry.type(name="Edge")
-class EdgeType:
-    cursor: str = strawberry.field(
+class EdgeType(Generic[Node, Cursor]):
+    cursor: Cursor = strawberry.field(
         description="""
         A cursor for use in pagination.
         """
@@ -56,15 +64,16 @@ class PageInfoType:
     )
 
 
+# TODO: make an abstract type
 @strawberry.type(name="Connection")
-class ConnectionType:
-    edges: List[EdgeType] = strawberry.field(
+class ConnectionType(Generic[Node, Edge]):
+    edges: List[Edge] = strawberry.field(
         description="""
         Contains the edges in the connection.
         """
     )
 
-    nodes: List[NodeType] = strawberry.field(
+    nodes: List[Node] = strawberry.field(
         description="""
         Contains the nodes in the connection.
         """
