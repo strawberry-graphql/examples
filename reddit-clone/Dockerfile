@@ -1,13 +1,13 @@
 FROM python:3.7
 
-RUN mkdir /reddit
+RUN mkdir /app
 
-COPY /reddit /reddit
-COPY /pyproject.toml /reddit
+COPY /reddit /app
+COPY /pyproject.toml /app
 
-WORKDIR /reddit
+WORKDIR /app
 
 RUN pip install poetry
 RUN poetry install
 
-ENTRYPOINT [ "poetry", "run", "uvicorn", "app" ]
+ENTRYPOINT [ "poetry", "run", "uvicorn", "reddit:app" ]
