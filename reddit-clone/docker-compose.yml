@@ -1,34 +1,45 @@
+version: "3.9"
 services:
-  database:
-    image: postgres:13-alpine
+  postgres:
+    image: postgres:14-alpine
+    container_name: reddit-clone-postgres
+    restart: unless-stopped
     env_file:
       - ".env"
+    ports:
+      - "5432:5432"
     volumes:
       - postgres-data:/var/lib/postgresql/data
 
   redis:
-    image: redis:6-alpine
-    env_file:
-      - ".env"
+    image: redis:6.2-alpine
+    container_name: reddit-clone-redis
+    restart: unless-stopped
     ports:
       - "6379:6379"
+    volumes:
+      - redis-data:/data
 
   rabbitmq:
     image: rabbitmq:3.8-alpine
-    env_file:
-      - ".env"
+    container_name: reddit-clone-rabbitmq
+    restart: unless-stopped
     ports:
       - "5672:5672"
+    volumes:
+      - rabbitmq-data:/data
 
   app:
     build:
       context: .
+    container_name: reddit-clone-app
     env_file:
       - ".env"
     depends_on:
-      - database
+      - postgres
 
   # celery:
+  #   container_name: reddit-clone-celery
   #   build:
   #     context: .
   #   restart: always
@@ -40,4 +51,6 @@ services:
   #     - app
 
 volumes:
+  redis-data:
+  rabbitmq-data:
   postgres-data:
