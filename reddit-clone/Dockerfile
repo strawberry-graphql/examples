@@ -2,11 +2,13 @@ FROM python:3.9
 
 WORKDIR /app
 
-COPY ./pyproject.toml ./poetry.lock /app/
-
+# First install poetry
 RUN pip install poetry
+
+# Then install dependencies
+COPY ./poetry.lock ./pyproject.toml ./
 RUN poetry install
 
-COPY ./reddit /app/reddit/
+COPY ./ ./
 
 CMD [ "poetry", "run", "uvicorn", "reddit:app" ]

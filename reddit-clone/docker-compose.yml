@@ -1,7 +1,6 @@
 services:
   database:
     image: postgres:13-alpine
-    restart: unless-stopped
     env_file:
       - ".env"
     volumes:
@@ -15,7 +14,7 @@ services:
       - "6379:6379"
 
   rabbitmq:
-    image: rabbitmq:3
+    image: rabbitmq:3.8-alpine
     env_file:
       - ".env"
     ports:
