@@ -11,17 +11,6 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data
 
-  pgadmin:
-    image: dpage/pgadmin4
-    container_name: reddit-clone-pgadmin
-    restart: unless-stopped
-    env_file:
-      - ".env"
-    ports:
-      - "5555:80"
-    depends_on:
-      - postgres
-
   redis:
     image: redis:6.2-alpine
     container_name: reddit-clone-redis
