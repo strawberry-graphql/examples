@@ -6,12 +6,12 @@ from strawberry.types import Info
 
 from reddit.database import get_session
 from reddit.users.types import UserType
-from reddit.users.models import User
+from reddit.users.services import user_by_username
 
 
 async def resolve_user(info: Info, username: str) -> Optional[UserType]:
     async with get_session() as session:
-        user = await User.by_username(session=session, username=username)
+        user = await user_by_username(session=session, username=username)
     if user is not None:
         return cast(UserType, user)
     return user
