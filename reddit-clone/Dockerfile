@@ -2,13 +2,14 @@ FROM python:3.9
 
 WORKDIR /app
 
-# First install poetry
+# install poetry
 RUN pip install poetry
 
-# Then install dependencies
+# install dependencies
 COPY ./poetry.lock ./pyproject.toml ./
 RUN poetry install
 
+# copy project files
 COPY ./ ./
 
 CMD [ "poetry", "run", "uvicorn", "reddit:app" ]
