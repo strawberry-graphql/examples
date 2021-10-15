@@ -2,7 +2,7 @@ FROM python:3.9-slim-buster
 
 RUN mkdir /app
 
-COPY /reddit /app
+COPY /reddit /migrations /app/
 COPY /pyproject.toml /poetry.lock /app/
 
 WORKDIR /app

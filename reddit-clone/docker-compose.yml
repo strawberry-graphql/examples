@@ -8,11 +8,15 @@ services:
     image: redis:6-alpine
     env_file:
       - ".env"
+    ports:
+      - "6379:6379"
 
   rabbitmq:
-    image: rabbitmq:latest
+    image: rabbitmq:3
     env_file:
       - ".env"
+    ports:
+      - "5672:5672"
 
   app:
     build:
@@ -22,10 +26,13 @@ services:
     depends_on:
       - database
 
-  celery:
-    restart: always
-    env_file:
-      - ".env"
-    depends_on:
-      - redis
-      - rabbitmq
+  # celery:
+  #   build:
+  #     context: .
+  #   restart: always
+  #   env_file:
+  #     - ".env"
+  #   depends_on:
+  #     - redis
+  #     - rabbitmq
+  #     - app
