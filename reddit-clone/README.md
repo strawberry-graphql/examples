@@ -27,36 +27,11 @@ most of the features that Strawberry gives us.
 
 ## How to use
 
-1. Install dependencies
+You can use [Docker Compose](https://github.com/docker/compose) to run this example. Make sure you have it installed on your machine!
 
-Use [poetry](https://python-poetry.org/) to install dependencies:
-
-```bash
-poetry install
-```
-
-2. Setup database
-   This example needs a PostgreSQL database. Make sure you have one on your machine.
-
-3. Configure envionment variables
-   Next up, you'd need to setup your environment variables. There is an example [`.env`](.env.example) file
-   which you can reference! (Blank variables are optional)
-
-4. Run migrations
-
-Run [alembic](https://alembic.sqlalchemy.org/en/latest/) to create the database
-and populate it with movie data:
-
-```bash
-poetry run alembic upgrade head
-```
-
-5. Run the server
-
-Run [uvicorn](https://www.uvicorn.org/) to run the server:
-
-```bash
-poetry run uvicorn reddit:app --reload
+```text
+cd reddit-clone
+docker compose up
 ```
 
 You can now explore the GraphQL API here: http://localhost:8000/graphql
