@@ -3,7 +3,7 @@ FROM python:3.7
 RUN mkdir /app
 
 COPY /reddit /app
-COPY /pyproject.toml /app
+COPY /pyproject.toml /poetry.lock /app/
 
 WORKDIR /app
 

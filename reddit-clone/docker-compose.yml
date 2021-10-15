@@ -1,0 +1,31 @@
+services:
+  database:
+    image: postgres:13-alpine
+    env_file:
+      - ".env"
+
+  redis:
+    image: redis:6-alpine
+    env_file:
+      - ".env"
+
+  rabbitmq:
+    image: rabbitmq:latest
+    env_file:
+      - ".env"
+
+  app:
+    build:
+      context: .
+    env_file:
+      - ".env"
+    depends_on:
+      - database
+
+  celery:
+    restart: always
+    env_file:
+      - ".env"
+    depends_on:
+      - redis
+      - rabbitmq

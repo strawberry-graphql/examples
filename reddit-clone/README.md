@@ -14,7 +14,7 @@ most of the features that Strawberry gives us.
 - [Alembic](https://github.com/sqlalchemy/alembic) migrations
 - [PostgreSQL](https://github.com/postgres/postgres) database server
 - [Schematics](https://github.com/schematics/schematics) data validation
-- [Celery](https://github.com/celery/celery) tasks ([Redis](https://github.com/redis/redis) store)
+- [Celery](https://github.com/celery/celery) tasks ([Redis](https://github.com/redis/redis) store, [RabbitMQ](https://github.com/rabbitmq/rabbitmq-server) broker)
 
 ## Features at a glance
 
