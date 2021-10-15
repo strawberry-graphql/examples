@@ -50,7 +50,6 @@ services:
   #   depends_on:
   #     - redis
   #     - rabbitmq
-  #     - app
 
 volumes:
   redis-data:
