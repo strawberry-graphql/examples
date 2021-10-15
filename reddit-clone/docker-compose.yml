@@ -13,7 +13,7 @@ services:
 
   pgadmin:
     image: dpage/pgadmin4
-    container_name: reddit-clone-admin
+    container_name: reddit-clone-pgadmin
     restart: unless-stopped
     env_file:
       - ".env"
