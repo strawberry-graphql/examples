@@ -46,6 +46,8 @@ services:
     container_name: reddit-clone-app
     env_file:
       - ".env"
+    ports:
+      - "8000:80"
     depends_on:
       - postgres
 

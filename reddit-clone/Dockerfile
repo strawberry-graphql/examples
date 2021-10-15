@@ -12,4 +12,4 @@ RUN poetry install
 # copy project files
 COPY ./ ./
 
-CMD [ "poetry", "run", "uvicorn", "reddit:app" ]
+CMD [ "poetry", "run", "uvicorn", "reddit:app", "--host=0.0.0.0" ]
