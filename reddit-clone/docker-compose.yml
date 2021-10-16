@@ -58,7 +58,6 @@ services:
       - postgres
 
   celery:
-    build: "."
     image: reddit-server
     container_name: reddit-celery
     restart: on-failure
