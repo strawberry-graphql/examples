@@ -31,15 +31,15 @@ services:
     volumes:
       - rabbitmq-data:/data
 
-  app:
+  server:
     build:
-      context: .
-    container_name: reddit-clone-app
+      context: "."
+    container_name: reddit-clone-server
     environment:
       DEBUG: "false"
-      CELERY_BROKER: amqp://guest@queue//
+      CELERY_BROKER: amqp://guest:guest@localhost:5672//
       CELERY_BACKEND: redis://localhost:6379
-      DATABASE_URL: postgres://reddit_clone:reddit_clone@db:5432/reddit_clone
+      DATABASE_URL: postgresql+asyncpg://reddit_clone:reddit_clone@db:5432/reddit_clone
       MAIL_HOST: 127.0.0.1
       MAIL_PORT: 25
       MAIL_USERNAME:
@@ -50,16 +50,31 @@ services:
     depends_on:
       - postgres
 
-  # celery:
-  #   container_name: reddit-clone-celery
-  #   build:
-  #     context: .
-  #   restart: always
-  #   depends_on:
-  #     - redis
-  #     - rabbitmq
+  celery:
+    build:
+      context: "."
+    container_name: reddit-clone-celery
+    restart: on-failure
+    command: poetry run celery -A reddit.tasks worker
+    environment:
+      DEBUG: "false"
+      CELERY_BROKER: amqp://guest:guest@localhost:5672//
+      CELERY_BACKEND: redis://localhost:6379
+      DATABASE_URL: postgresql+asyncpg://reddit_clone:reddit_clone@db:5432/reddit_clone
+      MAIL_HOST: 127.0.0.1
+      MAIL_PORT: 25
+      MAIL_USERNAME:
+      MAIL_PASSWORD:
+      MAIL_SENDER:
+    depends_on:
+      - server
+      - rabbitmq
+      - redis
 
 volumes:
   redis-data:
+    driver: local
   rabbitmq-data:
+    driver: local
   postgres-data:
+    driver: local
