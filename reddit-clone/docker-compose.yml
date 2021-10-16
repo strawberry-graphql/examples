@@ -37,12 +37,12 @@ services:
       - rabbitmq-data:/data
 
   server:
-    build:
-      context: "."
+    build: "."
+    image: reddit-server
     container_name: reddit-server
     restart: unless-stopped
     command: poetry run uvicorn reddit:app --host=0.0.0.0
-    environment:
+    environment: &env
       DEBUG: "false"
       CELERY_BROKER: amqp://reddit:reddit@rabbitmq:5672/
       CELERY_BACKEND: redis://:reddit@localhost:6379/
@@ -58,21 +58,12 @@ services:
       - postgres
 
   celery:
-    build:
-      context: "."
+    build: "."
+    image: reddit-server
     container_name: reddit-celery
     restart: on-failure
     command: poetry run celery -A reddit.tasks worker
-    environment:
-      DEBUG: "false"
-      CELERY_BROKER: amqp://reddit:reddit@rabbitmq:5672/
-      CELERY_BACKEND: redis://:reddit@localhost:6379/
-      DATABASE_URL: postgresql+asyncpg://reddit:reddit@db:5432/reddit
-      MAIL_HOST: 127.0.0.1
-      MAIL_PORT: 25
-      MAIL_USERNAME:
-      MAIL_PASSWORD:
-      MAIL_SENDER:
+    environment: *env
     depends_on:
       - rabbitmq
       - redis
