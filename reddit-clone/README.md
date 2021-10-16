@@ -30,7 +30,6 @@ most of the features that Strawberry gives us.
 You can use [Docker Compose](https://github.com/docker/compose) to run this example. Make sure you have it installed on your machine!
 
 ```text
-cd reddit-clone
 docker compose up
 ```
 
