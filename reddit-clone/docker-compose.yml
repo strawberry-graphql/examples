@@ -19,6 +19,8 @@ services:
       POSTGRES_DB: reddit
       POSTGRES_PASSWORD: reddit
       POSTGRES_USER: reddit
+    networks:
+      - reddit-main
     ports:
       - "5432:5432"
     volumes:
@@ -30,6 +32,8 @@ services:
     restart: always
     environment:
       REDIS_PASSWORD: reddit
+    networks:
+      - reddit-main
     ports:
       - "6379:6379"
     volumes:
@@ -47,6 +51,8 @@ services:
     environment:
       RABBITMQ_DEFAULT_USER: reddit
       RABBITMQ_DEFAULT_PASS: reddit
+    networks:
+      - reddit-main
     ports:
       - "5672:5672"
     volumes:
@@ -64,6 +70,8 @@ services:
     restart: always
     command: poetry run uvicorn reddit:app --host=0.0.0.0
     environment: *base-environment
+    networks:
+      - reddit-main
     ports:
       - "8000:8000"
     volumes:
@@ -72,12 +80,15 @@ services:
       - postgres
 
   celery:
-    # TODO: run celery with different user
     image: reddit-server
     container_name: reddit-celery
     restart: always
     command: poetry run celery -A reddit.tasks worker
     environment: *base-environment
+    networks:
+      - reddit-main
+    volumes:
+      - .:/server
     depends_on:
       - rabbitmq
       - redis
@@ -90,3 +101,7 @@ volumes:
     driver: local
   postgres-data:
     driver: local
+
+networks:
+  reddit-main:
+    driver: bridge
