@@ -1,6 +1,7 @@
 from typing import Optional
 
 from starlette.config import Config
+from starlette.datastructures import Secret
 
 
 config = Config(env_file=".env")
@@ -21,7 +22,7 @@ MAIL_PORT: int = config("MAIL_PORT", cast=int)
 MAIL_USERNAME: Optional[str] = config("MAIL_USERNAME", cast=str, default=None)
 
 # mail client auth password.
-MAIL_PASSWORD: Optional[str] = config("MAIL_PASSWORD", cast=str, default=None)
+MAIL_PASSWORD: Optional[Secret] = config("MAIL_PASSWORD", cast=Secret, default=None)
 
 # mail client sender address.
 MAIL_SENDER: Optional[str] = config("MAIL_SENDER", cast=str, default=None)

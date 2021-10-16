@@ -1,9 +1,20 @@
 version: "3.9"
+x-environment: &base-environment
+  DEBUG: "false"
+  CELERY_BROKER: amqp://reddit:reddit@rabbitmq:5672/
+  CELERY_BACKEND: redis://:reddit@localhost:6379/
+  DATABASE_URL: postgresql+asyncpg://reddit:reddit@localhost:5432/reddit/
+  MAIL_HOST: 127.0.0.1
+  MAIL_PORT: 25
+  MAIL_USERNAME:
+  MAIL_PASSWORD:
+  MAIL_SENDER:
+
 services:
   postgres:
     image: postgres:14-alpine
     container_name: reddit-postgres
-    restart: unless-stopped
+    restart: always
     environment:
       POSTGRES_DB: reddit
       POSTGRES_PASSWORD: reddit
@@ -16,13 +27,18 @@ services:
   redis:
     image: redis:6.2-alpine
     container_name: reddit-redis
-    restart: unless-stopped
+    restart: always
     environment:
       REDIS_PASSWORD: reddit
     ports:
       - "6379:6379"
     volumes:
       - redis-data:/data
+    healthcheck:
+      test: redis-cli ping
+      interval: 15s
+      retries: 5
+      timeout: 5s
 
   rabbitmq:
     image: rabbitmq:3.9-alpine
@@ -35,34 +51,33 @@ services:
       - "5672:5672"
     volumes:
       - rabbitmq-data:/data
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 15s
+      retries: 5
+      timeout: 5s
 
   server:
     build: "."
     image: reddit-server
     container_name: reddit-server
-    restart: unless-stopped
+    restart: always
     command: poetry run uvicorn reddit:app --host=0.0.0.0
-    environment: &env
-      DEBUG: "false"
-      CELERY_BROKER: amqp://reddit:reddit@rabbitmq:5672/
-      CELERY_BACKEND: redis://:reddit@localhost:6379/
-      DATABASE_URL: postgresql+asyncpg://reddit:reddit@localhost:5432/reddit/
-      MAIL_HOST: 127.0.0.1
-      MAIL_PORT: 25
-      MAIL_USERNAME:
-      MAIL_PASSWORD:
-      MAIL_SENDER:
+    environment: *base-environment
     ports:
       - "8000:8000"
+    volumes:
+      - .:/server
     depends_on:
       - postgres
 
   celery:
+    # TODO: run celery with different user
     image: reddit-server
     container_name: reddit-celery
-    restart: on-failure
+    restart: always
     command: poetry run celery -A reddit.tasks worker
-    environment: *env
+    environment: *base-environment
     depends_on:
       - rabbitmq
       - redis
