@@ -12,7 +12,3 @@ RUN poetry install --no-dev
 
 # copy project files
 COPY ./ ./
-
-EXPOSE 8000
-
-CMD poetry run uvicorn reddit:app --host=0.0.0.0

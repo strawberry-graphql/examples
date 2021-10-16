@@ -2,12 +2,12 @@ version: "3.9"
 services:
   postgres:
     image: postgres:14-alpine
-    container_name: reddit-clone-postgres
+    container_name: reddit-postgres
     restart: unless-stopped
     environment:
-      POSTGRES_DB: reddit_clone
-      POSTGRES_PASSWORD: reddit_clone
-      POSTGRES_USER: reddit_clone
+      POSTGRES_DB: reddit
+      POSTGRES_PASSWORD: reddit
+      POSTGRES_USER: reddit
     ports:
       - "5432:5432"
     volumes:
@@ -15,17 +15,22 @@ services:
 
   redis:
     image: redis:6.2-alpine
-    container_name: reddit-clone-redis
+    container_name: reddit-redis
     restart: unless-stopped
+    environment:
+      REDIS_PASSWORD: reddit
     ports:
       - "6379:6379"
     volumes:
       - redis-data:/data
 
   rabbitmq:
-    image: rabbitmq:3.8-alpine
-    container_name: reddit-clone-rabbitmq
+    image: rabbitmq:3.9-alpine
+    container_name: reddit-rabbitmq
     restart: unless-stopped
+    environment:
+      RABBITMQ_DEFAULT_USER: reddit
+      RABBITMQ_DEFAULT_PASS: reddit
     ports:
       - "5672:5672"
     volumes:
@@ -34,12 +39,14 @@ services:
   server:
     build:
       context: "."
-    container_name: reddit-clone-server
+    container_name: reddit-server
+    restart: unless-stopped
+    command: poetry run uvicorn reddit:app --host=0.0.0.0
     environment:
       DEBUG: "false"
-      CELERY_BROKER: amqp://guest:guest@localhost:5672//
-      CELERY_BACKEND: redis://localhost:6379
-      DATABASE_URL: postgresql+asyncpg://reddit_clone:reddit_clone@db:5432/reddit_clone
+      CELERY_BROKER: amqp://reddit:reddit@rabbitmq:5672/
+      CELERY_BACKEND: redis://:reddit@localhost:6379/
+      DATABASE_URL: postgresql+asyncpg://reddit:reddit@db:5432/reddit
       MAIL_HOST: 127.0.0.1
       MAIL_PORT: 25
       MAIL_USERNAME:
@@ -53,23 +60,23 @@ services:
   celery:
     build:
       context: "."
-    container_name: reddit-clone-celery
+    container_name: reddit-celery
     restart: on-failure
     command: poetry run celery -A reddit.tasks worker
     environment:
       DEBUG: "false"
-      CELERY_BROKER: amqp://guest:guest@localhost:5672//
-      CELERY_BACKEND: redis://localhost:6379
-      DATABASE_URL: postgresql+asyncpg://reddit_clone:reddit_clone@db:5432/reddit_clone
+      CELERY_BROKER: amqp://reddit:reddit@rabbitmq:5672/
+      CELERY_BACKEND: redis://:reddit@localhost:6379/
+      DATABASE_URL: postgresql+asyncpg://reddit:reddit@db:5432/reddit
       MAIL_HOST: 127.0.0.1
       MAIL_PORT: 25
       MAIL_USERNAME:
       MAIL_PASSWORD:
       MAIL_SENDER:
     depends_on:
-      - server
       - rabbitmq
       - redis
+      - server
 
 volumes:
   redis-data:
