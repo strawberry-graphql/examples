@@ -11,6 +11,49 @@ x-environment: &base-environment
   MAIL_SENDER:
 
 services:
+  nginx:
+    image: nginx:1.21-alpine
+    container_name: reddit-nginx
+    restart: always
+    networks:
+      - reddit-proxy
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./nginx/nginx.conf:/tmp/nginx.conf
+    depends_on:
+      - app
+
+  app:
+    build: "."
+    image: reddit-app
+    container_name: reddit-app
+    restart: always
+    command: poetry run uvicorn reddit:app --host=0.0.0.0 --port=5000
+    environment: *base-environment
+    networks:
+      - reddit-main
+      - reddit-proxy
+    volumes:
+      - .:/app
+    depends_on:
+      - postgres
+
+  celery:
+    image: reddit-app
+    container_name: reddit-celery
+    restart: always
+    command: poetry run celery -A reddit.tasks worker
+    environment: *base-environment
+    networks:
+      - reddit-main
+    volumes:
+      - .:/app
+    depends_on:
+      - rabbitmq
+      - redis
+      - app
+
   postgres:
     image: postgres:14-alpine
     container_name: reddit-postgres
@@ -47,7 +90,7 @@ services:
   rabbitmq:
     image: rabbitmq:3.9-alpine
     container_name: reddit-rabbitmq
-    restart: unless-stopped
+    restart: always
     environment:
       RABBITMQ_DEFAULT_USER: reddit
       RABBITMQ_DEFAULT_PASS: reddit
@@ -63,37 +106,6 @@ services:
       retries: 5
       timeout: 5s
 
-  server:
-    build: "."
-    image: reddit-server
-    container_name: reddit-server
-    restart: always
-    command: poetry run uvicorn reddit:app --host=0.0.0.0
-    environment: *base-environment
-    networks:
-      - reddit-main
-    ports:
-      - "8000:8000"
-    volumes:
-      - .:/server
-    depends_on:
-      - postgres
-
-  celery:
-    image: reddit-server
-    container_name: reddit-celery
-    restart: always
-    command: poetry run celery -A reddit.tasks worker
-    environment: *base-environment
-    networks:
-      - reddit-main
-    volumes:
-      - .:/server
-    depends_on:
-      - rabbitmq
-      - redis
-      - server
-
 volumes:
   redis-data:
     driver: local
@@ -104,4 +116,6 @@ volumes:
 
 networks:
   reddit-main:
+    driver: bridge
+  reddit-proxy:
     driver: bridge
