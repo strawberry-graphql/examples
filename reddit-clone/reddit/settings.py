@@ -9,7 +9,7 @@ config = Config(env_file=".env")
 DEBUG: bool = config("DEBUG", cast=bool, default=False)
 
 # SQLAlchemy database URL.
-DATABASE_URI: str = config("DATABASE_URI", cast=str)
+DATABASE_URL: str = config("DATABASE_URL", cast=str)
 
 # mail client host name.
 MAIL_HOST: str = config("MAIL_HOST", cast=str)

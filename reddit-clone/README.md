@@ -22,15 +22,12 @@ most of the features that Strawberry gives us.
 - [x] data modelling with relations
 - [x] Error modelling within the schema
 - [ ] Authorization with the permissions API
-- [ ] Batch loading with dataloaders
+- [x] Batch loading with dataloaders
 - [x] modular codebase
 
 ## How to use
 
-You'd need to setup environment variables first. These values will be read by docker containers when running the example.
-Make sure to create an `.env` file at the project root, referencing the [`example .env`](.env.example) file.
-
-Next up, can use [Docker Compose](https://github.com/docker/compose) to run this example. Make sure you have it installed on your machine!
+You can use [Docker Compose](https://github.com/docker/compose) to run this example. Make sure you have it installed on your machine!
 
 ```text
 cd reddit-clone

@@ -7,7 +7,7 @@ from sqlalchemy.ext.declarative import declarative_base
 
 from reddit import settings
 
-engine = create_async_engine(settings.DATABASE_URI, future=True)
+engine = create_async_engine(settings.DATABASE_URL, future=True)
 
 session_factory = sessionmaker(bind=engine, class_=AsyncSession)
 
