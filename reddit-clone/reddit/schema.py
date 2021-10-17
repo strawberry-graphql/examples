@@ -11,12 +11,11 @@ from reddit.users.mutations import UserMutation
 
 __all__ = ("schema",)
 
-Query = merge_types(name="Query", types=(BaseQuery, UserQuery, SubredditQuery))
 
-Mutation = merge_types(
-    name="Mutation",
-    types=(CommentMutation, PostMutation, UserMutation, SubredditMutation),
+schema = Schema(
+    query=merge_types(name="Query", types=(BaseQuery, UserQuery, SubredditQuery)),
+    mutation=merge_types(
+        name="Mutation",
+        types=(CommentMutation, PostMutation, UserMutation, SubredditMutation),
+    ),
 )
-
-
-schema = Schema(query=Query, mutation=Mutation)
