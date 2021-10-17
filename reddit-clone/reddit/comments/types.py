@@ -4,6 +4,7 @@ from typing import TYPE_CHECKING, List, Optional, cast
 
 import strawberry
 from strawberry.types import Info
+from strawberry.lazy_type import LazyType
 
 from reddit.base.types import NodeType
 
@@ -45,13 +46,17 @@ class CommentType(NodeType):
     )
 
     @strawberry.field(description="The owner of the comment.")
-    async def owner(self, info: Info) -> UserType:
+    async def owner(
+        self, info: Info
+    ) -> LazyType["UserType", "reddit.users.types"]:  # noqa: F821
         loader = info.context.get("user_loader")
         user = await loader.load(self.owner_id)
         return cast(UserType, user)
 
     @strawberry.field(description="The post of the comment.")
-    async def post(self, info: Info) -> PostType:
+    async def post(
+        self, info: Info
+    ) -> LazyType["PostType", "reddit.posts.types"]:  # noqa: F821
         loader = info.context.get("post_loader")
         post = await loader.load(self.post_id)
         return cast(PostType, post)
