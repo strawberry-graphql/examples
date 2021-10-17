@@ -1,12 +1,16 @@
 from __future__ import annotations
 
-from typing import List, Optional, cast
+from typing import TYPE_CHECKING, List, Optional, cast
 
 import strawberry
 from strawberry.types import Info
 
 from reddit.base.types import NodeType
 from reddit.comments.types import CommentType
+
+if TYPE_CHECKING:
+    from reddit.subreddits.types import SubredditType
+    from reddit.users.types import UserType
 
 
 @strawberry.type(name="Post")
@@ -58,6 +62,18 @@ class PostType(NodeType):
         The comments for the post.
         """
     )
+
+    @strawberry.field(description="The owner of the post.")
+    async def owner(self, info: Info) -> UserType:
+        loader = info.context.get("user_loader")
+        user = await loader.load(self.owner_id)
+        return cast(UserType, user)
+
+    @strawberry.field(description="The Subreddit of the post.")
+    async def subreddit(self, info: Info) -> SubredditType:
+        loader = info.context.get("subreddit_loader")
+        subreddit = await loader.load(self.subreddit_id)
+        return cast(SubredditType, subreddit)
 
     @classmethod
     async def resolve_node(cls, info: Info, post_id: str) -> Optional[PostType]:

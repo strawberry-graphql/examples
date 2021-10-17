@@ -1,11 +1,15 @@
 from __future__ import annotations
 
-from typing import List, Optional, cast
+from typing import TYPE_CHECKING, List, Optional, cast
 
 import strawberry
 from strawberry.types import Info
 
 from reddit.base.types import NodeType
+
+if TYPE_CHECKING:
+    from reddit.users.types import UserType
+    from reddit.posts.types import PostType
 
 
 @strawberry.type(name="Comment")
@@ -28,11 +32,29 @@ class CommentType(NodeType):
         """
     )
 
+    post_id: int = strawberry.field(
+        description="""
+        The post ID of the comment.
+        """
+    )
+
     replies: List[CommentType] = strawberry.field(
         description="""
         The replies for the comment.
         """
     )
+
+    @strawberry.field(description="The owner of the comment.")
+    async def owner(self, info: Info) -> UserType:
+        loader = info.context.get("user_loader")
+        user = await loader.load(self.owner_id)
+        return cast(UserType, user)
+
+    @strawberry.field(description="The post of the comment.")
+    async def post(self, info: Info) -> PostType:
+        loader = info.context.get("post_loader")
+        post = await loader.load(self.post_id)
+        return cast(PostType, post)
 
     @classmethod
     async def resolve_node(cls, info: Info, comment_id: str) -> Optional[CommentType]:

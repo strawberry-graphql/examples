@@ -1,12 +1,15 @@
 from __future__ import annotations
 
-from typing import List, Optional, cast
+from typing import TYPE_CHECKING, List, Optional, cast
 
 import strawberry
 from strawberry.types import Info
 
 from reddit.base.types import NodeType
 from reddit.posts.types import PostType
+
+if TYPE_CHECKING:
+    from reddit.users.types import UserType
 
 
 @strawberry.type(name="Subreddit")
@@ -47,6 +50,12 @@ class SubredditType(NodeType):
         The posts for the Subreddit.
         """
     )
+
+    @strawberry.field(description="The owner of the Subreddit.")
+    async def owner(self, info: Info) -> UserType:
+        loader = info.context.get("user_loader")
+        user = await loader.load(self.owner_id)
+        return cast(UserType, user)
 
     @classmethod
     async def resolve_node(
