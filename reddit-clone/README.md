@@ -33,4 +33,4 @@ You can use [Docker Compose](https://github.com/docker/compose) to run this exam
 docker compose up
 ```
 
-You can now explore the GraphQL API here: http://localhost:8000/graphql
+You can now explore the GraphQL API here: http://localhost/graphql
