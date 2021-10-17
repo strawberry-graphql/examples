@@ -1,4 +1,5 @@
-import strawberry
+from strawberry import Schema
+from strawberry.tools import merge_types
 
 from reddit.base.queries import BaseQuery
 from reddit.subreddits.queries import SubredditQuery
@@ -10,15 +11,12 @@ from reddit.users.mutations import UserMutation
 
 __all__ = ("schema",)
 
+Query = merge_types(name="Query", types=(BaseQuery, UserQuery, SubredditQuery))
 
-@strawberry.type
-class Query(BaseQuery, UserQuery, SubredditQuery):
-    pass
-
-
-@strawberry.type
-class Mutation(CommentMutation, PostMutation, UserMutation, SubredditMutation):
-    pass
+Mutation = merge_types(
+    name="Mutation",
+    types=(CommentMutation, PostMutation, UserMutation, SubredditMutation),
+)
 
 
-schema = strawberry.Schema(query=Query, mutation=Mutation)
+schema = Schema(query=Query, mutation=Mutation)

@@ -6,18 +6,18 @@ authors = ["Aryan Iyappan <aryaniyappan2006@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
-uvicorn = {extras = ["standard"], version = "^0.15.0"}
-SQLAlchemy = {extras = ["mypy"], version = "^1.4.23"}
-strawberry-graphql = {extras = ["asgi"], version = "^0.82.2"}
-passlib = {extras = ["argon2"], version = "^1.7.4"}
-celery = {extras = ["redis", "librabbitmq"], version = "^5.1.2"}
-alembic = "^1.7.1"
+uvicorn = {extras = ["standard"], version = "^0.15"}
+SQLAlchemy = {extras = ["mypy"], version = "^1.4"}
+strawberry-graphql = {extras = ["asgi"], version = "^0.84"}
+passlib = {extras = ["argon2"], version = "^1.7"}
+celery = {extras = ["redis", "librabbitmq"], version = "^5.1"}
+alembic = "^1.7"
 asyncpg = "^0.24"
-graphql-relay = "^3.1.0"
-schematics = "^2.1.1"
-jinja2 = "^3.0.2"
-aiofiles = "^0.7.0"
-starlette = "^0.16.0"
+graphql-relay = "^3.1"
+schematics = "^2.1"
+jinja2 = "^3.0"
+aiofiles = "^0.7"
+starlette = "^0.16"
 
 
 [tool.poetry.dev-dependencies]
