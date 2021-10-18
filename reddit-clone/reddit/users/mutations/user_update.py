@@ -28,13 +28,6 @@ class UserUpdateError:
 UserUpdateResult = Union[UserUpdateSuccess, UserUpdateError]
 
 
-async def resolve_user_update(info: Info, input: UserUpdateInput) -> UserUpdateResult:
+@strawberry.mutation(description="Updates the current user.")
+async def user_update(info: Info, input: UserUpdateInput) -> UserUpdateResult:
     pass
-
-
-user_update = strawberry.mutation(
-    resolver=resolve_user_update,
-    description="""
-    Updates the current user.
-    """,
-)

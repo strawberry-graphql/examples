@@ -29,15 +29,8 @@ class SubredditUpdateError:
 SubredditUpdateResult = Union[SubredditUpdateSuccess, SubredditUpdateError]
 
 
-async def resolve_subreddit_update(
+@strawberry.mutation(description="Updates a subreddit.")
+async def subreddit_update(
     info: Info, input: SubredditUpdateInput
 ) -> SubredditUpdateResult:
     pass
-
-
-subreddit_update = strawberry.mutation(
-    resolver=resolve_subreddit_update,
-    description="""
-    Updates a Subreddit.
-    """,
-)

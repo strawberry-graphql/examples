@@ -7,7 +7,7 @@ from reddit.database import get_session
 from reddit.posts.models import Post
 
 
-async def load_posts(post_ids: List[int]) -> List[Optional[Post]]:
+async def load_posts_by_id(post_ids: List[int]) -> List[Optional[Post]]:
     """
     Batch-loads posts by their IDs.
     """

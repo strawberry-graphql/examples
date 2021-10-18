@@ -48,6 +48,6 @@ class UserType(NodeType):
         """
         Gets an user with the given ID.
         """
-        loader = info.context.get("user_loader")
+        loader = info.context.get("user_id_loader")
         user = await loader.load(user_id)
         return cast(UserType, user)

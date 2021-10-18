@@ -29,15 +29,6 @@ class CommentDeleteError:
 CommentDeleteResult = Union[CommentDeleteSuccess, CommentDeleteError]
 
 
-async def resolve_comment_delete(
-    info: Info, input: CommentDeleteInput
-) -> CommentDeleteResult:
+@strawberry.field(description="Deletes a comment on a post.")
+async def comment_delete(info: Info, input: CommentDeleteInput) -> CommentDeleteResult:
     pass
-
-
-comment_delete = strawberry.mutation(
-    resolver=resolve_comment_delete,
-    description="""
-    Deletes a comment on a post.
-    """,
-)

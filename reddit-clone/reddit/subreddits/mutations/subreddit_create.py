@@ -28,15 +28,8 @@ class SubredditCreateError:
 SubredditCreateResult = Union[SubredditCreateSuccess, SubredditCreateError]
 
 
-async def resolve_subreddit_create(
+@strawberry.mutation(description="Creates a new subreddit.")
+async def subreddit_create(
     info: Info, input: SubredditCreateInput
 ) -> SubredditCreateResult:
     pass
-
-
-subreddit_create = strawberry.mutation(
-    resolver=resolve_subreddit_create,
-    description="""
-    Creates a new Subreddit.
-    """,
-)

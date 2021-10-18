@@ -28,13 +28,6 @@ class PostDeleteError:
 PostDeleteResult = Union[PostDeleteSuccess, PostDeleteError]
 
 
-async def resolve_post_delete(info: Info, input: PostDeleteInput) -> PostDeleteResult:
+@strawberry.mutation(description="Deletes a post in a subreddit.")
+async def post_delete(info: Info, input: PostDeleteInput) -> PostDeleteResult:
     pass
-
-
-post_delete = strawberry.mutation(
-    resolver=resolve_post_delete,
-    description="""
-    Deletes a post in a Subreddit.
-    """,
-)

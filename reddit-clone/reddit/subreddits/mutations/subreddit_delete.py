@@ -27,15 +27,8 @@ class SubredditDeleteError:
 SubredditDeleteResult = Union[SubredditDeleteSuccess, SubredditDeleteError]
 
 
-async def resolve_subreddit_delete(
+@strawberry.mutation(description="Deletes a subreddit.")
+async def subreddit_delete(
     info: Info, input: SubredditDeleteInput
 ) -> SubredditDeleteResult:
     pass
-
-
-subreddit_delete = strawberry.mutation(
-    resolver=resolve_subreddit_delete,
-    description="""
-    Deletes a Subreddit.
-    """,
-)

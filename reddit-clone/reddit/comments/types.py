@@ -49,7 +49,7 @@ class CommentType(NodeType):
     async def owner(
         self, info: Info
     ) -> LazyType["UserType", "reddit.users.types"]:  # noqa: F821
-        loader = info.context.get("user_loader")
+        loader = info.context.get("user_id_loader")
         user = await loader.load(self.owner_id)
         return cast(UserType, user)
 
@@ -57,7 +57,7 @@ class CommentType(NodeType):
     async def post(
         self, info: Info
     ) -> LazyType["PostType", "reddit.posts.types"]:  # noqa: F821
-        loader = info.context.get("post_loader")
+        loader = info.context.get("post_id_loader")
         post = await loader.load(self.post_id)
         return cast(PostType, post)
 
@@ -66,6 +66,6 @@ class CommentType(NodeType):
         """
         Gets a comment with the given ID.
         """
-        loader = info.context.get("comment_loader")
+        loader = info.context.get("comment_id_loader")
         comment = await loader.load(comment_id)
         return cast(CommentType, comment)

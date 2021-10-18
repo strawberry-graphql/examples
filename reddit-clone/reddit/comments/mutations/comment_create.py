@@ -29,15 +29,6 @@ class CommentCreateError:
 CommentCreateResult = Union[CommentCreateSuccess, CommentCreateError]
 
 
-async def resolve_comment_create(
-    info: Info, input: CommentCreateInput
-) -> CommentCreateResult:
+@strawberry.field(description="Creates a new comment on a post.")
+async def comment_create(info: Info, input: CommentCreateInput) -> CommentCreateResult:
     pass
-
-
-comment_create = strawberry.mutation(
-    resolver=resolve_comment_create,
-    description="""
-    Creates a new comment on a post.
-    """,
-)

@@ -28,16 +28,13 @@ PasswordResetRequestResult = Union[
 ]
 
 
-async def resolve_password_reset_request(
-    info: Info, input: PasswordResetRequestInput
-) -> PasswordResetRequestResult:
-    pass
-
-
-password_reset_request = strawberry.mutation(
-    resolver=resolve_password_reset_request,
+@strawberry.mutation(
     description="""
     Sends a password reset code to the
     provided email, if it actually exists.
-    """,
+    """
 )
+async def password_reset_request(
+    info: Info, input: PasswordResetRequestInput
+) -> PasswordResetRequestResult:
+    pass

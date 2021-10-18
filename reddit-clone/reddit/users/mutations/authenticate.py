@@ -28,15 +28,6 @@ class AuthenticateError:
 AuthenticateResult = Union[AuthenticateSuccess, AuthenticateError]
 
 
-async def resolve_authenticate(
-    info: Info, input: AuthenticateInput
-) -> AuthenticateResult:
+@strawberry.mutation(description="Logs the current user in.")
+async def authenticate(info: Info, input: AuthenticateInput) -> AuthenticateResult:
     pass
-
-
-authenticate = strawberry.mutation(
-    resolver=resolve_authenticate,
-    description="""
-    Logs the current user in.
-    """,
-)

@@ -56,7 +56,7 @@ class SubredditType(NodeType):
     async def owner(
         self, info: Info
     ) -> LazyType["UserType", "reddit.users.types"]:  # noqa: F821
-        loader = info.context.get("user_loader")
+        loader = info.context.get("user_id_loader")
         user = await loader.load(self.owner_id)
         return cast(UserType, user)
 
@@ -67,6 +67,6 @@ class SubredditType(NodeType):
         """
         Gets a Subreddit with the given ID.
         """
-        loader = info.context.get("subreddit_loader")
+        loader = info.context.get("subreddit_id_loader")
         subreddit = await loader.load(subreddit_id)
         return cast(SubredditType, subreddit)

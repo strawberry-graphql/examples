@@ -9,10 +9,10 @@ from strawberry.asgi import GraphQL
 
 from reddit import settings
 from reddit.schema import schema
-from reddit.users.loaders import load_users
-from reddit.subreddits.loaders import load_subreddits
-from reddit.posts.loaders import load_posts
-from reddit.comments.loaders import load_comments
+from reddit.users.loaders import load_users_by_id, load_users_by_username
+from reddit.subreddits.loaders import load_subreddits_by_id
+from reddit.posts.loaders import load_posts_by_id
+from reddit.comments.loaders import load_comments_by_id
 
 __all__ = ("app",)
 
@@ -23,10 +23,11 @@ class MyGraphQL(GraphQL):
     ) -> Optional[Any]:
         context = await super().get_context(request, response=response)
         context.update(
-            user_loader=DataLoader(load_fn=load_users),
-            subreddit_loader=DataLoader(load_fn=load_subreddits),
-            post_loader=DataLoader(load_fn=load_posts),
-            comment_loader=DataLoader(load_fn=load_comments),
+            user_id_loader=DataLoader(load_fn=load_users_by_id),
+            user_username_loader=DataLoader(load_fn=load_users_by_username),
+            subreddit_id_loader=DataLoader(load_fn=load_subreddits_by_id),
+            post_id_loader=DataLoader(load_fn=load_posts_by_id),
+            comment_id_loader=DataLoader(load_fn=load_comments_by_id),
         )
         return context
 

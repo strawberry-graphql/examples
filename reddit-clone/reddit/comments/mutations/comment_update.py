@@ -30,15 +30,6 @@ class CommentUpdateError:
 CommentUpdateResult = Union[CommentUpdateSuccess, CommentUpdateError]
 
 
-async def resolve_comment_update(
-    info: Info, input: CommentUpdateInput
-) -> CommentUpdateResult:
+@strawberry.field(description="Updates a comment on a post.")
+async def comment_update(info: Info, input: CommentUpdateInput) -> CommentUpdateResult:
     pass
-
-
-comment_update = strawberry.mutation(
-    resolver=resolve_comment_update,
-    description="""
-    Updates a comment on a post.
-    """,
-)

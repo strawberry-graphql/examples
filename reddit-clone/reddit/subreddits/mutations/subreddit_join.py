@@ -27,15 +27,10 @@ class SubredditJoinError:
 SubredditJoinResult = Union[SubredditJoinSuccess, SubredditJoinError]
 
 
-async def resolve_subreddit_join(
-    info: Info, input: SubredditJoinInput
-) -> SubredditJoinResult:
-    pass
-
-
-subreddit_join = strawberry.mutation(
-    resolver=resolve_subreddit_join,
+@strawberry.mutation(
     description="""
-    Creates a new Subreddit-User relationship.
-    """,
+    Creates a new subreddit-user relationship.
+    """
 )
+async def subreddit_join(info: Info, input: SubredditJoinInput) -> SubredditJoinResult:
+    pass

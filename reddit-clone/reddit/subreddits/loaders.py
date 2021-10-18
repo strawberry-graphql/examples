@@ -7,7 +7,7 @@ from reddit.database import get_session
 from reddit.subreddits.models import Subreddit
 
 
-async def load_subreddits(subreddit_ids: List[int]) -> List[Optional[Subreddit]]:
+async def load_subreddits_by_id(subreddit_ids: List[int]) -> List[Optional[Subreddit]]:
     """
     Batch-loads subreddits by their IDs.
     """

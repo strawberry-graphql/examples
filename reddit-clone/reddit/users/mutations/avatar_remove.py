@@ -21,13 +21,6 @@ class AvatarRemoveError:
 AvatarRemoveResult = Union[AvatarRemoveSuccess, AvatarRemoveError]
 
 
-async def resolve_avatar_remove(info: Info) -> AvatarRemoveResult:
+@strawberry.mutation(description="Removes the current user's avatar.")
+async def avatar_remove(info: Info) -> AvatarRemoveResult:
     pass
-
-
-avatar_remove = strawberry.mutation(
-    resolver=resolve_avatar_remove,
-    description="""
-    Removes the current user's avatar.
-    """,
-)

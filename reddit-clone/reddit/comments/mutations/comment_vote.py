@@ -29,15 +29,6 @@ class CommentVoteError:
 CommentVoteResult = Union[CommentVoteSuccess, CommentVoteError]
 
 
-async def resolve_comment_vote(
-    info: Info, input: CommentVoteInput
-) -> CommentVoteResult:
+@strawberry.field(description="Creates a vote on a comment.")
+async def comment_vote(info: Info, input: CommentVoteInput) -> CommentVoteResult:
     pass
-
-
-comment_vote = strawberry.mutation(
-    resolver=resolve_comment_vote,
-    description="""
-    Creates a vote on a comment.
-    """,
-)

@@ -28,13 +28,6 @@ class UserCreateError:
 UserCreateResult = Union[UserCreateSuccess, UserCreateError]
 
 
-async def resolve_user_create(info: Info, input: UserCreateInput) -> UserCreateResult:
+@strawberry.mutation(description="Creates a new user.")
+async def user_create(info: Info, input: UserCreateInput) -> UserCreateResult:
     pass
-
-
-user_create = strawberry.mutation(
-    resolver=resolve_user_create,
-    description="""
-    Creates a new user.
-    """,
-)

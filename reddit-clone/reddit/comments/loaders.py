@@ -7,7 +7,7 @@ from reddit.database import get_session
 from reddit.comments.models import Comment
 
 
-async def load_comments(comment_ids: List[int]) -> List[Optional[Comment]]:
+async def load_comments_by_id(comment_ids: List[int]) -> List[Optional[Comment]]:
     """
     Batch-loads comments by their IDs.
     """

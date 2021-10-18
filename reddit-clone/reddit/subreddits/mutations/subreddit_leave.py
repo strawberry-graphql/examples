@@ -27,15 +27,12 @@ class SubredditLeaveError:
 SubredditLeaveResult = Union[SubredditLeaveSuccess, SubredditLeaveError]
 
 
-async def resolve_subreddit_leave(
+@strawberry.field(
+    description="""
+    Deletes a subreddit-user relationship.
+    """
+)
+async def subreddit_leave(
     info: Info, input: SubredditLeaveInput
 ) -> SubredditLeaveResult:
     pass
-
-
-subreddit_leave = strawberry.mutation(
-    resolver=resolve_subreddit_leave,
-    description="""
-    Deletes a Subreddit-User relationship.
-    """,
-)

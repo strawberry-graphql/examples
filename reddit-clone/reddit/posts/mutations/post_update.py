@@ -30,13 +30,6 @@ class PostUpdateError:
 PostUpdateResult = Union[PostUpdateSuccess, PostUpdateError]
 
 
-async def resolve_post_update(info: Info, input: PostUpdateInput) -> PostUpdateResult:
+@strawberry.mutation(description="Updates a post in a subreddit.")
+async def post_update(info: Info, input: PostUpdateInput) -> PostUpdateResult:
     pass
-
-
-post_update = strawberry.mutation(
-    resolver=resolve_post_update,
-    description="""
-    Updates a post in a Subreddit.
-    """,
-)

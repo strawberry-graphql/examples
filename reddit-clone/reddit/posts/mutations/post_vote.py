@@ -28,13 +28,6 @@ class PostVoteError:
 PostVoteResult = Union[PostVoteSuccess, PostVoteError]
 
 
-async def resolve_post_vote(info: Info, input: PostVoteInput) -> PostVoteResult:
+@strawberry.mutation(description="Creates a vote on a post.")
+async def post_vote(info: Info, input: PostVoteInput) -> PostVoteResult:
     pass
-
-
-post_vote = strawberry.mutation(
-    resolver=resolve_post_vote,
-    description="""
-    Creates a vote on a post.
-    """,
-)

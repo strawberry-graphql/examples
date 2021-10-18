@@ -29,13 +29,6 @@ class PostCreateError:
 PostCreateResult = Union[PostCreateSuccess, PostCreateError]
 
 
-async def resolve_post_create(info: Info, input: PostCreateInput) -> PostCreateResult:
+@strawberry.mutation(description="Creates a new post in a subreddit.")
+async def post_create(info: Info, input: PostCreateInput) -> PostCreateResult:
     pass
-
-
-post_create = strawberry.mutation(
-    resolver=resolve_post_create,
-    description="""
-    Creates a new post in a Subreddit.
-    """,
-)

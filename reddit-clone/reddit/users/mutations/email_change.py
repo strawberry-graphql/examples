@@ -28,16 +28,11 @@ class EmailChangeError:
 EmailChangeResult = Union[EmailChangeSuccess, EmailChangeError]
 
 
-async def resolve_email_change(
-    info: Info, input: EmailChangeInput
-) -> EmailChangeResult:
-    pass
-
-
-email_change = strawberry.mutation(
-    resolver=resolve_email_change,
+@strawberry.mutation(
     description="""
     Changes the email for the user account
     associated with the given email.
-    """,
+    """
 )
+async def email_change(info: Info, input: EmailChangeInput) -> EmailChangeResult:
+    pass
