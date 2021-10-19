@@ -10,16 +10,16 @@ async def user_by_email(session: AsyncSession, email: str) -> Optional[User]:
     """
     Gets an user by their email.
     """
-    query = select(User).filter_by(email=email).first()
-    return await session.execute(query)
+    query = select(User).filter(User.email == email)
+    return (await session.execute(query)).scalar_one()
 
 
 async def user_by_username(session: AsyncSession, username: str) -> Optional[User]:
     """
     Gets an user by their username.
     """
-    query = select(User).filter_by(username=username).first()
-    return await session.execute(query)
+    query = select(User).filter(User.username == username)
+    return (await session.execute(query)).scalar_one()
 
 
 async def authenticate(
