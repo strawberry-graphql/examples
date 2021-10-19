@@ -3,7 +3,7 @@ x-environment: &base-environment
   DEBUG: "false"
   CELERY_BROKER: amqp://reddit:reddit@rabbitmq:5672/
   CELERY_BACKEND: redis://:reddit@localhost:6379/
-  DATABASE_URL: postgresql+asyncpg://reddit:reddit@localhost:5432/reddit/
+  DATABASE_URL: postgresql+asyncpg://reddit:reddit@postgres:5432/reddit/
   MAIL_HOST: 127.0.0.1
   MAIL_PORT: 25
   MAIL_USERNAME:

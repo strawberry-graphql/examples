@@ -7,6 +7,7 @@ import strawberry
 
 @strawberry.interface(name="Node", description="An object with an ID.")
 class NodeType:
+    # TODO: need to make custom ID resolver
     id: strawberry.ID = strawberry.field(
         description="""
         ID of the object.

@@ -13,7 +13,7 @@ most of the features that Strawberry gives us.
 - [SQLAlchemy](https://github.com/sqlalchemy/sqlalchemy) core/ mapper (asyncio)
 - [Alembic](https://github.com/sqlalchemy/alembic) migrations
 - [PostgreSQL](https://github.com/postgres/postgres) database server
-- [Schematics](https://github.com/schematics/schematics) data validation
+- [Marshmallow](https://github.com/marshmallow-code/marshmallow) data validation
 - [Celery](https://github.com/celery/celery) tasks ([Redis](https://github.com/redis/redis) store, [RabbitMQ](https://github.com/rabbitmq/rabbitmq-server) broker)
 
 ## Features at a glance
