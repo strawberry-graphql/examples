@@ -27,17 +27,12 @@ poetry run uvicorn main:app --reload
 ```graphql
 query AllTopRatedMovies {
   topRatedMovies {
-    id
     imageUrl
     imdbId
     imdbRating
     imdbRatingCount
     title
     year
-    director {
-      id
-      name
-    }
   }
 }
 ```

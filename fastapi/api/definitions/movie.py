@@ -3,7 +3,6 @@ import strawberry
 
 @strawberry.type
 class Movie:
-    id: int
     imdb_id: str
     title: str
     year: int
