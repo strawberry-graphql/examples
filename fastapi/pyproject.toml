@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "strawberry-graphql-fastapi-example"
+version = "0.1.0"
+description = "Example of a GraphQL API using Strawberry and FastAPI"
+authors = ["Rodrigo Feijao <hello@rodrigofeijao.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+uvicorn = {extras = ["standard"], version = "^0.24.0"}
+strawberry-graphql = {extras = ["asgi"], version = "^0.214.0"}
+fastapi = "^0.104.1"
+
+
+[tool.poetry.dev-dependencies]
+black = "^23.11"
+flake8 = "^6.1.0"
+flake8-black = "^0.3.6"
+flake8-bugbear = "^23.9.16"
+mypy = "^1.7.0"
+
+[build-system]
+requires = ["poetry-core>=1.8.0"]
+build-backend = "poetry.core.masonry.api"
