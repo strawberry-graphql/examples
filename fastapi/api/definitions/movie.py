@@ -3,7 +3,7 @@ import strawberry
 
 @strawberry.type
 class Movie:
-    imdb_id: str
+    imdb_id: str = strawberry.field(description="This is the IMDB ID of the movie")
     title: str
     year: int
     image_url: str
