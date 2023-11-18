@@ -11,6 +11,8 @@ SQLAlchemy = {extras = ["mypy"], version = "^1.4.23"}
 alembic = "^1.7.1"
 strawberry-graphql = {extras = ["asgi"], version = "^0.77.0"}
 fastapi = "^0.68.1"
+passlib = "^1.7.4"
+itsdangerous = "^2.0.1"
 
 
 [tool.poetry.dev-dependencies]
