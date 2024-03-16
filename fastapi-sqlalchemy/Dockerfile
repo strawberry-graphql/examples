@@ -15,5 +15,3 @@ RUN poetry install
 
 # Avvia l'applicazione
 CMD poetry run start
-
-
