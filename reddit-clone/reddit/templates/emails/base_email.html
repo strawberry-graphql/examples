@@ -1,0 +1,233 @@
+<html>
+  <head>
+    <title>{% block title %}{% endblock %}</title>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+    <style type="text/css">
+      /* CLIENT-SPECIFIC STYLES */
+      body,
+      table,
+      td,
+      a {
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+      }
+
+      /* Prevent WebKit and Windows mobile changing default text sizes */
+      table,
+      td {
+        mso-table-lspace: 0pt;
+        mso-table-rspace: 0pt;
+      }
+
+      /* Remove spacing between tables in Outlook 2007 and up */
+      img {
+        -ms-interpolation-mode: bicubic;
+      }
+
+      /* Allow smoother rendering of resized image in Internet Explorer */
+
+      /* RESET STYLES */
+      img {
+        border: 0;
+        height: auto;
+        line-height: 100%;
+        outline: none;
+        text-decoration: none;
+      }
+
+      table {
+        border-collapse: collapse !important;
+      }
+
+      body {
+        height: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+      }
+
+      /* iOS BLUE LINKS */
+      a[x-apple-data-detectors] {
+        color: inherit !important;
+        text-decoration: none !important;
+        font-size: inherit !important;
+        font-family: inherit !important;
+        font-weight: inherit !important;
+        line-height: inherit !important;
+      }
+
+      /* MOBILE STYLES */
+      @media screen and (max-width: 525px) {
+        /* ALLOWS FOR FLUID TABLES */
+        .wrapper {
+          width: 100% !important;
+          max-width: 100% !important;
+        }
+
+        /* USE THESE CLASSES TO HIDE CONTENT ON MOBILE */
+        .mobile-hide {
+          display: none !important;
+        }
+
+        .img-max {
+          max-width: 100% !important;
+          width: 100% !important;
+          height: auto !important;
+        }
+
+        /* FULL-WIDTH TABLES */
+        .responsive-table {
+          width: 100% !important;
+        }
+
+        /* UTILITY CLASSES FOR ADJUSTING PADDING ON MOBILE */
+        .padding {
+          padding: 10px 5% 15px 5% !important;
+        }
+
+        .padding-meta {
+          padding: 30px 5% 0px 5% !important;
+          text-align: center;
+        }
+
+        .no-padding {
+          padding: 0 !important;
+        }
+
+        .section-padding {
+          padding: 50px 15px 50px 15px !important;
+        }
+
+        /* ADJUST BUTTONS ON MOBILE */
+        .mobile-button-container {
+          margin: 0 auto;
+          width: 100% !important;
+        }
+
+        .mobile-button {
+          padding: 15px !important;
+          border: 0 !important;
+          font-size: 16px !important;
+          display: block !important;
+        }
+      }
+
+      /* ANDROID CENTER FIX */
+      div[style*="margin: 16px 0;"] {
+        margin: 0 !important;
+      }
+    </style>
+  </head>
+
+  <body style="margin: 0 !important; padding: 0 !important">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr>
+        <td
+          align="center"
+          class="section-padding"
+          style="padding: 50px 15px 70px 15px"
+        >
+          <table
+            border="0"
+            cellpadding="0"
+            cellspacing="0"
+            class="responsive-table"
+            style="max-width: 600px"
+            width="100%"
+          >
+            <tr>
+              <td>
+                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                  <tr>
+                    <td>
+                      <table
+                        border="0"
+                        cellpadding="0"
+                        cellspacing="0"
+                        width="100%"
+                      >
+                        <tr>
+                          <td
+                            class="padding"
+                            style="
+                              padding: 0;
+                              text-align: center;
+                              font-size: 16px;
+                              line-height: 25px;
+                              font-family: sans-serif;
+                              color: #666666;
+                            "
+                          >
+                            {% block content %}{% endblock %}
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <table
+                        border="0"
+                        cellpadding="0"
+                        cellspacing="0"
+                        width="100%"
+                      >
+                        <tr>
+                          <td
+                            class="padding"
+                            style="
+                              padding: 0;
+                              text-align: center;
+                              font-size: 16px;
+                              line-height: 25px;
+                              font-family: sans-serif;
+                              color: #666666;
+                            "
+                          >
+                            {% block content_more %}{% endblock %}
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+
+      <tr>
+        <td align="center" style="padding: 20px 0px">
+          <table
+            align="center"
+            border="0"
+            cellpadding="0"
+            cellspacing="0"
+            class="responsive-table"
+            style="max-width: 600px"
+            width="100%"
+          >
+            <tr>
+              <td
+                align="center"
+                style="
+                  font-size: 12px;
+                  line-height: 18px;
+                  font-family: sans-serif;
+                  color: #666666;
+                "
+              >
+                &copy; {{ now.year }}
+                <a href="{{ config.PUBLIC_SITE_URL }}">{{ config.SITE_NAME }}</a
+                >. All rights reserved.
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
