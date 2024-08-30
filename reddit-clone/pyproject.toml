@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "reddit-graphql"
+version = "0.1.0"
+description = "A Reddit API clone built with GraphQL."
+authors = ["Aryan Iyappan <aryaniyappan2006@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+uvicorn = {extras = ["standard"], version = "^0.15"}
+SQLAlchemy = {extras = ["mypy"], version = "^1.4"}
+strawberry-graphql = {extras = ["asgi"], version = "^0.84"}
+passlib = {extras = ["argon2"], version = "^1.7"}
+celery = {extras = ["redis", "librabbitmq"], version = "^5.1"}
+alembic = "^1.7"
+asyncpg = "^0.24"
+graphql-relay = "^3.1"
+jinja2 = "^3.0"
+aiofiles = "^0.7"
+starlette = "^0.16"
+marshmallow = "^3.14.0"
+
+
+[tool.poetry.dev-dependencies]
+black = "^21.8b0"
+flake8 = "^3.9.2"
+flake8-black = "^0.2.3"
+flake8-bugbear = "^21.4.3"
+mypy = "^0.910"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
