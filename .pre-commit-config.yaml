@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/PyCQA/flake8
-    rev: 7.1.1
+    rev: 7.3.0
     hooks:
       - id: flake8
         additional_dependencies: ["flake8-eradicate"]
@@ -18,7 +18,7 @@ repos:
         files: '.*\.mdx?$'
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0
+    rev: v6.0.0
     hooks:
       - id: trailing-whitespace
       - id: check-merge-conflict
@@ -31,7 +31,7 @@ repos:
       - id: autoflake
         args: ['--in-place', '--remove-all-unused-imports', '--remove-unused-variable']
 
-  - repo: https://github.com/psf/black
-    rev: 24.8.0
+  - repo: https://github.com/psf/black-pre-commit-mirror
+    rev: 25.9.0
     hooks:
       - id: black
