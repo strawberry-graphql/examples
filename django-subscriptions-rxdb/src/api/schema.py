@@ -49,7 +49,7 @@ def filterHeroes(
     if not updatedAt:
         qs = []
     else:
-        qs = [(Q(updatedAt__gt=updatedAt) | (Q(updatedAt=updatedAt) & Q(id__gt=id)))]
+        qs = [Q(updatedAt__gt=updatedAt) | (Q(updatedAt=updatedAt) & Q(id__gt=id))]
 
     return [
         Hero(
