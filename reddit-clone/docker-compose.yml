@@ -1,0 +1,113 @@
+version: "3.9"
+x-environment: &base-environment
+  DEBUG: "false"
+  CELERY_BROKER: amqp://reddit:reddit@rabbitmq:5672/
+  CELERY_BACKEND: redis://:reddit@localhost:6379/
+  DATABASE_URL: postgresql+asyncpg://reddit:reddit@postgres:5432/reddit/
+  MAIL_HOST: 127.0.0.1
+  MAIL_PORT: 25
+  MAIL_USERNAME:
+  MAIL_PASSWORD:
+  MAIL_SENDER:
+
+services:
+  nginx:
+    image: nginx:1.21-alpine
+    container_name: reddit-nginx
+    restart: always
+    networks:
+      - reddit-proxy
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - app
+
+  app:
+    build: "."
+    image: reddit-app
+    container_name: reddit-app
+    restart: always
+    command: poetry run uvicorn reddit:app --host=0.0.0.0 --port=8080
+    environment: *base-environment
+    networks:
+      - reddit-main
+      - reddit-proxy
+    volumes:
+      - .:/app
+    depends_on:
+      - postgres
+
+  celery:
+    image: reddit-app
+    container_name: reddit-celery
+    restart: always
+    command: poetry run celery -A reddit.tasks worker
+    environment: *base-environment
+    networks:
+      - reddit-main
+    volumes:
+      - .:/app
+    depends_on:
+      - rabbitmq
+      - redis
+      - app
+
+  postgres:
+    image: postgres:14-alpine
+    container_name: reddit-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: reddit
+      POSTGRES_PASSWORD: reddit
+      POSTGRES_DB: reddit
+    networks:
+      - reddit-main
+    ports:
+      - 5432:5432
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+
+  redis:
+    image: redis:6.2-alpine
+    container_name: reddit-redis
+    restart: always
+    environment:
+      REDIS_PASSWORD: reddit
+    networks:
+      - reddit-main
+    ports:
+      - 6379:6379
+    volumes:
+      - ./data/redis:/data
+    healthcheck:
+      test: redis-cli ping
+      interval: 15s
+      retries: 5
+      timeout: 5s
+
+  rabbitmq:
+    image: rabbitmq:3.9-alpine
+    container_name: reddit-rabbitmq
+    restart: always
+    environment:
+      RABBITMQ_DEFAULT_USER: reddit
+      RABBITMQ_DEFAULT_PASS: reddit
+    networks:
+      - reddit-main
+    ports:
+      - 5672:5672
+    volumes:
+      - ./data/rabbitmq:/data
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 15s
+      retries: 5
+      timeout: 5s
+
+networks:
+  reddit-main:
+    driver: bridge
+  reddit-proxy:
+    driver: bridge
