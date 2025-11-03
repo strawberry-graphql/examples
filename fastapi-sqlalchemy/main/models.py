@@ -1,6 +1,9 @@
+from typing import Optional
 from sqlalchemy import Column, Integer, String, Float, ForeignKey, select
 from sqlalchemy.orm import relationship, joinedload
 from sqlalchemy.orm import Session
+from sqlalchemy.exc import NoResultFound
+from passlib.hash import pbkdf2_sha256
 
 from .database import Base
 
@@ -37,3 +40,25 @@ def get_movies(db: Session, limit: int = 250):
 
     result = db.execute(query).unique()
     return result.scalars()
+
+
+class User(Base):
+    __tablename__ = "users"
+
+    id: int = Column(Integer, primary_key=True, index=True, nullable=False)
+    email: str = Column(String, unique=True, index=True, nullable=False)
+    password_hash: str = Column(String, nullable=False)
+
+    def set_password(self, password: str):
+        self.password_hash = pbkdf2_sha256.hash(password)
+
+    def check_password(self, password: str):
+        return pbkdf2_sha256.verify(password, self.password_hash)
+
+
+def get_user_by_email(db, email: str) -> Optional[User]:
+    try:
+        user = db.execute(select(User).filter_by(email=email)).scalar_one()
+        return user
+    except NoResultFound:
+        return None
