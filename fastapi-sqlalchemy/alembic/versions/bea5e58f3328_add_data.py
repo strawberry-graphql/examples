@@ -15,7 +15,6 @@ from sqlalchemy.exc import NoResultFound
 
 from main.models import Director, Movie
 
-
 # revision identifiers, used by Alembic.
 revision = "bea5e58f3328"
 down_revision = "9bc8667ab6a6"
